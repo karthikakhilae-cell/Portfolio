@@ -5,7 +5,6 @@
 [functions]
   directory = "netlify/functions"
   node_bundle = true
-  external_node_modules = ["express"]
 
 [[redirects]]
   from = "/api/*"
