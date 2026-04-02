@@ -21,7 +21,14 @@ const SERVICES = [
     description: "Optimizing internal workflows to increase efficiency and reduce overhead. I design systems that scale with your business.",
     icon: <Zap className="w-6 h-6" />,
     features: ["Process Automation", "Workflow Design", "Operational Audits"]
-  }
+  },
+  {
+  title: "AI & Machine Learning",
+  description: "Leveraging artificial intelligence and machine learning to build intelligent systems that analyze data, predict outcomes, and automate decision-making processes.",
+  icon: <brain className="w-6 h-6" />,
+  features: ["Machine Learning Model Development","Predictive Analytics & Forecasting","AI-Powered Data Insights"
+  ]
+}
 ];
 
 const PROCESS = [

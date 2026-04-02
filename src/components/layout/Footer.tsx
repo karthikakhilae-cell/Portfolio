@@ -14,7 +14,7 @@ export default function Footer() {
         <div className="space-y-4">
           <div className="text-xl md:text-2xl font-display text-ink">Akhil Karthik</div>
           <p className="text-[10px] text-muted max-w-xs uppercase tracking-widest leading-relaxed">
-            Curating clarity and purpose through data analytics and strategic design.
+            Curating clarity and purpose through data science and strategic design.
           </p>
         </div>
         <div className="flex flex-wrap gap-6 md:gap-8 md:justify-end text-[10px] uppercase tracking-[0.2em] font-bold text-muted">
