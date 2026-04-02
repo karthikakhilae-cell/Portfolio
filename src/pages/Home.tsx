@@ -1,0 +1,270 @@
+import { motion } from "motion/react";
+import { ArrowRight, Mail, Linkedin, Github, Instagram, ExternalLink, Loader2 } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useState, FormEvent, useEffect } from "react";
+import { PROJECTS as STATIC_PROJECTS, PROFILE_PIC, SOCIAL_LINKS } from "../constants";
+
+export default function Home() {
+  const [formState, setFormState] = useState({ name: "", email: "", message: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{ type: "success" | "error"; message: string } | null>(null);
+  const [projects, setProjects] = useState(STATIC_PROJECTS);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await fetch("/api/projects");
+        if (response.ok) {
+          const githubProjects = await response.json();
+          const merged = [...STATIC_PROJECTS];
+          githubProjects.forEach((gp: any) => {
+            if (!merged.find(p => p.link === gp.link || p.id === gp.id)) {
+              merged.push(gp);
+            }
+          });
+          setProjects(merged);
+        }
+      } catch (error) {
+        console.error("Failed to fetch projects:", error);
+      }
+    };
+    fetchProjects();
+  }, []);
+
+  const handleFormSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const response = await fetch("/api/inquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...formState, type: "inquiry" }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setSubmitStatus({ type: "success", message: "Thank you! Your inquiry has been submitted." });
+        setFormState({ name: "", email: "", message: "" });
+      } else {
+        setSubmitStatus({ type: "error", message: data.error || "Something went wrong. Please try again." });
+      }
+    } catch (error) {
+      setSubmitStatus({ type: "error", message: "Failed to connect to the server. Please check your connection." });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <main className="bg-bg">
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex flex-col justify-center px-6 md:px-24 py-32 md:py-0 overflow-hidden">
+        {/* Soft Background Elements */}
+        <div className="absolute top-0 right-0 w-full h-full -z-10 overflow-hidden">
+          <div className="absolute top-[-10%] right-[-5%] w-[60%] h-[80%] bg-accent/5 blur-[120px] rounded-full animate-pulse" />
+          <div className="absolute bottom-[-10%] left-[-5%] w-[40%] h-[60%] bg-white blur-[100px] rounded-full" />
+        </div>
+        
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
+          className="max-w-5xl"
+        >
+          <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-accent mb-8 block">
+            Portfolio 2026 — Project Analyst
+          </span>
+          <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-[110px] leading-[0.85] tracking-tighter mb-16 font-display">
+            Designing <span className="text-accent">clarity</span> <br /> 
+            <span className="text-ink/20">&</span> purpose <br /> 
+            through data.
+          </h1>
+          
+          <div className="flex flex-col md:flex-row gap-8 items-start md:items-center">
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="flex flex-col sm:flex-row gap-4"
+            >
+              <Link 
+                to="/work"
+                className="bg-ink text-white px-12 py-6 rounded-full flex items-center gap-4 text-xs font-bold uppercase tracking-widest hover:bg-accent transition-all duration-500 shadow-xl shadow-ink/10"
+              >
+                View Projects <ArrowRight className="w-4 h-4" />
+              </Link>
+              <Link 
+                to="/hire-me"
+                className="bg-white text-ink border border-line/20 px-12 py-6 rounded-full flex items-center gap-4 text-xs font-bold uppercase tracking-widest hover:bg-accent hover:text-white hover:border-accent transition-all duration-500 shadow-xl shadow-ink/5"
+              >
+                Hire Me <ArrowRight className="w-4 h-4" />
+              </Link>
+            </motion.div>
+            
+            <p className="max-w-sm text-sm text-muted/80 leading-relaxed font-light">
+              Results-driven Assistant Manager with 5 years of experience in project management, business operations, and data analytics. Curating systems that bridge the gap between human intuition and digital interfaces.
+            </p>
+          </div>
+        </motion.div>
+
+        <motion.div 
+          initial={{ opacity: 0, scale: 1.05, rotate: 2 }}
+          animate={{ opacity: 1, scale: 1, rotate: 0 }}
+          transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
+          className="absolute right-6 md:right-24 bottom-24 w-48 h-64 sm:w-72 sm:h-96 hidden sm:block lg:block"
+        >
+          <div className="relative w-full h-full">
+            <img 
+              src={PROFILE_PIC} 
+              alt="Akhil Karthik" 
+              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 rounded-[2.5rem] shadow-2xl"
+              referrerPolicy="no-referrer"
+            />
+            <div className="absolute -bottom-8 -left-8 bg-white/80 backdrop-blur-md p-8 shadow-2xl rounded-3xl max-w-[220px] border border-white/20">
+              <p className="text-[11px] text-ink/60 leading-relaxed font-sans">
+                "Data is not just numbers; it's the narrative of progress."
+              </p>
+            </div>
+          </div>
+        </motion.div>
+      </section>
+
+      {/* Quick Links Grid - Refined */}
+      <section className="py-40 px-6 md:px-24">
+        <div className="max-w-4xl mb-24">
+          <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-accent mb-6 block">The Index</span>
+          <h2 className="text-4xl md:text-6xl font-display leading-tight">Explore the <br /> digital monograph.</h2>
+        </div>
+        
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[
+            { to: "/work", title: "Work", desc: "Selected professional projects and case studies." },
+            { to: "/blogs", title: "Blogs", desc: "Long-form articles and technical deep-dives on Medium." },
+            { to: "/lab", title: "Lab", desc: "Experiments, technical ideas, and raw prototypes." },
+            { to: "/thinking", title: "Thinking", desc: "Strategic insights and technical deep-dives." },
+            { to: "/arts", title: "Arts", desc: "Creative writing, digital art, and visual works." },
+            { to: "/journal", title: "Journal", desc: "Weekly reflections and personal learnings." }
+          ].map((link, i) => (
+            <Link 
+              key={link.to} 
+              to={link.to} 
+              className="group p-12 bg-white rounded-[3rem] border border-line/5 hover:border-accent/20 hover:shadow-2xl hover:shadow-accent/5 transition-all duration-700 flex flex-col justify-between aspect-square"
+            >
+              <div>
+                <div className="text-[10px] font-bold text-accent/30 mb-8">0{i + 1}</div>
+                <h3 className="text-4xl mb-4 font-display group-hover:text-accent transition-colors">{link.title}</h3>
+                <p className="text-sm text-muted/60 leading-relaxed">{link.desc}</p>
+              </div>
+              <div className="flex justify-end">
+                <div className="w-12 h-12 rounded-full border border-line/10 flex items-center justify-center group-hover:bg-accent group-hover:text-white transition-all duration-500">
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* Inquiry Form Section - New & Sophisticated */}
+      <section className="py-40 px-6 md:px-24 bg-white rounded-[4rem] mx-4 md:mx-12 mb-12 shadow-2xl shadow-ink/5">
+        <div className="grid lg:grid-cols-2 gap-24 items-start">
+          <div className="space-y-16">
+            <div>
+              <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-accent mb-8 block">Collaborate</span>
+              <h2 className="text-5xl md:text-7xl font-display leading-[0.9] mb-12">
+                Let's build <br /> something <span className="text-accent">meaningful.</span>
+              </h2>
+              <p className="text-muted leading-relaxed text-lg max-w-md font-light">
+                Currently accepting select commissions for late 2026. I am particularly interested in projects involving cultural institutions and sustainable brands.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
+              <div className="space-y-4">
+                <div className="text-[10px] uppercase tracking-widest font-bold text-accent">Contact</div>
+                <a href={SOCIAL_LINKS.email} className="text-sm hover:text-accent transition-colors block">{SOCIAL_LINKS.email.replace('mailto:', '')}</a>
+              </div>
+              <div className="space-y-4">
+                <div className="text-[10px] uppercase tracking-widest font-bold text-accent">Social</div>
+                <div className="flex gap-6">
+                  <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors"><Linkedin className="w-4 h-4" /></a>
+                  <a href={SOCIAL_LINKS.github} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors"><Github className="w-4 h-4" /></a>
+                  <a href={SOCIAL_LINKS.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors"><Instagram className="w-4 h-4" /></a>
+                  <a href={SOCIAL_LINKS.medium} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors"><ExternalLink className="w-4 h-4" /></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <motion.form 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            onSubmit={handleFormSubmit} 
+            className="space-y-12 bg-bg p-12 md:p-16 rounded-[3rem] border border-line/5"
+          >
+            <div className="space-y-8">
+              <div className="space-y-2">
+                <label className="text-[10px] uppercase tracking-widest font-bold text-muted/60">Full Name</label>
+                <input 
+                  type="text" 
+                  required
+                  value={formState.name}
+                  onChange={(e) => setFormState({ ...formState, name: e.target.value })}
+                  className="w-full border-b border-line/20 py-4 focus:border-accent outline-none transition-colors bg-transparent text-lg font-sans" 
+                  placeholder="John Doe" 
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-[10px] uppercase tracking-widest font-bold text-muted/60">Email Address</label>
+                <input 
+                  type="email" 
+                  required
+                  value={formState.email}
+                  onChange={(e) => setFormState({ ...formState, email: e.target.value })}
+                  className="w-full border-b border-line/20 py-4 focus:border-accent outline-none transition-colors bg-transparent text-lg font-sans" 
+                  placeholder="john@example.com" 
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-[10px] uppercase tracking-widest font-bold text-muted/60">Your Inquiry</label>
+                <textarea 
+                  required
+                  value={formState.message}
+                  onChange={(e) => setFormState({ ...formState, message: e.target.value })}
+                  className="w-full border-b border-line/20 py-4 focus:border-accent outline-none transition-colors bg-transparent h-32 resize-none text-lg font-sans" 
+                  placeholder="Tell me about your project..." 
+                />
+              </div>
+            </div>
+            
+            {submitStatus && (
+              <div className={`text-xs font-bold uppercase tracking-widest p-6 rounded-2xl ${submitStatus.type === "success" ? "bg-green-50 text-green-600" : "bg-red-50 text-red-600"}`}>
+                {submitStatus.message}
+              </div>
+            )}
+
+            <button 
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full bg-ink text-white py-6 rounded-2xl flex items-center justify-center gap-4 text-xs font-bold uppercase tracking-widest hover:bg-accent transition-all duration-500 disabled:opacity-50 shadow-xl shadow-ink/10"
+            >
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="w-4 h-4 animate-spin" />
+                  Sending...
+                </>
+              ) : (
+                <>
+                  Send Inquiry <ArrowRight className="w-4 h-4" />
+                </>
+              )}
+            </button>
+          </motion.form>
+        </div>
+      </section>
+    </main>
+  );
+}
