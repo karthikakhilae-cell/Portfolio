@@ -33,16 +33,16 @@ export default function Work() {
   }, []);
 
   return (
-    <main className="pt-24 md:pt-32 pb-20 px-6 md:px-24 min-h-screen bg-bg">
+    <main className="pt-24 md:pt-32 pb-20 px-4 sm:px-8 md:px-12 lg:px-24 min-h-screen bg-bg">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="max-w-4xl mb-16 md:mb-24"
+        className="max-w-4xl mb-12 md:mb-24"
       >
-        <span className="text-[10px] uppercase tracking-[0.3em] font-semibold text-accent mb-6 block">
+        <span className="text-[10px] uppercase tracking-[0.3em] font-semibold text-accent mb-4 md:mb-6 block">
           Selected Archive
         </span>
-        <h1 className="text-4xl md:text-8xl font-display leading-tight mb-8">
+        <h1 className="text-4xl sm:text-6xl md:text-8xl font-display leading-tight mb-6 md:mb-8">
           Featured <br /> Projects
         </h1>
         <p className="text-muted text-base md:text-lg leading-relaxed max-w-2xl">

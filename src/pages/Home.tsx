@@ -61,7 +61,7 @@ export default function Home() {
   return (
     <main className="bg-bg">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex flex-col justify-center px-6 md:px-24 py-32 md:py-0 overflow-hidden">
+      <section className="relative min-h-screen flex flex-col justify-center px-4 sm:px-8 md:px-12 lg:px-24 py-32 md:py-0 overflow-hidden">
         {/* Soft Background Elements */}
         <div className="absolute top-0 right-0 w-full h-full -z-10 overflow-hidden">
           <div className="absolute top-[-10%] right-[-5%] w-[60%] h-[80%] bg-accent/5 blur-[120px] rounded-full animate-pulse" />
@@ -74,10 +74,10 @@ export default function Home() {
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
           className="max-w-5xl"
         >
-          <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-accent mb-8 block">
+          <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-accent mb-6 md:mb-8 block">
             Portfolio 2026 — Project Analyst
           </span>
-          <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-[110px] leading-[0.85] tracking-tighter mb-16 font-display">
+          <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-[110px] leading-[0.85] tracking-tighter mb-12 md:mb-16 font-display">
             Designing <span className="text-accent">clarity</span> <br /> 
             <span className="text-ink/20">&</span> purpose <br /> 
             through data.
@@ -87,17 +87,17 @@ export default function Home() {
             <motion.div
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="flex flex-col sm:flex-row gap-4"
+              className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
             >
               <Link 
                 to="/work"
-                className="bg-ink text-white px-12 py-6 rounded-full flex items-center gap-4 text-xs font-bold uppercase tracking-widest hover:bg-accent transition-all duration-500 shadow-xl shadow-ink/10"
+                className="bg-ink text-white px-8 sm:px-12 py-4 sm:py-6 rounded-full flex items-center justify-center sm:justify-start gap-4 text-xs font-bold uppercase tracking-widest hover:bg-accent transition-all duration-500 shadow-xl shadow-ink/10"
               >
                 View Projects <ArrowRight className="w-4 h-4" />
               </Link>
               <Link 
                 to="/hire-me"
-                className="bg-white text-ink border border-line/20 px-12 py-6 rounded-full flex items-center gap-4 text-xs font-bold uppercase tracking-widest hover:bg-accent hover:text-white hover:border-accent transition-all duration-500 shadow-xl shadow-ink/5"
+                className="bg-white text-ink border border-line/20 px-8 sm:px-12 py-4 sm:py-6 rounded-full flex items-center justify-center sm:justify-start gap-4 text-xs font-bold uppercase tracking-widest hover:bg-accent hover:text-white hover:border-accent transition-all duration-500 shadow-xl shadow-ink/5"
               >
                 Hire Me <ArrowRight className="w-4 h-4" />
               </Link>
@@ -113,7 +113,7 @@ export default function Home() {
           initial={{ opacity: 0, scale: 1.05, rotate: 2 }}
           animate={{ opacity: 1, scale: 1, rotate: 0 }}
           transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
-          className="absolute right-6 md:right-24 bottom-24 w-48 h-64 sm:w-72 sm:h-96 hidden sm:block lg:block"
+          className="absolute right-4 sm:right-8 md:right-12 lg:right-24 bottom-24 w-48 h-64 sm:w-72 sm:h-96 hidden sm:block lg:block"
         >
           <div className="relative w-full h-full">
             <img 
@@ -132,13 +132,13 @@ export default function Home() {
       </section>
 
       {/* Quick Links Grid - Refined */}
-      <section className="py-40 px-6 md:px-24">
-        <div className="max-w-4xl mb-24">
-          <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-accent mb-6 block">The Index</span>
-          <h2 className="text-4xl md:text-6xl font-display leading-tight">Explore the <br /> digital monograph.</h2>
+      <section className="py-24 md:py-40 px-4 sm:px-8 md:px-12 lg:px-24">
+        <div className="max-w-4xl mb-16 md:mb-24">
+          <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-accent mb-4 md:mb-6 block">The Index</span>
+          <h2 className="text-3xl sm:text-4xl md:text-6xl font-display leading-tight">Explore the <br /> digital monograph.</h2>
         </div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {[
             { to: "/work", title: "Work", desc: "Selected professional projects and case studies." },
             { to: "/blogs", title: "Blogs", desc: "Long-form articles and technical deep-dives on Medium." },
@@ -150,7 +150,7 @@ export default function Home() {
             <Link 
               key={link.to} 
               to={link.to} 
-              className="group p-12 bg-white rounded-[3rem] border border-line/5 hover:border-accent/20 hover:shadow-2xl hover:shadow-accent/5 transition-all duration-700 flex flex-col justify-between aspect-square"
+              className="group p-8 sm:p-12 bg-white rounded-[2.5rem] md:rounded-[3rem] border border-line/5 hover:border-accent/20 hover:shadow-2xl hover:shadow-accent/5 transition-all duration-700 flex flex-col justify-between aspect-square"
             >
               <div>
                 <div className="text-[10px] font-bold text-accent/30 mb-8">0{i + 1}</div>
@@ -168,20 +168,20 @@ export default function Home() {
       </section>
 
       {/* Inquiry Form Section - New & Sophisticated */}
-      <section className="py-40 px-6 md:px-24 bg-white rounded-[4rem] mx-4 md:mx-12 mb-12 shadow-2xl shadow-ink/5">
-        <div className="grid lg:grid-cols-2 gap-24 items-start">
-          <div className="space-y-16">
+      <section className="py-24 md:py-40 px-4 sm:px-8 md:px-12 lg:px-24 bg-white rounded-[2.5rem] md:rounded-[4rem] mx-2 sm:mx-4 md:mx-12 mb-12 shadow-2xl shadow-ink/5">
+        <div className="grid lg:grid-cols-2 gap-16 md:gap-24 items-start">
+          <div className="space-y-12 md:space-y-16">
             <div>
-              <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-accent mb-8 block">Collaborate</span>
-              <h2 className="text-5xl md:text-7xl font-display leading-[0.9] mb-12">
+              <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-accent mb-6 md:mb-8 block">Collaborate</span>
+              <h2 className="text-4xl sm:text-5xl md:text-7xl font-display leading-[0.9] mb-8 md:mb-12">
                 Let's build <br /> something <span className="text-accent">meaningful.</span>
               </h2>
-              <p className="text-muted leading-relaxed text-lg max-w-md font-light">
+              <p className="text-muted leading-relaxed text-base md:text-lg max-w-md font-light">
                 Currently accepting select commissions for late 2026. I am particularly interested in projects involving cultural institutions and sustainable brands.
               </p>
             </div>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-12">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 md:gap-12">
               <div className="space-y-4">
                 <div className="text-[10px] uppercase tracking-widest font-bold text-accent">Contact</div>
                 <a href={SOCIAL_LINKS.email} className="text-sm hover:text-accent transition-colors block">{SOCIAL_LINKS.email.replace('mailto:', '')}</a>
@@ -203,7 +203,7 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             onSubmit={handleFormSubmit} 
-            className="space-y-12 bg-bg p-12 md:p-16 rounded-[3rem] border border-line/5"
+            className="space-y-8 md:space-y-12 bg-bg p-8 sm:p-12 md:p-16 rounded-[2.5rem] md:rounded-[3rem] border border-line/5"
           >
             <div className="space-y-8">
               <div className="space-y-2">

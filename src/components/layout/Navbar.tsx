@@ -36,29 +36,29 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 w-full z-50 px-6 md:px-24 py-6 flex justify-between items-center transition-all duration-500 ${scrolled ? "bg-white/80 backdrop-blur-md py-4 shadow-sm" : "bg-transparent"}`}>
+      <nav className={`fixed top-0 left-0 w-full z-50 px-4 sm:px-8 md:px-12 lg:px-24 py-4 md:py-6 flex justify-between items-center transition-all duration-500 ${scrolled ? "bg-white/80 backdrop-blur-md py-3 md:py-4 shadow-sm" : "bg-transparent"}`}>
         <motion.div 
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="flex items-center gap-4 group cursor-pointer"
+          className="flex items-center gap-3 md:gap-4 group cursor-pointer"
           onClick={() => navigate('/about')}
         >
           <div className="relative">
             <img 
               src={PROFILE_PIC} 
               alt="Akhil" 
-              className="w-10 h-10 rounded-full object-cover border border-ink/10 group-hover:border-accent transition-colors"
+              className="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover border border-ink/10 group-hover:border-accent transition-colors"
               referrerPolicy="no-referrer"
             />
-            <div className="absolute -bottom-1 -right-1 w-3 h-3 bg-green-500 border-2 border-bg rounded-full" />
+            <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-green-500 border-2 border-bg rounded-full" />
           </div>
-          <div className="text-xl font-display tracking-tight text-ink">
+          <div className="text-lg md:text-xl font-display tracking-tight text-ink">
             Akhil Karthik
           </div>
         </motion.div>
         
-        <div className="hidden lg:flex gap-8 text-[10px] uppercase tracking-[0.2em] font-bold text-ink/60">
-          {NAV_LINKS.slice(0, 6).map((link) => (
+        <div className="hidden lg:flex gap-6 xl:gap-8 text-[10px] uppercase tracking-[0.2em] font-bold text-ink/60">
+          {NAV_LINKS.slice(0, 7).map((link) => (
             <Link 
               key={link.path}
               to={link.path} 

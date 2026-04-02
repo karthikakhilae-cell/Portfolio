@@ -62,27 +62,27 @@ export default function HireMe() {
   };
 
   return (
-    <main className="pt-32 pb-20 px-6 md:px-24 min-h-screen bg-bg">
+    <main className="pt-24 md:pt-32 pb-20 px-4 sm:px-8 md:px-12 lg:px-24 min-h-screen bg-bg">
       {/* Hero */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="max-w-4xl mb-32"
+        className="max-w-4xl mb-20 md:mb-32"
       >
-        <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-accent mb-8 block">
+        <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-accent mb-6 md:mb-8 block">
           Available for Projects
         </span>
-        <h1 className="text-6xl md:text-8xl font-display leading-[0.9] mb-12">
+        <h1 className="text-4xl sm:text-6xl md:text-8xl font-display leading-[0.9] mb-8 md:mb-12">
           Let's solve your <br /> <span className="text-accent">complex</span> problems.
         </h1>
-        <p className="text-muted text-xl leading-relaxed max-w-2xl font-light">
+        <p className="text-muted text-lg md:text-xl leading-relaxed max-w-2xl font-light">
           I partner with forward-thinking companies to build data-driven systems and lead high-impact projects. Currently accepting select inquiries for Q3 & Q4 2026.
         </p>
       </motion.div>
 
       {/* Services */}
-      <section className="mb-40">
-        <div className="grid lg:grid-cols-3 gap-8">
+      <section className="mb-24 md:mb-40">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {SERVICES.map((service, i) => (
             <motion.div
               key={service.title}
@@ -111,13 +111,13 @@ export default function HireMe() {
       </section>
 
       {/* Process */}
-      <section className="mb-40 py-32 bg-white rounded-[4rem] px-12 md:px-24 shadow-2xl shadow-ink/5">
-        <div className="max-w-2xl mb-24">
-          <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-accent mb-6 block">The Workflow</span>
-          <h2 className="text-4xl md:text-6xl font-display leading-tight">A systematic approach <br /> to excellence.</h2>
+      <section className="mb-24 md:mb-40 py-20 md:py-32 bg-white rounded-[2.5rem] md:rounded-[4rem] px-6 sm:px-12 md:px-24 shadow-2xl shadow-ink/5">
+        <div className="max-w-2xl mb-16 md:mb-24">
+          <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-accent mb-4 md:mb-6 block">The Workflow</span>
+          <h2 className="text-3xl sm:text-4xl md:text-6xl font-display leading-tight">A systematic approach <br /> to excellence.</h2>
         </div>
         
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12">
           {PROCESS.map((p, i) => (
             <div key={p.step} className="space-y-6">
               <div className="text-5xl font-display text-accent/10">{p.step}</div>
@@ -130,17 +130,17 @@ export default function HireMe() {
 
       {/* Form */}
       <section className="max-w-6xl mx-auto">
-        <div className="grid lg:grid-cols-2 gap-24 items-start">
+        <div className="grid lg:grid-cols-2 gap-16 md:gap-24 items-start">
           <div>
-            <h2 className="text-5xl md:text-7xl font-display leading-[0.9] mb-12">
+            <h2 className="text-4xl sm:text-5xl md:text-7xl font-display leading-[0.9] mb-8 md:mb-12">
               Start a <br /> <span className="text-accent">Conversation.</span>
             </h2>
-            <p className="text-muted leading-relaxed text-lg mb-12 font-light">
+            <p className="text-muted leading-relaxed text-base md:text-lg mb-8 md:mb-12 font-light">
               Fill out the form with your project details, or reach out directly via email for a quick consultation.
             </p>
             <div className="space-y-4">
               <div className="text-[10px] uppercase tracking-widest font-bold text-accent">Direct Email</div>
-              <a href={SOCIAL_LINKS.email} className="text-2xl font-display hover:text-accent transition-colors">{SOCIAL_LINKS.email.replace('mailto:', '')}</a>
+              <a href={SOCIAL_LINKS.email} className="text-xl md:text-2xl font-display hover:text-accent transition-colors">{SOCIAL_LINKS.email.replace('mailto:', '')}</a>
             </div>
           </div>
 
@@ -149,7 +149,7 @@ export default function HireMe() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             onSubmit={handleFormSubmit} 
-            className="space-y-8 bg-white p-12 md:p-16 rounded-[3.5rem] shadow-2xl shadow-ink/5 border border-line/5"
+            className="space-y-6 md:space-y-8 bg-white p-8 sm:p-12 md:p-16 rounded-[2.5rem] md:rounded-[3.5rem] shadow-2xl shadow-ink/5 border border-line/5"
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="space-y-2">

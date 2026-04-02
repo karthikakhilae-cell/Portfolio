@@ -36,7 +36,7 @@ export default function Landing() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7 }}
-          className="text-5xl md:text-8xl font-display mb-6 tracking-tighter"
+          className="text-4xl sm:text-6xl md:text-8xl font-display mb-6 tracking-tighter"
         >
           Akhil Karthik
         </motion.h1>
@@ -45,7 +45,7 @@ export default function Landing() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.9 }}
-          className="text-white/50 text-sm md:text-base uppercase tracking-[0.4em] mb-16 font-light"
+          className="text-white/50 text-[10px] sm:text-xs md:text-base uppercase tracking-[0.2em] sm:tracking-[0.4em] mb-12 sm:mb-16 font-light max-w-[280px] sm:max-w-none mx-auto"
         >
           Data Analyst • Project Strategist • Digital Curator
         </motion.p>
@@ -57,10 +57,10 @@ export default function Landing() {
         >
           <Link 
             to="/home"
-            className="group relative inline-flex items-center gap-4 px-12 py-6 border border-white/20 rounded-full hover:bg-white hover:text-ink transition-all duration-500 overflow-hidden"
+            className="group relative inline-flex items-center gap-4 px-8 sm:px-12 py-4 sm:py-6 border border-white/20 rounded-full hover:bg-white hover:text-ink transition-all duration-500 overflow-hidden"
           >
-            <span className="relative z-10 text-sm font-bold uppercase tracking-widest">Enter Experience</span>
-            <ArrowRight className="w-5 h-5 relative z-10 group-hover:translate-x-2 transition-transform" />
+            <span className="relative z-10 text-xs sm:text-sm font-bold uppercase tracking-widest">Enter Experience</span>
+            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 relative z-10 group-hover:translate-x-2 transition-transform" />
           </Link>
         </motion.div>
       </motion.div>

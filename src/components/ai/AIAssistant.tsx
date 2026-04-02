@@ -178,7 +178,7 @@ Guidelines:
   return (
     <>
       {/* Floating Doll */}
-      <div className="fixed bottom-8 right-8 z-[100]">
+      <div className="fixed bottom-4 right-4 md:bottom-8 md:right-8 z-[100]">
         {/* Hello Bubble */}
         <AnimatePresence>
           {showHello && !isOpen && (
@@ -186,7 +186,7 @@ Guidelines:
               initial={{ opacity: 0, y: 10, scale: 0.8 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 10, scale: 0.8 }}
-              className="absolute bottom-28 right-0"
+              className="absolute bottom-24 md:bottom-28 right-0"
             >
               <div className="bg-white/90 backdrop-blur-md px-5 py-3 rounded-2xl shadow-2xl border border-line/10 text-[11px] font-bold uppercase tracking-widest text-ink/60 whitespace-nowrap relative">
                 {greeting}
@@ -227,7 +227,7 @@ Guidelines:
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => setIsOpen(!isOpen)}
-            className="relative w-16 h-16 bg-gradient-to-b from-white to-bg text-ink rounded-[2rem] flex flex-col items-center justify-center shadow-[0_10px_30px_rgba(0,0,0,0.1)] border border-white/50 overflow-hidden group"
+            className="relative w-14 h-14 md:w-16 md:h-16 bg-gradient-to-b from-white to-bg text-ink rounded-[1.5rem] md:rounded-[2rem] flex flex-col items-center justify-center shadow-[0_10px_30px_rgba(0,0,0,0.1)] border border-white/50 overflow-hidden group"
           >
             {/* Doll Face */}
             <div className="flex flex-col items-center gap-1.5">
@@ -272,7 +272,7 @@ Guidelines:
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed bottom-28 right-8 z-[100] w-[calc(100vw-4rem)] sm:w-[400px] h-[600px] bg-white rounded-3xl shadow-[0_30px_90px_rgba(0,0,0,0.2)] border border-line/10 flex flex-col overflow-hidden"
+            className="fixed bottom-24 right-4 md:bottom-28 md:right-8 z-[100] w-[calc(100vw-2rem)] sm:w-[400px] h-[calc(100vh-10rem)] max-h-[600px] bg-white rounded-3xl shadow-[0_30px_90px_rgba(0,0,0,0.2)] border border-line/10 flex flex-col overflow-hidden"
           >
             {/* Header */}
             <div className="p-6 border-b border-line/5 flex items-center justify-between">
