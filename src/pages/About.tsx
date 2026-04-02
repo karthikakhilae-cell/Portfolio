@@ -18,7 +18,7 @@ export default function About() {
           </h1>
           <div className="space-y-8 opacity-70 leading-relaxed text-lg font-light">
             <p>
-              As a curator and designer with over a decade of experience, I approach every project with the rigor of an archivist and the soul of an artist. My work is defined by a commitment to silence in a world of digital noise.
+              As a Data curator and designer with over a decade of experience, I approach every project with the rigor of an archivist and the soul of an artist. My work is defined by a commitment to silence in a world of digital noise.
             </p>
             <p>
               I specialize in creating high-end digital monographs and portfolio experiences for architectural firms, luxury brands, and independent artists. My background in fine arts and systems engineering allows me to bridge the gap between technical complexity and aesthetic purity.
