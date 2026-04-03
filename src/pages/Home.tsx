@@ -104,7 +104,7 @@ export default function Home() {
             </motion.div>
             
             <p className="max-w-sm text-sm text-muted/80 leading-relaxed font-light">
-              Results-driven Assistant Manager with 5 years of experience in project management, business operations, and data analytics. Curating systems that bridge the gap between human intuition and digital interfaces.
+              Results-driven data science enthusiast with 5+ years of experience in project management, business operations, data Science And AI ML Research. Curating systems that bridge the gap between human intuition and digital interfaces.
             </p>
           </div>
         </motion.div>

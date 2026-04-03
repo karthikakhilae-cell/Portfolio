@@ -128,42 +128,28 @@ Guidelines:
     setIsGenerating(true);
 
     try {
-      const apiKey = process.env.GEMINI_API_KEY;
-      if (!apiKey) {
-        throw new Error("Gemini API Key is not configured");
-      }
-
-      const ai = new GoogleGenAI({ apiKey });
-      const chat = ai.chats.create({
-        model: "gemini-3-flash-preview",
-        config: {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message: userMessage,
           systemInstruction: SYSTEM_INSTRUCTION,
-          temperature: 0.9,
-        },
-        history: messages.map(m => ({
-          role: m.role,
-          parts: [{ text: m.text }]
-        }))
+          history: messages.map(m => ({
+            role: m.role,
+            parts: [{ text: m.text }]
+          }))
+        })
       });
 
-      const result = await chat.sendMessageStream({ message: userMessage });
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to get AI response");
+      }
+
+      const data = await response.json();
       
       setIsTyping(false);
-      setMessages(prev => [...prev, { role: "model", text: "" }]);
-
-      let fullText = "";
-      for await (const chunk of result) {
-        const c = chunk as GenerateContentResponse;
-        const text = c.text;
-        if (text) {
-          fullText += text;
-          setMessages(prev => {
-            const newMessages = [...prev];
-            newMessages[newMessages.length - 1] = { role: "model", text: fullText };
-            return newMessages;
-          });
-        }
-      }
+      setMessages(prev => [...prev, { role: "model", text: data.text }]);
     } catch (error) {
       console.error("AI Assistant Error:", error);
       setMessages(prev => [...prev, { role: "model", text: "I'm sorry, I encountered an error. Please try again or contact Akhil directly." }]);
@@ -402,7 +388,7 @@ Guidelines:
                 </button>
               </form>
               <div className="mt-4 text-[8px] text-center uppercase tracking-[0.2em] font-bold text-muted/40">
-                Powered by Gemini 3 Flash
+                Powered by Gemini 2.0 Flash
               </div>
             </div>
           </motion.div>

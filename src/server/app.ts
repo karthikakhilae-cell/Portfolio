@@ -71,6 +71,38 @@ export function createExpressApp() {
     }
   });
 
+  // API Route for AI Chat (Gemini)
+  router.post("/chat", async (req, res) => {
+    const { message, history, systemInstruction } = req.body;
+
+    if (!message) {
+      return res.status(400).json({ error: "Message is required" });
+    }
+
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey) {
+      return res.status(500).json({ error: "Gemini API Key is not configured on the server" });
+    }
+
+    try {
+      const ai = new GoogleGenAI({ apiKey });
+      const chat = ai.chats.create({
+        model: "gemini-2.0-flash",
+        config: {
+          systemInstruction: systemInstruction,
+          temperature: 0.9,
+        },
+        history: history || []
+      });
+
+      const result = await chat.sendMessage({ message: message });
+      res.status(200).json({ text: result.text });
+    } catch (error) {
+      console.error("Gemini API Error:", error);
+      res.status(500).json({ error: "Failed to generate AI response" });
+    }
+  });
+
   // Mount the router at both paths to support local dev and Netlify functions
   app.use("/api", router);
   app.use("/.netlify/functions/api", router);

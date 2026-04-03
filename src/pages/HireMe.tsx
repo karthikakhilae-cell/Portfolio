@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { ArrowRight, CheckCircle2, Zap, Target, BarChart3, Layers, Loader2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, Zap, Target, BarChart3, Layers, Loader2, Brain } from "lucide-react";
 import { useState, FormEvent } from "react";
 import { SOCIAL_LINKS } from "../constants";
 
@@ -25,7 +25,7 @@ const SERVICES = [
   {
   title: "AI & Machine Learning",
   description: "Leveraging artificial intelligence and machine learning to build intelligent systems that analyze data, predict outcomes, and automate decision-making processes.",
-  icon: <brain className="w-6 h-6" />,
+  icon: <Brain className="w-6 h-6" />,
   features: ["Machine Learning Model Development","Predictive Analytics & Forecasting","AI-Powered Data Insights"
   ]
 }
