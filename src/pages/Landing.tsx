@@ -59,7 +59,7 @@ export default function Landing() {
             to="/home"
             className="group relative inline-flex items-center gap-4 px-8 sm:px-12 py-4 sm:py-6 border border-white/20 rounded-full hover:bg-white hover:text-ink transition-all duration-500 overflow-hidden"
           >
-            <span className="relative z-10 text-xs sm:text-sm font-bold uppercase tracking-widest">Enter Experience</span>
+            <span className="relative z-10 text-xs sm:text-sm font-bold uppercase tracking-widest">Dive In</span>
             <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 relative z-10 group-hover:translate-x-2 transition-transform" />
           </Link>
         </motion.div>
