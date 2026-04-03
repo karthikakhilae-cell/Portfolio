@@ -47,7 +47,7 @@ export default function Landing() {
           transition={{ delay: 0.9 }}
           className="text-white/50 text-[10px] sm:text-xs md:text-base uppercase tracking-[0.2em] sm:tracking-[0.4em] mb-12 sm:mb-16 font-light max-w-[280px] sm:max-w-none mx-auto"
         >
-          Data Analyst • Project Strategist • Digital Curator
+          Data science enthusiast • Project Strategist • Digital Curator • AI ML researcher
         </motion.p>
 
         <motion.div
