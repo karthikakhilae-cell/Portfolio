@@ -152,7 +152,8 @@ Guidelines:
       setMessages(prev => [...prev, { role: "model", text: data.text }]);
     } catch (error) {
       console.error("AI Assistant Error:", error);
-      setMessages(prev => [...prev, { role: "model", text: "I'm sorry, I encountered an error. Please try again or contact Akhil directly." }]);
+      setMessages(prev => [...prev, { role: "model", text: It looks like the AI assistant has reached its usage limit for now If you’d like to continue the conversation or learn more about my work,
+feel free to contact me directly." }]);
     } finally {
       setIsLoading(false);
       setIsTyping(false);
