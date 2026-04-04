@@ -2,40 +2,29 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { MessageSquare, X, Send, Bot, User, Loader2 } from "lucide-react";
 import Markdown from "react-markdown";
-import { GoogleGenAI, GenerateContentResponse } from "@google/genai";
 import { PROJECTS as STATIC_PROJECTS, SOCIAL_LINKS } from "../../constants";
 
 interface Message {
   role: "user" | "model";
   text: string;
+  suggestions?: string[];
 }
 
 export default function AIAssistant() {
   const [isOpen, setIsOpen] = useState(false);
   const [projects, setProjects] = useState(STATIC_PROJECTS);
   const [messages, setMessages] = useState<Message[]>([
-    { role: "model", text: "Hi there! I'm Laura, Akhil's digital assistant. How can I help you explore his work today?" }
+    { 
+      role: "model", 
+      text: "Hi there! I'm Laura, Akhil's digital assistant. How can I help you explore his work today?",
+      suggestions: ["Tell me about Akhil", "Show me his projects", "How can I contact him?"]
+    }
   ]);
 
   useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const response = await fetch("/api/projects");
-        if (response.ok) {
-          const githubProjects = await response.json();
-          const merged = [...STATIC_PROJECTS];
-          githubProjects.forEach((gp: any) => {
-            if (!merged.find(p => p.link === gp.link || p.id === gp.id)) {
-              merged.push(gp);
-            }
-          });
-          setProjects(merged);
-        }
-      } catch (error) {
-        console.error("Failed to fetch projects for AI:", error);
-      }
-    };
-    fetchProjects();
+    // Note: /api/projects is not currently implemented on the server.
+    // Using static projects from constants for now.
+    setProjects(STATIC_PROJECTS);
   }, []);
 
   const SYSTEM_INSTRUCTION = `
@@ -117,47 +106,85 @@ Guidelines:
     }
   }, [messages]);
 
-  const handleSend = async () => {
-    if (!input.trim() || isLoading) return;
+  const handleSend = async (customMessage?: string) => {
+    const messageToSend = customMessage || input;
+    if (!messageToSend.trim() || isLoading) return;
 
-    const userMessage = input.trim();
-    setInput("");
-    setMessages(prev => [...prev, { role: "user", text: userMessage }]);
+    const userMessage = messageToSend.trim().toLowerCase();
+    if (!customMessage) setInput("");
+    
+    setMessages(prev => [...prev, { role: "user", text: messageToSend.trim() }]);
     setIsLoading(true);
     setIsTyping(true);
     setIsGenerating(true);
 
-    try {
-      const response = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          message: userMessage,
-          systemInstruction: SYSTEM_INSTRUCTION,
-          history: messages.map(m => ({
-            role: m.role,
-            parts: [{ text: m.text }]
-          }))
-        })
-      });
+    // Simulate a small delay for a "human" feel
+    setTimeout(() => {
+      let responseText = "I'm not quite sure about that. Would you like to see Akhil's projects or contact him directly?";
+      let suggestions: string[] = ["Show me projects", "Contact Akhil", "Who is Akhil?"];
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to get AI response");
+      // Specific Suggestion Handlers
+      if (userMessage === "tell me about akhil" || userMessage === "who is akhil?") {
+        responseText = "Akhil is a Data Scientist and Project Analyst with over 5 years of experience. He loves turning complex data into meaningful stories. Want to know more about his background?";
+        suggestions = ["His Experience", "His Education", "His Core Skills"];
+      } else if (userMessage === "show me his projects" || userMessage === "show all projects") {
+        responseText = "Akhil has worked on some amazing data projects! Some highlights include his Spotify Power BI Analysis, SpaceX Landing Prediction, and Chicago Data Analysis. You can see them all in the 'Work' section. Which one sounds interesting?";
+        suggestions = ["Spotify Analysis", "SpaceX Prediction", "Chicago Data Analysis", "Tell me more"];
+      } else if (userMessage === "how can i contact him?" || userMessage === "contact akhil") {
+        responseText = `You can reach Akhil directly at ${SOCIAL_LINKS.email.replace('mailto:', '')} or connect with him on LinkedIn. He's always open to interesting collaborations!`;
+        suggestions = ["LinkedIn Profile", "GitHub Profile", "Send an inquiry"];
+      } else if (userMessage === "what are his skills?" || userMessage === "his core skills") {
+        responseText = "Akhil is a pro with SQL, Python, Power BI, and Tableau. He also has experience with Machine Learning and Agile Management. Is there a specific skill you're looking for?";
+        suggestions = ["SQL Expertise", "Python Skills", "Data Visualization", "Machine Learning"];
+      } else if (userMessage === "spotify analysis") {
+        responseText = "The Spotify Power BI Analysis is one of Akhil's favorites! It uses Python for data enrichment and features a sleek glass-morphism design with DENEB visuals. It's a great example of his ability to blend aesthetics with deep analytics.";
+        suggestions = ["See the code", "Other projects", "His SQL work"];
+      } else if (userMessage === "spacex prediction") {
+        responseText = "This project uses Machine Learning to predict successful Falcon 9 first-stage landings. It's built with Python and leverages historical launch data to provide actionable insights. Pretty cool, right?";
+        suggestions = ["See the code", "Other ML projects", "His Python skills"];
+      } else if (userMessage === "chicago data analysis") {
+        responseText = "In this project, Akhil integrated SQL and Python to analyze socioeconomic indicators, public schools, and crime data in Chicago. It really showcases his ability to handle large, complex datasets.";
+        suggestions = ["See the code", "His SQL skills", "Data Science work"];
+      } else if (userMessage === "his experience") {
+        responseText = "Akhil has over 5 years of experience in project management, business operations, and data science. He's currently focused on AI and ML research, helping organizations bridge the gap between intuition and data-driven decisions.";
+        suggestions = ["His Education", "His Skills", "Contact him"];
+      } else if (userMessage === "his education") {
+        responseText = "Akhil has a strong academic background in data science and project management. He's constantly learning and staying up-to-date with the latest trends in AI and Machine Learning. Would you like to see his certifications?";
+        suggestions = ["Certifications", "His Skills", "His Projects"];
+      } else if (userMessage === "linkedin profile") {
+        responseText = `You can find Akhil's professional profile on LinkedIn here: [${SOCIAL_LINKS.linkedin}](${SOCIAL_LINKS.linkedin}). Feel free to reach out and connect!`;
+        suggestions = ["GitHub Profile", "Email him", "Back to chat"];
+      } else if (userMessage === "github profile") {
+        responseText = `Check out all of Akhil's open-source work and repositories on GitHub here: [${SOCIAL_LINKS.github}](${SOCIAL_LINKS.github}). He's quite active there!`;
+        suggestions = ["LinkedIn Profile", "Show projects", "Back to chat"];
+      } else if (userMessage === "send an inquiry") {
+        responseText = "You can use the contact form on the 'Home' or 'Contact' pages to send a direct inquiry. Akhil usually responds within 24-48 hours. Anything else I can help with?";
+        suggestions = ["Go to Contact", "His Email", "Back to chat"];
+      } else if (userMessage === "quick summary") {
+        responseText = "In short: Akhil is a Data Scientist with 5+ years of experience, an expert in SQL/Python/Power BI, and a passionate AI researcher. He's great at making data talk! What's next?";
+        suggestions = ["Show projects", "Contact him", "Who is he?"];
+      }
+      // General Keyword Matching (Fallback)
+      else if (userMessage.includes("hi") || userMessage.includes("hello") || userMessage.includes("hey")) {
+        responseText = "Hi there! I'm Laura, Akhil's digital assistant. I can tell you about his projects, skills, or how to contact him. What would you like to know?";
+        suggestions = ["Tell me about Akhil", "Show me his projects", "What are his skills?"];
+      } else if (userMessage.includes("project") || userMessage.includes("work")) {
+        responseText = "Akhil has worked on some amazing data projects! Some highlights include his Spotify Power BI Analysis, SpaceX Landing Prediction, and Chicago Data Analysis. You can see them all in the 'Work' section. Which one sounds interesting?";
+        suggestions = ["Spotify Analysis", "SpaceX Prediction", "Chicago Data Analysis", "Show all projects"];
+      } else if (userMessage.includes("skill") || userMessage.includes("tech") || userMessage.includes("stack")) {
+        responseText = "Akhil is a pro with SQL, Python, Power BI, and Tableau. He also has experience with Machine Learning and Agile Management. Is there a specific skill you're looking for?";
+        suggestions = ["SQL Expertise", "Python Skills", "Data Visualization", "Machine Learning"];
+      } else if (userMessage.includes("contact") || userMessage.includes("email") || userMessage.includes("hire")) {
+        responseText = `You can reach Akhil directly at ${SOCIAL_LINKS.email.replace('mailto:', '')} or connect with him on LinkedIn. He's always open to interesting collaborations!`;
+        suggestions = ["LinkedIn Profile", "GitHub Profile", "Send an inquiry"];
       }
 
-      const data = await response.json();
-      
-      setIsTyping(false);
-      setMessages(prev => [...prev, { role: "model", text: data.text }]);
-    } catch (error) {
-      console.error("AI Assistant Error:", error);
-      setMessages(prev => [...prev, { role: "model", text: "Looks like I've reached my usage limit for the moment. But I'd still love to connect you with Akhil! You can reach him directly via email or LinkedIn to continue the conversation." }]);  } finally {
+      setMessages(prev => [...prev, { role: "model", text: responseText, suggestions }]);
       setIsLoading(false);
       setIsTyping(false);
       setIsGenerating(false);
       resetIdleTimer();
-    }
+    }, 1000);
   };
 
   return (
@@ -299,23 +326,43 @@ Guidelines:
                   animate={{ opacity: 1, x: 0 }}
                   className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
                 >
-                  <div className={`flex gap-3 max-w-[85%] ${m.role === "user" ? "flex-row-reverse" : "flex-row"}`}>
-                    <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${m.role === "user" ? "bg-ink text-white" : "bg-bg text-ink border border-line/5"}`}>
-                      {m.role === "user" ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
-                    </div>
-                    <div className={`p-4 rounded-2xl text-sm leading-relaxed ${m.role === "user" ? "bg-ink text-white rounded-tr-none" : "bg-bg text-ink rounded-tl-none border border-line/5"}`}>
-                      <div className="markdown-body relative">
-                        <Markdown>{m.text}</Markdown>
-                        {isGenerating && i === messages.length - 1 && m.role === "model" && (
-                          <motion.span
-                            animate={{ opacity: [0, 1, 0] }}
-                            transition={{ duration: 0.8, repeat: Infinity }}
-                            className="inline-block w-1.5 h-4 bg-accent ml-1 translate-y-0.5"
-                          />
-                        )}
+                    <div className="space-y-3 max-w-[85%]">
+                      <div className={`flex gap-3 ${m.role === "user" ? "flex-row-reverse" : "flex-row"}`}>
+                        <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${m.role === "user" ? "bg-ink text-white" : "bg-bg text-ink border border-line/5"}`}>
+                          {m.role === "user" ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
+                        </div>
+                        <div className={`p-4 rounded-2xl text-sm leading-relaxed ${m.role === "user" ? "bg-ink text-white rounded-tr-none" : "bg-bg text-ink rounded-tl-none border border-line/5"}`}>
+                          <div className="markdown-body relative">
+                            <Markdown>{m.text}</Markdown>
+                            {isGenerating && i === messages.length - 1 && m.role === "model" && (
+                              <motion.span
+                                animate={{ opacity: [0, 1, 0] }}
+                                transition={{ duration: 0.8, repeat: Infinity }}
+                                className="inline-block w-1.5 h-4 bg-accent ml-1 translate-y-0.5"
+                              />
+                            )}
+                          </div>
+                        </div>
                       </div>
+                      
+                      {/* Suggestions */}
+                      {m.role === "model" && m.suggestions && i === messages.length - 1 && !isLoading && (
+                        <div className="flex flex-wrap gap-2 ml-11">
+                          {m.suggestions.map((suggestion, idx) => (
+                            <motion.button
+                              key={idx}
+                              initial={{ opacity: 0, y: 10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              transition={{ delay: 0.1 * idx }}
+                              onClick={() => handleSend(suggestion)}
+                              className="px-4 py-2 bg-bg border border-line/10 rounded-full text-[10px] font-bold uppercase tracking-widest text-ink/60 hover:bg-ink hover:text-white hover:border-ink transition-all"
+                            >
+                              {suggestion}
+                            </motion.button>
+                          ))}
+                        </div>
+                      )}
                     </div>
-                  </div>
                 </motion.div>
               ))}
               {isTyping && (
