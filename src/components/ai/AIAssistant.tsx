@@ -434,7 +434,7 @@ Guidelines:
                 </button>
               </form>
               <div className="mt-4 text-[8px] text-center uppercase tracking-[0.2em] font-bold text-muted/40">
-                Powered by Gemini 2.0 Flash
+                Created by Akhil Karthik
               </div>
             </div>
           </motion.div>
