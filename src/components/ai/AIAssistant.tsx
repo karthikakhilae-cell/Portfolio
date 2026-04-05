@@ -119,7 +119,7 @@ Guidelines:
 
   const RESPONSES = {
     whoIsAkhil: [
-      "Akhil is a Data Scientist and Project Analyst with over 5 years of experience. He loves turning complex data into meaningful stories. Want to know more about his background?",
+      "Akhil is a Data science researcher and Project Analyst with over 5 years of experience. He loves turning complex data into meaningful stories. Want to know more about his background?",
       "Meet Akhil! He's a Data Scientist who's spent the last 5 years bridging the gap between raw data and business strategy. Should I tell you about his experience or his education?",
       "Akhil is a passionate Data Scientist and Project Analyst. He's an expert at making data talk! Would you like to hear about his core skills or see some of his work?"
     ],
