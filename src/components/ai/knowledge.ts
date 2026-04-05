@@ -12,7 +12,7 @@ export const ASSISTANT_KNOWLEDGE: Intent[] = [
   },
   {
     keywords: ["who is akhil", "akhil?", "who is this", "tell me about akhil", "who is he?"],
-    response: "Akhil is a Data Scientist and Project Analyst with over 5 years of experience. He loves turning complex data into meaningful stories. Want to know more about his background?",
+    response: "Akhil is a Data science researcher and Project data Analyst with over 5+ years of experience. He loves turning complex data into meaningful stories. Want to know more about his background?",
     suggestions: ["His Experience", "His Education", "His Core Skills"]
   },
   {
