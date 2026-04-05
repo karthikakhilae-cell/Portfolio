@@ -5,12 +5,15 @@ import { SOCIAL_LINKS } from "../constants";
 
 const PROJECT_TYPES = [
   "Data Analytics",
-  "Power Bi Development",
-  "Data Base Development",
+  "Power BI Development / Visualisation",
+  "Database Development",
   "Business Analytics",
   "Python Development",
   "Project Management",
   "Business Operations",
+  "Web/Software/App development",
+  "ML models",
+  "AL Models",
   "Other"
 ];
 
