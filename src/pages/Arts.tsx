@@ -30,41 +30,41 @@ const CREATIVE_WORKS = [
 
 export default function Arts() {
   return (
-    <main className="pt-24 md:pt-32 pb-20 px-6 md:px-24 min-h-screen bg-bg">
+    <main className="pt-24 md:pt-32 pb-20 px-4 sm:px-8 md:px-12 lg:px-24 min-h-screen bg-bg">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="max-w-4xl mb-16 md:mb-24"
+        className="max-w-4xl mb-12 md:mb-24"
       >
-        <span className="text-[10px] uppercase tracking-[0.3em] font-semibold text-accent mb-6 block">
+        <span className="text-[10px] uppercase tracking-[0.3em] font-semibold text-accent mb-4 md:mb-6 block">
           Creative Work
         </span>
-        <h1 className="text-4xl md:text-8xl font-display leading-tight mb-8">
+        <h1 className="text-4xl sm:text-6xl md:text-8xl font-display leading-[0.9] mb-6 md:mb-8">
           Arts <br /> & Writing
         </h1>
-        <p className="text-muted text-base md:text-lg leading-relaxed max-w-2xl">
+        <p className="text-muted text-base md:text-lg leading-relaxed max-w-2xl font-light">
           A space for my creative pursuits, from long-form writing to digital art and creative coding experiments.
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-8">
         {CREATIVE_WORKS.map((work, i) => (
           <motion.div
             key={work.title}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.1 }}
-            className="bg-white p-8 md:p-12 rounded-2xl md:rounded-3xl border border-line/5 hover:border-accent/20 transition-all group"
+            className="bg-white p-8 md:p-12 rounded-[2rem] md:rounded-3xl border border-line/5 hover:border-accent/20 transition-all group"
           >
-            <div className="text-accent mb-8 group-hover:scale-110 transition-transform duration-500">
+            <div className="text-accent mb-6 md:mb-8 group-hover:scale-110 transition-transform duration-500">
               {work.icon}
             </div>
-            <div className="text-[10px] uppercase tracking-widest font-bold text-muted mb-4">
+            <div className="text-[9px] md:text-[10px] uppercase tracking-widest font-bold text-muted mb-3 md:mb-4">
               {work.category}
             </div>
-            <h3 className="text-2xl mb-4 group-hover:text-accent transition-colors">{work.title}</h3>
-            <p className="text-muted leading-relaxed">{work.description}</p>
-            <button className="mt-8 text-[10px] uppercase tracking-widest font-bold border-b border-ink pb-1 hover:text-accent hover:border-accent transition-all">
+            <h3 className="text-xl md:text-2xl mb-3 md:mb-4 group-hover:text-accent transition-colors font-display">{work.title}</h3>
+            <p className="text-muted text-xs md:text-sm leading-relaxed">{work.description}</p>
+            <button className="mt-6 md:mt-8 text-[9px] md:text-[10px] uppercase tracking-widest font-bold border-b border-ink pb-1 hover:text-accent hover:border-accent transition-all">
               Explore Work
             </button>
           </motion.div>

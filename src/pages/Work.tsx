@@ -42,10 +42,10 @@ export default function Work() {
         <span className="text-[10px] uppercase tracking-[0.3em] font-semibold text-accent mb-4 md:mb-6 block">
           Selected Archive
         </span>
-        <h1 className="text-4xl sm:text-6xl md:text-8xl font-display leading-tight mb-6 md:mb-8">
+        <h1 className="text-4xl sm:text-6xl md:text-8xl font-display leading-[0.9] mb-6 md:mb-8">
           Featured <br /> Projects
         </h1>
-        <p className="text-muted text-base md:text-lg leading-relaxed max-w-2xl">
+        <p className="text-muted text-base md:text-lg leading-relaxed max-w-2xl font-light">
           A deep dive into my professional work, case studies, and successful project implementations.
         </p>
       </motion.div>

@@ -105,21 +105,21 @@ export default function Navbar() {
               </button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-24 gap-y-8 my-12 overflow-y-auto max-h-[60vh] pr-4 scrollbar-hide">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 md:gap-x-24 gap-y-6 md:gap-y-8 my-8 md:my-12 overflow-y-auto max-h-[70vh] pr-4 scrollbar-hide">
               {NAV_LINKS.map((link, i) => (
                 <motion.div
                   key={link.path}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.05 }}
+                  transition={{ delay: i * 0.03 }}
                 >
                   <Link 
                     to={link.path}
                     onClick={() => setIsMenuOpen(false)}
-                    className="group flex items-end gap-4"
+                    className="group flex items-end gap-3 md:gap-4"
                   >
-                    <span className="text-[10px] font-bold opacity-20 group-hover:opacity-100 transition-opacity mb-2">0{i + 1}</span>
-                    <span className="text-4xl md:text-6xl font-display hover:text-accent transition-all duration-500 group-hover:pl-4">
+                    <span className="text-[9px] md:text-[10px] font-bold opacity-20 group-hover:opacity-100 transition-opacity mb-1 md:mb-2">0{i + 1}</span>
+                    <span className="text-3xl sm:text-4xl md:text-6xl font-display hover:text-accent transition-all duration-500 group-hover:pl-2 md:group-hover:pl-4">
                       {link.name}
                     </span>
                   </Link>

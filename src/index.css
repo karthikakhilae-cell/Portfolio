@@ -13,8 +13,12 @@
 }
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
   body {
-    @apply bg-bg text-ink font-sans antialiased;
+    @apply bg-bg text-ink font-sans antialiased overflow-x-hidden;
   }
   
   h1, h2, h3, h4 {
@@ -34,5 +38,18 @@
   
   .mask-oval {
     clip-path: ellipse(50% 50% at 50% 50%);
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-xl border border-white/50;
   }
 }

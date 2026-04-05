@@ -1,7 +1,18 @@
-import { motion } from "motion/react";
-import { ArrowRight, CheckCircle2, Zap, Target, BarChart3, Layers, Loader2, Brain } from "lucide-react";
-import { useState, FormEvent } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { ArrowRight, CheckCircle2, Zap, Target, BarChart3, Layers, Loader2, Brain, Copy, Check, FileText, ChevronDown } from "lucide-react";
+import { useState, FormEvent, useRef, useEffect } from "react";
 import { SOCIAL_LINKS } from "../constants";
+
+const PROJECT_TYPES = [
+  "Data Analytics",
+  "Power Bi Development",
+  "Data Base Development",
+  "Business Analytics",
+  "Python Development",
+  "Project Management",
+  "Business Operations",
+  "Other"
+];
 
 const SERVICES = [
   {
@@ -42,6 +53,29 @@ export default function HireMe() {
   const [formState, setFormState] = useState({ name: "", email: "", project: "Data Analytics", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{ type: "success" | "error"; message: string } | null>(null);
+  const [isCopied, setIsCopied] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleCopyCV = async () => {
+    try {
+      await navigator.clipboard.writeText(SOCIAL_LINKS.cv);
+      setIsCopied(true);
+      setTimeout(() => setIsCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy CV link:", err);
+    }
+  };
 
   const handleFormSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -69,27 +103,89 @@ export default function HireMe() {
   };
 
   return (
-    <main className="pt-24 md:pt-32 pb-20 px-4 sm:px-8 md:px-12 lg:px-24 min-h-screen bg-bg">
+    <main className="pt-24 md:pt-32 pb-20 px-4 sm:px-8 md:px-12 lg:px-24 min-h-screen bg-bg relative">
+      {/* Floating CV Button */}
+      <div className="fixed bottom-4 left-4 md:bottom-8 md:left-8 z-[100]">
+        <motion.div
+          animate={{ 
+            y: [0, -10, 0],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        >
+          <motion.button
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={handleCopyCV}
+            className={`group relative flex items-center gap-3 px-6 py-4 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] border transition-all duration-500 ${
+              isCopied 
+                ? "bg-green-500 border-green-400 text-white" 
+                : "bg-white/80 backdrop-blur-xl border-white/50 text-ink hover:bg-white hover:shadow-[0_25px_60px_rgba(0,0,0,0.15)]"
+            }`}
+          >
+            <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors duration-500 ${
+              isCopied ? "bg-white/20" : "bg-bg"
+            }`}>
+              {isCopied ? <Check className="w-5 h-5" /> : <FileText className="w-5 h-5 text-accent" />}
+            </div>
+            <div className="flex flex-col items-start pr-2">
+              <span className="text-[10px] uppercase tracking-[0.2em] font-bold opacity-60">
+                {isCopied ? "Success" : "Curriculum Vitae"}
+              </span>
+              <span className="text-sm font-bold tracking-tight">
+                {isCopied ? "Link Copied!" : "CV"}
+              </span>
+            </div>
+
+            {/* Shine Effect */}
+            {!isCopied && (
+              <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+            )}
+          </motion.button>
+        </motion.div>
+
+        {/* Floating Label */}
+        <AnimatePresence>
+          {!isCopied && (
+            <motion.div
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -10 }}
+              className="absolute left-full ml-4 top-1/2 -translate-y-1/2 whitespace-nowrap pointer-events-none hidden md:block"
+            >
+              <div className="bg-ink text-white text-[9px] uppercase tracking-[0.3em] font-bold px-4 py-2 rounded-full shadow-xl">
+                Lets Connect?
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+
       {/* Hero */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="max-w-4xl mb-20 md:mb-32"
+        className="max-w-4xl mb-16 md:mb-32"
       >
-        <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-accent mb-6 md:mb-8 block">
+        <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-accent mb-4 md:mb-8 block">
           Available for Projects
         </span>
-        <h1 className="text-4xl sm:text-6xl md:text-8xl font-display leading-[0.9] mb-8 md:mb-12">
+        <h1 className="text-4xl sm:text-6xl md:text-8xl font-display leading-[0.9] mb-6 md:mb-12">
           Let's solve your <br /> <span className="text-accent">complex</span> problems.
         </h1>
-        <p className="text-muted text-lg md:text-xl leading-relaxed max-w-2xl font-light">
+        <p className="text-muted text-base md:text-xl leading-relaxed max-w-2xl font-light">
           I partner with forward-thinking companies to build data-driven systems and lead high-impact projects. Currently accepting select inquiries for Q3 & Q4 2026.
         </p>
       </motion.div>
 
       {/* Services */}
-      <section className="mb-24 md:mb-40">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+      <section className="mb-20 md:mb-40">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
           {SERVICES.map((service, i) => (
             <motion.div
               key={service.title}
@@ -97,16 +193,16 @@ export default function HireMe() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="bg-white p-12 rounded-[3rem] border border-line/5 hover:border-accent/20 transition-all group"
+              className="bg-white p-8 md:p-12 rounded-[2rem] md:rounded-[3rem] border border-line/5 hover:border-accent/20 transition-all group"
             >
-              <div className="text-accent mb-8 group-hover:scale-110 transition-transform duration-500">
+              <div className="text-accent mb-6 md:mb-8 group-hover:scale-110 transition-transform duration-500">
                 {service.icon}
               </div>
-              <h3 className="text-2xl mb-6 font-display">{service.title}</h3>
-              <p className="text-muted text-sm leading-relaxed mb-8">{service.description}</p>
-              <ul className="space-y-3">
+              <h3 className="text-xl md:text-2xl mb-4 md:mb-6 font-display">{service.title}</h3>
+              <p className="text-muted text-xs md:text-sm leading-relaxed mb-6 md:mb-8">{service.description}</p>
+              <ul className="space-y-2 md:space-y-3">
                 {service.features.map(feature => (
-                  <li key={feature} className="flex items-center gap-3 text-[10px] uppercase tracking-widest font-bold text-ink/60">
+                  <li key={feature} className="flex items-center gap-2 md:gap-3 text-[9px] md:text-[10px] uppercase tracking-widest font-bold text-ink/60">
                     <CheckCircle2 className="w-3 h-3 text-accent" />
                     {feature}
                   </li>
@@ -183,18 +279,55 @@ export default function HireMe() {
               </div>
             </div>
             
-            <div className="space-y-2">
+            <div className="space-y-2 relative" ref={dropdownRef}>
               <label className="text-[10px] uppercase tracking-widest font-bold text-muted/60">Project Type</label>
-              <select 
-                value={formState.project}
-                onChange={(e) => setFormState({ ...formState, project: e.target.value })}
-                className="w-full border-b border-line/20 py-4 focus:border-accent outline-none transition-colors bg-transparent text-lg font-sans appearance-none cursor-pointer"
+              <div 
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                className="w-full border-b border-line/20 py-4 flex items-center justify-between cursor-pointer group hover:border-accent transition-colors"
               >
-                <option>Data Analytics</option>
-                <option>Project Management</option>
-                <option>Business Operations</option>
-                <option>Other</option>
-              </select>
+                <span className={`text-lg font-sans ${formState.project ? 'text-ink' : 'text-muted/40'}`}>
+                  {formState.project || "Select Project Type"}
+                </span>
+                <motion.div
+                  animate={{ rotate: isDropdownOpen ? 180 : 0 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                >
+                  <ChevronDown className={`w-5 h-5 transition-colors ${isDropdownOpen ? 'text-accent' : 'text-muted/40'}`} />
+                </motion.div>
+              </div>
+
+              <AnimatePresence>
+                {isDropdownOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                    transition={{ duration: 0.2, ease: "easeOut" }}
+                    className="absolute top-full left-0 w-full mt-2 bg-white rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-line/5 z-50 overflow-hidden py-2"
+                  >
+                    {PROJECT_TYPES.map((type) => (
+                      <motion.div
+                        key={type}
+                        whileHover={{ x: 5 }}
+                        onClick={() => {
+                          setFormState({ ...formState, project: type });
+                          setIsDropdownOpen(false);
+                        }}
+                        className={`px-6 py-3 text-sm font-sans cursor-pointer transition-colors hover:bg-bg flex items-center justify-between ${
+                          formState.project === type ? 'text-accent font-bold' : 'text-ink/70'
+                        }`}
+                      >
+                        {type}
+                        {formState.project === type && (
+                          <motion.div layoutId="active-check">
+                            <Check className="w-4 h-4" />
+                          </motion.div>
+                        )}
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             <div className="space-y-2">

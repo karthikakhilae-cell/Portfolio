@@ -113,17 +113,17 @@ export default function Home() {
           initial={{ opacity: 0, scale: 1.05, rotate: 2 }}
           animate={{ opacity: 1, scale: 1, rotate: 0 }}
           transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
-          className="absolute right-4 sm:right-8 md:right-12 lg:right-24 bottom-24 w-48 h-64 sm:w-72 sm:h-96 hidden sm:block lg:block"
+          className="absolute right-4 sm:right-8 md:right-12 lg:right-24 bottom-12 sm:bottom-24 w-32 h-44 sm:w-48 sm:h-64 md:w-72 md:h-96 hidden xs:block"
         >
           <div className="relative w-full h-full">
             <img 
               src={PROFILE_PIC} 
               alt="Akhil Karthik" 
-              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 rounded-[2.5rem] shadow-2xl"
+              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 rounded-[1.5rem] sm:rounded-[2.5rem] shadow-2xl"
               referrerPolicy="no-referrer"
             />
-            <div className="absolute -bottom-8 -left-8 bg-white/80 backdrop-blur-md p-8 shadow-2xl rounded-3xl max-w-[220px] border border-white/20">
-              <p className="text-[11px] text-ink/60 leading-relaxed font-sans">
+            <div className="absolute -bottom-4 -left-4 sm:-bottom-8 sm:-left-8 bg-white/80 backdrop-blur-md p-4 sm:p-8 shadow-2xl rounded-2xl sm:rounded-3xl max-w-[140px] sm:max-w-[220px] border border-white/20">
+              <p className="text-[9px] sm:text-[11px] text-ink/60 leading-relaxed font-sans">
                 "Data is not just numbers; it's the narrative of progress."
               </p>
             </div>
