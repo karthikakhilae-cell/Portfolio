@@ -158,7 +158,7 @@ export const ASSISTANT_KNOWLEDGE: Intent[] = [
 ];
 
 export const AKHIL_DETAILS = {
-  currentRole: "Data Scientist / Project Analyst",
+  currentRole: "Data science researcher / Project Analyst",
   experience: "5+ years",
   location: "India",
   currentFocus: "AI & ML Research",
