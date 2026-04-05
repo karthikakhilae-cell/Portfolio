@@ -18,7 +18,7 @@ export default function AIAssistant() {
     { 
       role: "model", 
       text: "Hi there! I'm Laura, Akhil's digital assistant. How can I help you explore his work today?",
-      suggestions: ["Tell me about Akhil", "Show me his projects", "Copy CV Link", "How can I contact him?"]
+      suggestions: ["Tell me about Akhil", "Show me his projects", "Collect His CV", "How can I contact him?"]
     }
   ]);
 
