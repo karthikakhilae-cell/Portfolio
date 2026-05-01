@@ -1,8 +1,8 @@
-import { 
-  Database, 
-  BarChart3, 
-  Code2, 
-  Cpu 
+import {
+  Database,
+  BarChart3,
+  Code2,
+  Cpu
 } from "lucide-react";
 import React from "react";
 
@@ -150,10 +150,11 @@ export const PROJECTS = [
 ];
 
 export const SKILLS = [
-  { name: "Data Analytics", icon: <BarChart3 className="w-4 h-4" />, items: ["Power BI", "Tableau", "Excel VBA"] },
-  { name: "Engineering", icon: <Database className="w-4 h-4" />, items: ["SQL", "KNIME", "Python"] },
-  { name: "Machine Learning", icon: <Cpu className="w-4 h-4" />, items: ["Predictive Modeling", "ML Algorithms"] },
-  { name: "Management", icon: <Code2 className="w-4 h-4" />, items: ["Agile", "Waterfall", "MS Project"] }
+  { name: "Data Analytics", icon: <BarChart3 className="w-4 h-4" />, items: ["Power BI", "Tableau", "Excel VBA", "Excel", "SQL"] },
+  { name: "Engineering", icon: <Database className="w-4 h-4" />, items: ["SQL Server", "KNIME", "Python", "Pandas", "NumPy", "APIs", "ETL", "Web Scraping"] },
+  { name: "Machine Learning", icon: <Cpu className="w-4 h-4" />, items: ["Predictive Modeling", "ML Algorithms", "Regression", "Classification", "Time Series", "Neural Networks"] },
+  { name: "AI", icon: <Code2 className="w-4 h-4" />, items: ["Generative AI", "LLM", "RAG", "Langchain", "CNN", "NLP"] },
+  { name: "Management", icon: <Code2 className="w-4 h-4" />, items: ["Agile", "Waterfall", "MS Project", "Scrum", "Lean"] }
 ];
 
 export const SOCIAL_LINKS = {

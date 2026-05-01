@@ -3,6 +3,7 @@ import { ArrowRight, Mail, Linkedin, Github, Instagram, ExternalLink, Loader2 } 
 import { Link } from "react-router-dom";
 import { useState, FormEvent, useEffect } from "react";
 import { PROJECTS as STATIC_PROJECTS, PROFILE_PIC, SOCIAL_LINKS } from "../constants";
+import AntigravitySkills from "../components/home/AntigravitySkills";
 
 export default function Home() {
   const [formState, setFormState] = useState({ name: "", email: "", message: "" });
@@ -130,6 +131,8 @@ export default function Home() {
           </div>
         </motion.div>
       </section>
+
+      <AntigravitySkills />
 
       {/* Quick Links Grid - Refined */}
       <section className="py-24 md:py-40 px-4 sm:px-8 md:px-12 lg:px-24">

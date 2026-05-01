@@ -15,10 +15,10 @@ export default function AIAssistant() {
   const [projects, setProjects] = useState(STATIC_PROJECTS);
   const [isCopied, setIsCopied] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { 
-      role: "model", 
+    {
+      role: "model",
       text: "Hi there! I'm Laura, Akhil's digital assistant. How can I help you explore his work today?",
-      suggestions: ["Tell me about Akhil", "Show me his projects", "Collect His CV", "How can I contact him?"]
+      suggestions: ["Tell me about Akhil", "Show me his projects", "How can I contact him?"]
     }
   ]);
 
@@ -186,7 +186,7 @@ Guidelines:
 
     const userMessage = messageToSend.trim().toLowerCase();
     if (!customMessage) setInput("");
-    
+
     setMessages(prev => [...prev, { role: "user", text: messageToSend.trim() }]);
     setIsLoading(true);
     setIsTyping(true);
@@ -196,8 +196,8 @@ Guidelines:
     if (userMessage === "copy cv link") {
       setTimeout(() => {
         handleCopyCV();
-        setMessages(prev => [...prev, { 
-          role: "model", 
+        setMessages(prev => [...prev, {
+          role: "model",
           text: "I've copied Akhil's CV link to your clipboard! 📋 You can now paste it anywhere. Is there anything else you'd like to see?",
           suggestions: ["Show projects", "Contact Akhil", "Who is Akhil?"]
         }]);
@@ -312,9 +312,9 @@ Guidelines:
           }}
           className="absolute bottom-0 left-1/2 -translate-x-1/2 w-12 h-3 bg-ink/20 rounded-full blur-md"
         />
-        
+
         <motion.div
-          animate={{ 
+          animate={{
             y: [0, -15, 0],
           }}
           transition={{
@@ -335,26 +335,26 @@ Guidelines:
             {/* Doll Face */}
             <div className="flex flex-col items-center gap-1.5">
               <div className="flex gap-2">
-                <motion.div 
+                <motion.div
                   animate={{ scaleY: [1, 0.1, 1] }}
                   transition={{ duration: 4, repeat: Infinity, repeatDelay: 3 }}
-                  className="w-2 h-2 bg-ink rounded-full" 
+                  className="w-2 h-2 bg-ink rounded-full"
                 />
-                <motion.div 
+                <motion.div
                   animate={{ scaleY: [1, 0.1, 1] }}
                   transition={{ duration: 4, repeat: Infinity, repeatDelay: 3 }}
-                  className="w-2 h-2 bg-ink rounded-full" 
+                  className="w-2 h-2 bg-ink rounded-full"
                 />
               </div>
-              <motion.div 
+              <motion.div
                 animate={{ width: isOpen ? 12 : 8 }}
-                className="h-1 bg-ink/20 rounded-full" 
+                className="h-1 bg-ink/20 rounded-full"
               />
             </div>
 
             {/* Status Indicator */}
             {isGenerating && (
-              <motion.div 
+              <motion.div
                 animate={{ opacity: [0.3, 1, 0.3] }}
                 transition={{ duration: 1, repeat: Infinity }}
                 className="absolute top-2 right-2 w-2 h-2 bg-accent rounded-full"
@@ -382,15 +382,15 @@ Guidelines:
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 bg-bg rounded-full flex flex-col items-center justify-center text-ink border border-line/5">
                   <div className="flex gap-1 mb-0.5">
-                    <motion.div 
+                    <motion.div
                       animate={{ scaleY: [1, 0.1, 1] }}
                       transition={{ duration: 4, repeat: Infinity, repeatDelay: 4 }}
-                      className="w-1 h-1 bg-ink rounded-full" 
+                      className="w-1 h-1 bg-ink rounded-full"
                     />
-                    <motion.div 
+                    <motion.div
                       animate={{ scaleY: [1, 0.1, 1] }}
                       transition={{ duration: 4, repeat: Infinity, repeatDelay: 4 }}
-                      className="w-1 h-1 bg-ink rounded-full" 
+                      className="w-1 h-1 bg-ink rounded-full"
                     />
                   </div>
                   <Bot className="w-3 h-3 opacity-30" />
@@ -406,7 +406,7 @@ Guidelines:
             </div>
 
             {/* Messages */}
-            <div 
+            <div
               ref={scrollRef}
               className="flex-1 overflow-y-auto p-6 space-y-6 scrollbar-hide"
             >
@@ -417,43 +417,43 @@ Guidelines:
                   animate={{ opacity: 1, x: 0 }}
                   className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
                 >
-                    <div className="space-y-3 max-w-[85%]">
-                      <div className={`flex gap-3 ${m.role === "user" ? "flex-row-reverse" : "flex-row"}`}>
-                        <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${m.role === "user" ? "bg-ink text-white" : "bg-bg text-ink border border-line/5"}`}>
-                          {m.role === "user" ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
-                        </div>
-                        <div className={`p-4 rounded-2xl text-sm leading-relaxed ${m.role === "user" ? "bg-ink text-white rounded-tr-none" : "bg-bg text-ink rounded-tl-none border border-line/5"}`}>
-                          <div className="markdown-body relative">
-                            <Markdown>{m.text}</Markdown>
-                            {isGenerating && i === messages.length - 1 && m.role === "model" && (
-                              <motion.span
-                                animate={{ opacity: [0, 1, 0] }}
-                                transition={{ duration: 0.8, repeat: Infinity }}
-                                className="inline-block w-1.5 h-4 bg-accent ml-1 translate-y-0.5"
-                              />
-                            )}
-                          </div>
+                  <div className="space-y-3 max-w-[85%]">
+                    <div className={`flex gap-3 ${m.role === "user" ? "flex-row-reverse" : "flex-row"}`}>
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${m.role === "user" ? "bg-ink text-white" : "bg-bg text-ink border border-line/5"}`}>
+                        {m.role === "user" ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
+                      </div>
+                      <div className={`p-4 rounded-2xl text-sm leading-relaxed ${m.role === "user" ? "bg-ink text-white rounded-tr-none" : "bg-bg text-ink rounded-tl-none border border-line/5"}`}>
+                        <div className="markdown-body relative">
+                          <Markdown>{m.text}</Markdown>
+                          {isGenerating && i === messages.length - 1 && m.role === "model" && (
+                            <motion.span
+                              animate={{ opacity: [0, 1, 0] }}
+                              transition={{ duration: 0.8, repeat: Infinity }}
+                              className="inline-block w-1.5 h-4 bg-accent ml-1 translate-y-0.5"
+                            />
+                          )}
                         </div>
                       </div>
-                      
-                      {/* Suggestions */}
-                      {m.role === "model" && m.suggestions && i === messages.length - 1 && !isLoading && (
-                        <div className="flex flex-wrap gap-2 ml-11">
-                          {m.suggestions.map((suggestion, idx) => (
-                            <motion.button
-                              key={idx}
-                              initial={{ opacity: 0, y: 10 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ delay: 0.1 * idx }}
-                              onClick={() => handleSend(suggestion)}
-                              className="px-4 py-2 bg-bg border border-line/10 rounded-full text-[10px] font-bold uppercase tracking-widest text-ink/60 hover:bg-ink hover:text-white hover:border-ink transition-all"
-                            >
-                              {suggestion}
-                            </motion.button>
-                          ))}
-                        </div>
-                      )}
                     </div>
+
+                    {/* Suggestions */}
+                    {m.role === "model" && m.suggestions && i === messages.length - 1 && !isLoading && (
+                      <div className="flex flex-wrap gap-2 ml-11">
+                        {m.suggestions.map((suggestion, idx) => (
+                          <motion.button
+                            key={idx}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.1 * idx }}
+                            onClick={() => handleSend(suggestion)}
+                            className="px-4 py-2 bg-bg border border-line/10 rounded-full text-[10px] font-bold uppercase tracking-widest text-ink/60 hover:bg-ink hover:text-white hover:border-ink transition-all"
+                          >
+                            {suggestion}
+                          </motion.button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </motion.div>
               ))}
               {isTyping && (
@@ -462,7 +462,7 @@ Guidelines:
                     <div className="w-8 h-8 bg-bg text-ink rounded-full flex items-center justify-center border border-line/5">
                       <Bot className="w-4 h-4" />
                     </div>
-                    <motion.div 
+                    <motion.div
                       initial={{ opacity: 0, y: 5 }}
                       animate={{ opacity: 1, y: 0 }}
                       className="bg-bg px-4 py-3 rounded-2xl rounded-tl-none border border-line/5 flex items-center gap-3"
@@ -471,14 +471,14 @@ Guidelines:
                         {[0, 1, 2].map((dot) => (
                           <motion.div
                             key={dot}
-                            animate={{ 
+                            animate={{
                               scale: [1, 1.5, 1],
                               opacity: [0.3, 1, 0.3]
                             }}
-                            transition={{ 
-                              duration: 1, 
-                              repeat: Infinity, 
-                              delay: dot * 0.2 
+                            transition={{
+                              duration: 1,
+                              repeat: Infinity,
+                              delay: dot * 0.2
                             }}
                             className="w-1 h-1 bg-ink/40 rounded-full"
                           />
@@ -491,7 +491,7 @@ Guidelines:
               )}
               {isGenerating && !isTyping && (
                 <div className="flex justify-center py-2">
-                  <motion.div 
+                  <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     className="text-[9px] uppercase tracking-[0.2em] font-bold text-accent/60 flex items-center gap-2"
@@ -505,7 +505,7 @@ Guidelines:
 
             {/* Input */}
             <div className="p-6 border-t border-line/5">
-              <form 
+              <form
                 onSubmit={(e) => { e.preventDefault(); handleSend(); }}
                 className="relative"
               >
