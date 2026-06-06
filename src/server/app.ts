@@ -70,11 +70,52 @@ export function createExpressApp() {
     }
   });
 
-  // API Route for Projects (Static for now, can be expanded to GitHub API)
+  // API Route for Projects
   router.get("/projects", async (req, res) => {
-    // For now, we return an empty array or you could return static projects.
-    // The frontend merges this with STATIC_PROJECTS from constants.
     res.status(200).json([]);
+  });
+
+  // ── Grok (xAI) Chat API ──────────────────────────────────────────
+  router.post("/chat", async (req, res) => {
+    const { messages } = req.body;
+
+    if (!messages || !Array.isArray(messages)) {
+      return res.status(400).json({ error: "Missing messages array" });
+    }
+
+    const apiKey = process.env.XAI_API_KEY;
+    if (!apiKey) {
+      return res.status(500).json({ error: "XAI_API_KEY is not configured in .env" });
+    }
+
+    try {
+      const response = await fetch("https://api.x.ai/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify({
+          model: "grok-3-mini",
+          messages,
+          max_tokens: 400,
+          temperature: 0.8,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error("Grok API error:", errorText);
+        return res.status(response.status).json({ error: "Grok API error", detail: errorText });
+      }
+
+      const data = await response.json() as any;
+      const text = data.choices?.[0]?.message?.content ?? "Sorry, I couldn't get a response right now.";
+      res.json({ text });
+    } catch (error) {
+      console.error("Grok fetch error:", error);
+      res.status(500).json({ error: "Failed to reach Grok API" });
+    }
   });
 
   // Mount the router at both paths to support local dev and Netlify functions

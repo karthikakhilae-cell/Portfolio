@@ -2,11 +2,72 @@ import {
   Database,
   BarChart3,
   Code2,
-  Cpu
+  Cpu,
+  Calendar
 } from "lucide-react";
 import React from "react";
 
 export const PROJECTS = [
+  {
+    id: 'isometric-bom-extractor',
+    title: 'Isometric BOM Extractor (IsoMTO)',
+    category: 'Engineering Automation',
+    description: 'A fully offline Python tool that OCRs the Bill of Materials from piping isometric drawings (vector PDFs with no text layer) and reconciles every item code against a project code master — exact, fuzzy, and reverse-lookup-by-description matching — producing one combined Excel/CSV for material take-off. Flags uncertain rows rather than guessing.',
+    image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=1200&auto=format&fit=crop',
+    year: '2025',
+    tags: ['Python', 'OCR', 'Tesseract', 'PyMuPDF', 'Pandas', 'EPC Piping'],
+    link: 'https://github.com/akhilkarthik/isometric-bom-extractor'
+  },
+  {
+    id: 'p6-schedule-visualizer',
+    title: 'P6 Schedule Visualizer',
+    category: 'Project Controls',
+    description: 'A unified tool that connects to Primavera P6 from three sources — native .xer files, the P6 EPPM REST API, or the P6 SQL database — normalizes the data into one model, and visualizes it through an interactive Streamlit app (Gantt, S-curve, discipline progress) plus a one-click Power BI Excel export.',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop',
+    year: '2025',
+    tags: ['Python', 'Streamlit', 'Primavera P6', 'Power BI', 'Plotly'],
+    link: 'https://github.com/akhilkarthik/p6-schedule-visualizer'
+  },
+  {
+    id: 'p6-health-checker',
+    title: 'P6 Schedule Health Checker',
+    category: 'Project Controls',
+    description: 'A Python CLI tool that audits Primavera P6 schedules using the DCMA 14-Point methodology. Parses native .xer exports, runs ten schedule-quality checks (open ends, leads/lags, hard constraints, negative float, high duration, missing resources), computes a weighted health score, and generates a professional PDF report.',
+    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1200&auto=format&fit=crop',
+    year: '2025',
+    tags: ['Python', 'Primavera P6', 'DCMA 14-Point', 'PDF Reporting'],
+    link: 'https://github.com/akhilkarthik/p6-schedule-health-checker'
+  },
+  {
+    id: 'fabric-lakehouse',
+    title: 'Enterprise Fabric Data Lakehouse',
+    category: 'Microsoft Fabric',
+    description: 'Designed and deployed an end-to-end operational analytics platform in Microsoft Fabric using Synapse Spark pipelines, Lakehouse Delta tables, and DirectLake Power BI semantic models.',
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1200&auto=format&fit=crop',
+    year: '2025',
+    tags: ['Microsoft Fabric', 'Synapse Spark', 'DirectLake', 'Power BI'],
+    link: 'https://github.com/akhilkarthik/Enterprise-Fabric-Data-Lakehouse'
+  },
+  {
+    id: 'planning-automation',
+    title: 'AI-Powered Primavera P6 Audit Automation',
+    category: 'AI Automations',
+    description: 'Developed an automated Python and GenAI scheduling assistant utilizing LangChain and Gemini APIs to audit Primavera P6 schedules and compile automated operational risk assessments.',
+    image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop',
+    year: '2024',
+    tags: ['AI Automations', 'Python', 'Primavera P6', 'LangChain'],
+    link: 'https://github.com/akhilkarthik/P6-Schedule-AI-Automation'
+  },
+  {
+    id: 'db-optimization',
+    title: 'Database Architecture & Query Optimization',
+    category: 'Database Engineering',
+    description: 'Optimized a high-throughput enterprise database schema, writing advanced query partitions and indexes to improve transaction response times by 65%.',
+    image: 'https://images.unsplash.com/photo-1544383835-bda2bc66a55d?q=80&w=1200&auto=format&fit=crop',
+    year: '2024',
+    tags: ['SQL Server', 'Database Tuning', 'ETL/ELT', 'Data Architectures'],
+    link: 'https://github.com/akhilkarthik/Enterprise-Database-Optimization'
+  },
   {
     id: 'spotify-analysis',
     title: 'Spotify Power BI Analysis',
@@ -150,20 +211,19 @@ export const PROJECTS = [
 ];
 
 export const SKILLS = [
-  { name: "Data Analytics", icon: <BarChart3 className="w-4 h-4" />, items: ["Power BI", "Tableau", "Excel VBA", "Excel", "SQL"] },
-  { name: "Engineering", icon: <Database className="w-4 h-4" />, items: ["SQL Server", "KNIME", "Python", "Pandas", "NumPy", "APIs", "ETL", "Web Scraping"] },
-  { name: "Machine Learning", icon: <Cpu className="w-4 h-4" />, items: ["Predictive Modeling", "ML Algorithms", "Regression", "Classification", "Time Series", "Neural Networks"] },
-  { name: "AI", icon: <Code2 className="w-4 h-4" />, items: ["Generative AI", "LLM", "RAG", "Langchain", "CNN", "NLP"] },
-  { name: "Management", icon: <Code2 className="w-4 h-4" />, items: ["Agile", "Waterfall", "MS Project", "Scrum", "Lean"] }
+  { name: "Planning Engineering", icon: <Calendar className="w-4 h-4" />, items: ["Primavera P6", "MS Project", "Resource Optimization", "Scheduling Controls", "Agile / Lean Scrum"] },
+  { name: "Microsoft Fabric & BI", icon: <BarChart3 className="w-4 h-4" />, items: ["Microsoft Fabric Lakehouse", "Synapse Analytics", "Power BI DirectLake", "DAX / DENEB Visuals", "Data Factory Pipelines"] },
+  { name: "Data Science & AI", icon: <Cpu className="w-4 h-4" />, items: ["Python", "Predictive ML Modeling", "AI Automations", "LangChain & LLMs", "Advanced ETL / ELT"] },
+  { name: "Database Engineering", icon: <Database className="w-4 h-4" />, items: ["SQL Server Optimization", "Database Architecture", "PostgreSQL", "Query Tuning & Indexing", "Data Partitioning"] }
 ];
 
 export const SOCIAL_LINKS = {
   github: "https://github.com/akhilkarthik",
   linkedin: "https://www.linkedin.com/in/akhilkarthikk/",
   instagram: "https://instagram.com/akhilkarthik.de",
-  medium: "https://akhilkarthik.medium.com/",
+  medium: "https://medium.com/@karthikakhil.in",
   email: "mailto:karthikakhil.in@gmail.com",
-  cv: "https://drive.google.com/file/d/1oP6LOJeK9TNTqo6q9cdQWI403gbXyIaa/view" // Placeholder CV link
+  cv: "https://drive.google.com/file/d/1AoxKOL9A18WQzuU3m-YUtwb9QxRyRLqh/view"
 };
 
 export const PROFILE_PIC = "https://lh3.googleusercontent.com/d/1tk7ppgl-vYdJsRNaWQ2_F3-qCXcbWItI";

@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, BookOpen } from "lucide-react";
 import { Link } from "react-router-dom";
 import { PROFILE_PIC } from "../constants";
 
@@ -47,19 +47,28 @@ export default function Landing() {
           transition={{ delay: 0.9 }}
           className="text-white/50 text-[10px] sm:text-xs md:text-base uppercase tracking-[0.2em] sm:tracking-[0.4em] mb-12 sm:mb-16 font-light max-w-[280px] sm:max-w-none mx-auto"
         >
-          Data science enthusiast • Project Strategist • Digital Curator • AI ML researcher
+          Data science enthusiast &#x2022; Project Strategist &#x2022; Digital Curator &#x2022; AI ML researcher
         </motion.p>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.1 }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <Link 
+          <Link
             to="/home"
             className="group relative inline-flex items-center gap-4 px-8 sm:px-12 py-4 sm:py-6 border border-white/20 rounded-full hover:bg-white hover:text-ink transition-all duration-500 overflow-hidden"
           >
             <span className="relative z-10 text-xs sm:text-sm font-bold uppercase tracking-widest">Dive In</span>
+            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 relative z-10 group-hover:translate-x-2 transition-transform" />
+          </Link>
+          <Link
+            to="/blogs"
+            className="group relative inline-flex items-center gap-4 px-8 sm:px-12 py-4 sm:py-6 bg-white text-ink rounded-full hover:bg-accent hover:text-white transition-all duration-500 overflow-hidden"
+          >
+            <BookOpen className="w-4 h-4 sm:w-5 sm:h-5 relative z-10" />
+            <span className="relative z-10 text-xs sm:text-sm font-bold uppercase tracking-widest">Latest Blogs</span>
             <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 relative z-10 group-hover:translate-x-2 transition-transform" />
           </Link>
         </motion.div>

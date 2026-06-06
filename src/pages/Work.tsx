@@ -1,7 +1,14 @@
 import { motion } from "motion/react";
 import { PROJECTS as STATIC_PROJECTS, SOCIAL_LINKS } from "../constants";
 import { useEffect, useState } from "react";
-import { Loader2 } from "lucide-react";
+import { ArrowRight, BarChart3, Loader2, Sparkles } from "lucide-react";
+import { Link } from "react-router-dom";
+
+const ONGOING_PROJECT_IDS = new Set([
+  "fabric-lakehouse",
+  "planning-automation",
+  "db-optimization",
+]);
 
 export default function Work() {
   const [projects, setProjects] = useState(STATIC_PROJECTS);
@@ -13,7 +20,6 @@ export default function Work() {
         const response = await fetch("/api/projects");
         if (response.ok) {
           const githubProjects = await response.json();
-          // Merge static projects with github projects, avoiding duplicates by ID/Link
           const merged = [...STATIC_PROJECTS];
           githubProjects.forEach((gp: any) => {
             if (!merged.find(p => p.link === gp.link || p.id === gp.id)) {
@@ -28,7 +34,6 @@ export default function Work() {
         setIsLoading(false);
       }
     };
-
     fetchProjects();
   }, []);
 
@@ -48,6 +53,14 @@ export default function Work() {
         <p className="text-muted text-base md:text-lg leading-relaxed max-w-2xl font-light">
           A deep dive into my professional work, case studies, and successful project implementations.
         </p>
+        <Link
+          to="/dashboard"
+          className="mt-8 inline-flex items-center gap-3 rounded-full bg-ink px-7 py-4 text-[10px] font-bold uppercase tracking-widest text-white shadow-xl shadow-ink/10 transition-all duration-500 hover:bg-accent"
+        >
+          <BarChart3 className="w-4 h-4" />
+          View Dashboard analysis
+          <ArrowRight className="w-4 h-4" />
+        </Link>
       </motion.div>
 
       {isLoading ? (
@@ -58,7 +71,7 @@ export default function Work() {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 md:gap-y-16">
           {projects.map((project) => (
-            <motion.a 
+            <motion.a
               key={project.id}
               href={project.link}
               target="_blank"
@@ -69,20 +82,29 @@ export default function Work() {
               className="group cursor-pointer block"
             >
               <div className="relative overflow-hidden rounded-2xl mb-6 aspect-[4/3]">
-                <motion.img 
+                <motion.img
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.6 }}
-                  src={project.image} 
-                  alt={project.title} 
+                  src={project.image}
+                  alt={project.title}
                   className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute inset-0 bg-accent/0 group-hover:bg-accent/10 transition-colors duration-500" />
-                <div className="absolute top-6 right-6 text-white/50 font-display text-xl opacity-0 group-hover:opacity-100 transition-opacity">
+                {ONGOING_PROJECT_IDS.has(project.id) && (
+                  <div className="absolute top-4 right-4 inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/15 px-3 py-2 text-[9px] font-bold uppercase tracking-[0.18em] text-white shadow-2xl shadow-black/20 backdrop-blur-md">
+                    <span className="relative flex h-4 w-4 items-center justify-center rounded-full bg-accent/25">
+                      <span className="absolute h-4 w-4 animate-ping rounded-full bg-accent/40" />
+                      <Sparkles className="relative h-3 w-3 text-white" />
+                    </span>
+                    Ongoing
+                  </div>
+                )}
+                <div className="absolute top-6 left-6 text-white/50 font-display text-xl opacity-0 group-hover:opacity-100 transition-opacity">
                   {project.year}
                 </div>
               </div>
-              
+
               <div className="space-y-3">
                 <div className="flex flex-wrap gap-2">
                   {project.tags.map(tag => (

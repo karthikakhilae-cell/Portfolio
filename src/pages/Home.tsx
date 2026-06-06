@@ -1,9 +1,10 @@
 import { motion } from "motion/react";
-import { ArrowRight, Mail, Linkedin, Github, Instagram, ExternalLink, Loader2 } from "lucide-react";
+import { ArrowRight, Mail, Linkedin, Github, Instagram, ExternalLink, Loader2, BookOpen } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, FormEvent, useEffect } from "react";
 import { PROJECTS as STATIC_PROJECTS, PROFILE_PIC, SOCIAL_LINKS } from "../constants";
 import AntigravitySkills from "../components/home/AntigravitySkills";
+import AnalyticsVisuals from "../components/home/AnalyticsVisuals";
 
 export default function Home() {
   const [formState, setFormState] = useState({ name: "", email: "", message: "" });
@@ -68,7 +69,7 @@ export default function Home() {
           <div className="absolute top-[-10%] right-[-5%] w-[60%] h-[80%] bg-accent/5 blur-[120px] rounded-full animate-pulse" />
           <div className="absolute bottom-[-10%] left-[-5%] w-[40%] h-[60%] bg-white blur-[100px] rounded-full" />
         </div>
-        
+
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
@@ -76,50 +77,72 @@ export default function Home() {
           className="max-w-5xl"
         >
           <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-accent mb-6 md:mb-8 block">
-            Portfolio 2026 — Project Analyst
+            Available for hire · Data Science & AI Engineering
           </span>
           <h1 className="text-4xl sm:text-6xl md:text-8xl lg:text-[110px] leading-[0.85] tracking-tighter mb-12 md:mb-16 font-display">
-            Designing <span className="text-accent">clarity</span> <br /> 
-            <span className="text-ink/20">&</span> purpose <br /> 
-            through data.
+            I build <span className="text-accent">ML pipelines,</span> <br />
+            Power BI dashboards, <br />
+            <span className="text-ink/40">&amp; AI automation.</span>
           </h1>
-          
+
           <div className="flex flex-col md:flex-row gap-8 items-start md:items-center">
             <motion.div
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
             >
-              <Link 
+              <Link
                 to="/work"
                 className="bg-ink text-white px-8 sm:px-12 py-4 sm:py-6 rounded-full flex items-center justify-center sm:justify-start gap-4 text-xs font-bold uppercase tracking-widest hover:bg-accent transition-all duration-500 shadow-xl shadow-ink/10"
               >
                 View Projects <ArrowRight className="w-4 h-4" />
               </Link>
-              <Link 
+              <Link
                 to="/hire-me"
                 className="bg-white text-ink border border-line/20 px-8 sm:px-12 py-4 sm:py-6 rounded-full flex items-center justify-center sm:justify-start gap-4 text-xs font-bold uppercase tracking-widest hover:bg-accent hover:text-white hover:border-accent transition-all duration-500 shadow-xl shadow-ink/5"
               >
                 Hire Me <ArrowRight className="w-4 h-4" />
               </Link>
+              <Link
+                to="/blogs"
+                className="bg-accent text-white px-8 sm:px-12 py-4 sm:py-6 rounded-full flex items-center justify-center sm:justify-start gap-4 text-xs font-bold uppercase tracking-widest hover:bg-ink transition-all duration-500 shadow-xl shadow-accent/10"
+              >
+                <BookOpen className="w-4 h-4" />
+                Latest Blogs
+                <ArrowRight className="w-4 h-4" />
+              </Link>
             </motion.div>
-            
+
             <p className="max-w-sm text-sm text-muted/80 leading-relaxed font-light">
-              Results-driven data science enthusiast with 5+ years of experience in project management, business operations, data Science And AI ML Research. Curating systems that bridge the gap between human intuition and digital interfaces.
+              I help enterprise teams turn messy data into working ML models, live dashboards, and automated workflows — using Python, Power BI, SQL, and Microsoft Fabric.
             </p>
+          </div>
+
+          {/* Hero Stats */}
+          <div className="mt-12 md:mt-16 flex flex-wrap gap-8 md:gap-12">
+            {[
+              { value: "94%", label: "ML model accuracy" },
+              { value: "20+", label: "projects shipped" },
+              { value: "65%", label: "query speedup" },
+            ].map((stat) => (
+              <div key={stat.label} className="flex flex-col gap-1">
+                <span className="text-3xl md:text-4xl font-display text-ink leading-none">{stat.value}</span>
+                <span className="text-[10px] uppercase tracking-[0.25em] font-bold text-muted/60">{stat.label}</span>
+              </div>
+            ))}
           </div>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 1.05, rotate: 2 }}
           animate={{ opacity: 1, scale: 1, rotate: 0 }}
           transition={{ duration: 1.5, ease: [0.22, 1, 0.36, 1] }}
           className="absolute right-4 sm:right-8 md:right-12 lg:right-24 bottom-12 sm:bottom-24 w-32 h-44 sm:w-48 sm:h-64 md:w-72 md:h-96 hidden xs:block"
         >
           <div className="relative w-full h-full">
-            <img 
-              src={PROFILE_PIC} 
-              alt="Akhil Karthik" 
+            <img
+              src={PROFILE_PIC}
+              alt="Akhil Karthik"
               className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 rounded-[1.5rem] sm:rounded-[2.5rem] shadow-2xl"
               referrerPolicy="no-referrer"
             />
@@ -134,25 +157,82 @@ export default function Home() {
 
       <AntigravitySkills />
 
-      {/* Quick Links Grid - Refined */}
+      {/* Featured Work — surfaced immediately after skills */}
+      <section className="px-4 sm:px-8 md:px-12 lg:px-24 pt-16 md:pt-24 pb-8">
+        <div className="max-w-4xl mb-10 md:mb-14">
+          <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-accent mb-4 block">Featured Work</span>
+          <h2 className="text-3xl sm:text-4xl md:text-6xl font-display leading-tight">Live dashboards &amp; tools.</h2>
+          <p className="mt-4 text-sm text-muted/70 max-w-xl leading-relaxed font-light">
+            Interactive data science and analytics work built on Python, Power BI, and Microsoft Fabric — covering ML, data engineering, and AI automation.
+          </p>
+        </div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+          {[
+            {
+              to: "/dashboard", external: false,
+              tag: "Power BI · DAX",
+              title: "ML Performance Dashboard",
+              desc: "Live model monitoring dashboard — accuracy trends, F1/AUC tracking, data drift alerts and pipeline health across 18 deployed models."
+            },
+            {
+              to: "/dashboard", external: false,
+              tag: "Power BI · Analytics",
+              title: "Enterprise KPI Dashboard",
+              desc: "Executive analytics platform — real-time KPIs, drill-through reports, and automated commentary generation using Python + DAX."
+            },
+            {
+              to: "https://github.com/akhilkarthik/Enterprise-Fabric-Data-Lakehouse", external: true,
+              tag: "Microsoft Fabric · Spark",
+              title: "Enterprise Lakehouse",
+              desc: "End-to-end data platform on Microsoft Fabric — Synapse Spark pipelines, Delta Lakehouse, DirectLake Power BI semantic models."
+            }
+          ].map((p, i) => {
+            const inner = (
+              <>
+                <div>
+                  <div className="text-[10px] uppercase tracking-widest font-bold text-accent mb-6">{p.tag}</div>
+                  <h3 className="text-2xl md:text-3xl mb-3 font-display group-hover:text-accent transition-colors">{p.title}</h3>
+                  <p className="text-sm text-muted/60 leading-relaxed">{p.desc}</p>
+                </div>
+                <div className="flex justify-end mt-8">
+                  <div className="w-12 h-12 rounded-full border border-line/10 flex items-center justify-center group-hover:bg-accent group-hover:text-white transition-all duration-500">
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </div>
+              </>
+            );
+            const cls = "group p-8 md:p-10 bg-white rounded-[2rem] md:rounded-[2.5rem] border border-line/5 hover:border-accent/20 hover:shadow-2xl hover:shadow-accent/5 transition-all duration-700 flex flex-col justify-between min-h-[280px]";
+            return p.external ? (
+              <a key={i} href={p.to} target="_blank" rel="noopener noreferrer" className={cls}>{inner}</a>
+            ) : (
+              <Link key={i} to={p.to} className={cls}>{inner}</Link>
+            );
+          })}
+        </div>
+      </section>
+
+      <AnalyticsVisuals projectCount={projects.length} />
+
+      {/* Quick Links Grid */}
       <section className="py-24 md:py-40 px-4 sm:px-8 md:px-12 lg:px-24">
         <div className="max-w-4xl mb-16 md:mb-24">
           <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-accent mb-4 md:mb-6 block">The Index</span>
           <h2 className="text-3xl sm:text-4xl md:text-6xl font-display leading-tight">Explore the <br /> digital monograph.</h2>
         </div>
-        
+
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {[
             { to: "/work", title: "Work", desc: "Selected professional projects and case studies." },
-            { to: "/blogs", title: "Blogs", desc: "Long-form articles and technical deep-dives on Medium." },
+            { to: "/dashboard", title: "Dashboards", desc: "Live, interactive Power BI and data science dashboards." },
+            { to: "/blogs", title: "Blogs", desc: "Long-form articles and technical deep-dives." },
             { to: "/lab", title: "Lab", desc: "Experiments, technical ideas, and raw prototypes." },
             { to: "/thinking", title: "Thinking", desc: "Strategic insights and technical deep-dives." },
-            { to: "/arts", title: "Arts", desc: "Creative writing, digital art, and visual works." },
             { to: "/journal", title: "Journal", desc: "Weekly reflections and personal learnings." }
           ].map((link, i) => (
-            <Link 
-              key={link.to} 
-              to={link.to} 
+            <Link
+              key={link.to}
+              to={link.to}
               className="group p-8 sm:p-12 bg-white rounded-[2.5rem] md:rounded-[3rem] border border-line/5 hover:border-accent/20 hover:shadow-2xl hover:shadow-accent/5 transition-all duration-700 flex flex-col justify-between aspect-square"
             >
               <div>
@@ -170,7 +250,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Inquiry Form Section - New & Sophisticated */}
+      {/* Inquiry Form Section */}
       <section className="py-24 md:py-40 px-4 sm:px-8 md:px-12 lg:px-24 bg-white rounded-[2.5rem] md:rounded-[4rem] mx-2 sm:mx-4 md:mx-12 mb-12 shadow-2xl shadow-ink/5">
         <div className="grid lg:grid-cols-2 gap-16 md:gap-24 items-start">
           <div className="space-y-12 md:space-y-16">
@@ -180,10 +260,10 @@ export default function Home() {
                 Let's build <br /> something <span className="text-accent">meaningful.</span>
               </h2>
               <p className="text-muted leading-relaxed text-base md:text-lg max-w-md font-light">
-                Currently accepting select commissions for late 2026. I am particularly interested in projects involving cultural institutions and sustainable brands.
+                Open to new opportunities in Data Science, AI Engineering, and enterprise data platform roles. Particularly interested in high-impact ML, analytics, and automation projects.
               </p>
             </div>
-            
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-10 md:gap-12">
               <div className="space-y-4">
                 <div className="text-[10px] uppercase tracking-widest font-bold text-accent">Contact</div>
@@ -201,55 +281,55 @@ export default function Home() {
             </div>
           </div>
 
-          <motion.form 
+          <motion.form
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            onSubmit={handleFormSubmit} 
+            onSubmit={handleFormSubmit}
             className="space-y-8 md:space-y-12 bg-bg p-8 sm:p-12 md:p-16 rounded-[2.5rem] md:rounded-[3rem] border border-line/5"
           >
             <div className="space-y-8">
               <div className="space-y-2">
                 <label className="text-[10px] uppercase tracking-widest font-bold text-muted/60">Full Name</label>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   required
                   value={formState.name}
                   onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                  className="w-full border-b border-line/20 py-4 focus:border-accent outline-none transition-colors bg-transparent text-lg font-sans" 
-                  placeholder="John Doe" 
+                  className="w-full border-b border-line/20 py-4 focus:border-accent outline-none transition-colors bg-transparent text-lg font-sans"
+                  placeholder="John Doe"
                 />
               </div>
               <div className="space-y-2">
                 <label className="text-[10px] uppercase tracking-widest font-bold text-muted/60">Email Address</label>
-                <input 
-                  type="email" 
+                <input
+                  type="email"
                   required
                   value={formState.email}
                   onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                  className="w-full border-b border-line/20 py-4 focus:border-accent outline-none transition-colors bg-transparent text-lg font-sans" 
-                  placeholder="john@example.com" 
+                  className="w-full border-b border-line/20 py-4 focus:border-accent outline-none transition-colors bg-transparent text-lg font-sans"
+                  placeholder="john@example.com"
                 />
               </div>
               <div className="space-y-2">
                 <label className="text-[10px] uppercase tracking-widest font-bold text-muted/60">Your Inquiry</label>
-                <textarea 
+                <textarea
                   required
                   value={formState.message}
                   onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                  className="w-full border-b border-line/20 py-4 focus:border-accent outline-none transition-colors bg-transparent h-32 resize-none text-lg font-sans" 
-                  placeholder="Tell me about your project..." 
+                  className="w-full border-b border-line/20 py-4 focus:border-accent outline-none transition-colors bg-transparent h-32 resize-none text-lg font-sans"
+                  placeholder="Tell me about your project..."
                 />
               </div>
             </div>
-            
+
             {submitStatus && (
               <div className={`text-xs font-bold uppercase tracking-widest p-6 rounded-2xl ${submitStatus.type === "success" ? "bg-green-50 text-green-600" : "bg-red-50 text-red-600"}`}>
                 {submitStatus.message}
               </div>
             )}
 
-            <button 
+            <button
               type="submit"
               disabled={isSubmitting}
               className="w-full bg-ink text-white py-6 rounded-2xl flex items-center justify-center gap-4 text-xs font-bold uppercase tracking-widest hover:bg-accent transition-all duration-500 disabled:opacity-50 shadow-xl shadow-ink/10"

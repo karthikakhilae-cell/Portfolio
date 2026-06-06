@@ -1,8 +1,9 @@
 import { motion, AnimatePresence } from "motion/react";
-import { Menu, X, Github, Linkedin, Instagram, ExternalLink } from "lucide-react";
+import { Menu, X, Github, Linkedin, Instagram, ExternalLink, Sun, Moon } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { PROFILE_PIC, SOCIAL_LINKS } from "../../constants";
+import { useTheme } from "../../hooks/useTheme";
 
 const NAV_LINKS = [
   { name: "Home", path: "/home" },
@@ -24,6 +25,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const { theme, toggle } = useTheme();
   const isLandingPage = location.pathname === "/";
 
   useEffect(() => {
@@ -36,17 +38,17 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 w-full z-50 px-4 sm:px-8 md:px-12 lg:px-24 py-4 md:py-6 flex justify-between items-center transition-all duration-500 ${scrolled ? "bg-white/80 backdrop-blur-md py-3 md:py-4 shadow-sm" : "bg-transparent"}`}>
-        <motion.div 
+      <nav className={`fixed top-0 left-0 w-full z-50 px-4 sm:px-8 md:px-12 lg:px-24 py-4 md:py-6 flex justify-between items-center transition-all duration-500 ${scrolled ? "bg-bg/80 backdrop-blur-md py-3 md:py-4 shadow-sm" : "bg-transparent"}`}>
+        <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           className="flex items-center gap-3 md:gap-4 group cursor-pointer"
           onClick={() => navigate('/about')}
         >
           <div className="relative">
-            <img 
-              src={PROFILE_PIC} 
-              alt="Akhil" 
+            <img
+              src={PROFILE_PIC}
+              alt="Akhil"
               className="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover border border-ink/10 group-hover:border-accent transition-colors"
               referrerPolicy="no-referrer"
             />
@@ -56,19 +58,19 @@ export default function Navbar() {
             Akhil Karthik
           </div>
         </motion.div>
-        
+
         <div className="hidden lg:flex gap-6 xl:gap-8 text-[10px] uppercase tracking-[0.2em] font-bold text-ink/60">
           {NAV_LINKS.slice(0, 7).map((link) => (
-            <Link 
+            <Link
               key={link.path}
-              to={link.path} 
+              to={link.path}
               className={`hover:text-accent transition-colors relative group ${location.pathname === link.path ? "text-accent" : ""}`}
             >
               {link.name}
               <span className={`absolute -bottom-1 left-0 h-px bg-accent transition-all ${location.pathname === link.path ? "w-full" : "w-0 group-hover:w-full"}`} />
             </Link>
           ))}
-          <button 
+          <button
             onClick={() => setIsMenuOpen(true)}
             className="text-accent hover:text-ink transition-colors relative group"
           >
@@ -77,19 +79,28 @@ export default function Navbar() {
           </button>
         </div>
 
-        <button 
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
-          className="lg:hidden p-2 text-ink"
-          aria-label="Toggle Menu"
-        >
-          <Menu className="w-6 h-6" />
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={toggle}
+            aria-label="Toggle dark mode"
+            className="p-2 rounded-full hover:bg-ink/5 transition-colors text-ink"
+          >
+            {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+          </button>
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="lg:hidden p-2 text-ink"
+            aria-label="Toggle Menu"
+          >
+            <Menu className="w-6 h-6" />
+          </button>
+        </div>
       </nav>
 
       {/* Full Screen Menu Overlay */}
       <AnimatePresence>
         {isMenuOpen && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -97,7 +108,7 @@ export default function Navbar() {
           >
             <div className="flex justify-between items-center">
               <div className="text-2xl font-display">Index</div>
-              <button 
+              <button
                 onClick={() => setIsMenuOpen(false)}
                 className="p-4 hover:scale-110 transition-transform"
               >
@@ -113,7 +124,7 @@ export default function Navbar() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.03 }}
                 >
-                  <Link 
+                  <Link
                     to={link.path}
                     onClick={() => setIsMenuOpen(false)}
                     className="group flex items-end gap-3 md:gap-4"
