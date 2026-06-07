@@ -9,6 +9,16 @@ import React from "react";
 
 export const PROJECTS = [
   {
+    id: 'laura-telegram-agent',
+    title: 'Laura — AI Telegram Personal Assistant',
+    category: 'AI Automations',
+    description: 'A conversational Telegram bot that works as a fully-featured personal assistant: writes and schedules LinkedIn posts, drafts emails, saves Notion notes, and generates visual analytics dashboards. Powered by Groq LLaMA 3.3 70B with persistent cross-session memory via GitHub API. Hosted 24/7 for free on GitHub Actions.',
+    image: 'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?q=80&w=1200&auto=format&fit=crop',
+    year: '2025',
+    tags: ['Python', 'LLaMA 3.3 70B', 'Groq', 'Telegram Bot', 'GitHub Actions', 'LinkedIn API'],
+    link: 'https://github.com/akhilkarthik/linkedin-telegram-agent'
+  },
+  {
     id: 'isometric-bom-extractor',
     title: 'Isometric BOM Extractor (IsoMTO)',
     category: 'Engineering Automation',

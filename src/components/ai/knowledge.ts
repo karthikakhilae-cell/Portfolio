@@ -17,8 +17,8 @@ export const ASSISTANT_KNOWLEDGE: Intent[] = [
   },
   {
     keywords: ["project", "work", "portfolio", "show me his projects", "show all projects", "show me projects", "his projects"],
-    response: "Akhil has worked on some amazing data projects! Some highlights include his Spotify Power BI Analysis, SpaceX Landing Prediction, and Chicago Data Analysis. You can see them all in the 'Work' section. Which one sounds interesting?",
-    suggestions: ["Spotify Analysis", "SpaceX Prediction", "Chicago Data Analysis", "Show all projects"]
+    response: "Akhil has worked on some standout projects! His latest is Laura — an AI Telegram personal assistant built on LLaMA 3.3 70B. He's also done the Isometric BOM Extractor, Spotify Power BI Analysis, and SpaceX Landing Prediction. Head to the Work section to see all of them.",
+    suggestions: ["Laura AI Assistant", "Isometric BOM Extractor", "Spotify Analysis", "Show all projects"]
   },
   {
     keywords: ["skill", "tech", "stack", "what are his skills?", "his core skills", "his skills"],
@@ -136,9 +136,14 @@ export const ASSISTANT_KNOWLEDGE: Intent[] = [
     suggestions: ["Spotify Analysis", "Other projects", "His Skills"]
   },
   {
+    keywords: ["laura", "laura ai", "telegram bot", "ai assistant", "personal assistant bot"],
+    response: "Laura is Akhil's latest build — a conversational AI personal assistant running on Telegram. She uses Groq's LLaMA 3.3 70B to write LinkedIn posts, draft emails, save Notion notes, and generate visual analytics dashboards. She has persistent memory across sessions and runs 24/7 for free on GitHub Actions. Genuinely impressive engineering.",
+    suggestions: ["See the GitHub repo", "His AI projects", "His Skills"]
+  },
+  {
     keywords: ["his focus", "what is he focused on", "current focus"],
-    response: "Akhil is currently deep-diving into AI and Machine Learning research. He's passionate about exploring how generative AI can be applied to real-world data problems. Want to see his ML projects?",
-    suggestions: ["ML Projects", "SpaceX Prediction", "His Skills"]
+    response: "Right now Akhil is building production-grade AI tools — his latest is Laura, a fully autonomous Telegram assistant powered by LLaMA 3.3 70B. He's deep into agentic systems, LLM orchestration, and making AI that actually works in the real world.",
+    suggestions: ["Laura AI Assistant", "ML Projects", "His Skills"]
   },
   {
     keywords: ["show projects", "contact him", "who is he?"],
