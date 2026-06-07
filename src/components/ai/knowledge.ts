@@ -137,12 +137,12 @@ export const ASSISTANT_KNOWLEDGE: Intent[] = [
   },
   {
     keywords: ["laura", "laura ai", "telegram bot", "ai assistant", "personal assistant bot"],
-    response: "Laura is Akhil's latest build — a conversational AI personal assistant running on Telegram. She uses Groq's LLaMA 3.3 70B to write LinkedIn posts, draft emails, save Notion notes, and generate visual analytics dashboards. She has persistent memory across sessions and runs 24/7 for free on GitHub Actions. Genuinely impressive engineering.",
+    response: "Laura is Akhil's latest build — a conversational AI agent. She uses Groq's LLaMA 3.3 70B to write LinkedIn posts, draft emails, save Notion notes, and generate visual analytics dashboards. She has persistent memory across sessions and runs 24/7 for free on GitHub Actions. Genuinely impressive engineering.",
     suggestions: ["See the GitHub repo", "His AI projects", "His Skills"]
   },
   {
     keywords: ["his focus", "what is he focused on", "current focus"],
-    response: "Right now Akhil is building production-grade AI tools — his latest is Laura, a fully autonomous Telegram assistant powered by LLaMA 3.3 70B. He's deep into agentic systems, LLM orchestration, and making AI that actually works in the real world.",
+    response: "Right now Akhil is building production-grade AI tools — his latest is Laura, a fully autonomous AI agent powered by LLaMA 3.3 70B. He's deep into agentic systems, LLM orchestration, and making AI that actually works in the real world.",
     suggestions: ["Laura AI Assistant", "ML Projects", "His Skills"]
   },
   {
