@@ -23,7 +23,7 @@ export default function Blogs() {
     const fetchPosts = async () => {
       try {
         const response = await fetch(
-          `https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@akhilkarthik`
+          `https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@karthikakhil.in`
         );
         const data = await response.json();
         if (data.status === "ok") {
@@ -75,7 +75,7 @@ export default function Blogs() {
             </p>
           </div>
           <a 
-            href="https://akhilkarthik.medium.com/" 
+            href="https://medium.com/@karthikakhil.in" 
             target="_blank" 
             rel="noopener noreferrer"
             className="flex items-center gap-3 bg-ink text-white px-6 md:px-8 py-3 md:py-4 rounded-full text-xs md:text-sm font-bold uppercase tracking-widest hover:bg-accent transition-colors group w-fit"
@@ -95,7 +95,7 @@ export default function Blogs() {
         <div className="text-center py-40">
           <p className="text-muted mb-8">{error}</p>
           <a 
-            href="https://akhilkarthik.medium.com/" 
+            href="https://medium.com/@karthikakhil.in" 
             target="_blank" 
             rel="noopener noreferrer"
             className="text-accent font-bold uppercase tracking-widest text-sm border-b border-accent pb-2"
