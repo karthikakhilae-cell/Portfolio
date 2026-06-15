@@ -13,7 +13,7 @@ export const PROJECTS = [
     title: 'Apex — F1 Telemetry Reconstruction',
     category: 'Data Visualization',
     description: 'A real-time, 60 FPS interactive dashboard that reconstructs Formula 1 qualifying telemetry in 3D — fusing real OpenF1 data with a WebGL digital twin of the car and circuit. Performs signal conditioning and derives second-order kinematics (g-loading, path curvature), rendered as a synchronised multi-view surface: a Three.js digital twin on the racing line, a g–g friction circle, per-corner minimum-velocity analysis and time-aligned traces. Delivered as a Microsoft Fabric App with a Lakehouse → Semantic Model → Eventstream data tier.',
-    image: 'https://images.unsplash.com/photo-1583900985737-6d0495555783?q=80&w=1200&auto=format&fit=crop',
+    image: 'https://raw.githubusercontent.com/akhilkarthik/apex-f1-telemetry/main/docs/track.png',
     year: '2025',
     tags: ['React', 'Three.js', 'WebGL', 'Microsoft Fabric', 'OpenF1 API', 'DAX'],
     link: 'https://github.com/akhilkarthik/apex-f1-telemetry'
