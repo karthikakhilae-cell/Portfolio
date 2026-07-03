@@ -2,8 +2,7 @@ import {
   Database,
   BarChart3,
   Code2,
-  Cpu,
-  Calendar
+  Cpu
 } from "lucide-react";
 import React from "react";
 
@@ -29,36 +28,6 @@ export const PROJECTS = [
     link: 'https://github.com/akhilkarthik/laura-ai-agent'
   },
   {
-    id: 'isometric-bom-extractor',
-    title: 'Isometric BOM Extractor (IsoMTO)',
-    category: 'Engineering Automation',
-    description: 'A fully offline Python tool that OCRs the Bill of Materials from piping isometric drawings (vector PDFs with no text layer) and reconciles every item code against a project code master — exact, fuzzy, and reverse-lookup-by-description matching — producing one combined Excel/CSV for material take-off. Flags uncertain rows rather than guessing.',
-    image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=1200&auto=format&fit=crop',
-    year: '2025',
-    tags: ['Python', 'OCR', 'Tesseract', 'PyMuPDF', 'Pandas', 'EPC Piping'],
-    link: 'https://github.com/akhilkarthik/isometric-bom-extractor'
-  },
-  {
-    id: 'p6-schedule-visualizer',
-    title: 'P6 Schedule Visualizer',
-    category: 'Project Controls',
-    description: 'A unified tool that connects to Primavera P6 from three sources — native .xer files, the P6 EPPM REST API, or the P6 SQL database — normalizes the data into one model, and visualizes it through an interactive Streamlit app (Gantt, S-curve, discipline progress) plus a one-click Power BI Excel export.',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop',
-    year: '2025',
-    tags: ['Python', 'Streamlit', 'Primavera P6', 'Power BI', 'Plotly'],
-    link: 'https://github.com/akhilkarthik/p6-schedule-visualizer'
-  },
-  {
-    id: 'p6-health-checker',
-    title: 'P6 Schedule Health Checker',
-    category: 'Project Controls',
-    description: 'A Python CLI tool that audits Primavera P6 schedules using the DCMA 14-Point methodology. Parses native .xer exports, runs ten schedule-quality checks (open ends, leads/lags, hard constraints, negative float, high duration, missing resources), computes a weighted health score, and generates a professional PDF report.',
-    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1200&auto=format&fit=crop',
-    year: '2025',
-    tags: ['Python', 'Primavera P6', 'DCMA 14-Point', 'PDF Reporting'],
-    link: 'https://github.com/akhilkarthik/p6-schedule-health-checker'
-  },
-  {
     id: 'fabric-lakehouse',
     title: 'Enterprise Fabric Data Lakehouse',
     category: 'Microsoft Fabric',
@@ -67,16 +36,6 @@ export const PROJECTS = [
     year: '2025',
     tags: ['Microsoft Fabric', 'Synapse Spark', 'DirectLake', 'Power BI'],
     link: 'https://github.com/akhilkarthik/Enterprise-Fabric-Data-Lakehouse'
-  },
-  {
-    id: 'planning-automation',
-    title: 'AI-Powered Primavera P6 Audit Automation',
-    category: 'AI Automations',
-    description: 'Developed an automated Python and GenAI scheduling assistant utilizing LangChain and Gemini APIs to audit Primavera P6 schedules and compile automated operational risk assessments.',
-    image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1200&auto=format&fit=crop',
-    year: '2024',
-    tags: ['AI Automations', 'Python', 'Primavera P6', 'LangChain'],
-    link: 'https://github.com/akhilkarthik/P6-Schedule-AI-Automation'
   },
   {
     id: 'db-optimization',
@@ -231,7 +190,6 @@ export const PROJECTS = [
 ];
 
 export const SKILLS = [
-  { name: "Planning Engineering", icon: <Calendar className="w-4 h-4" />, items: ["Primavera P6", "MS Project", "Resource Optimization", "Scheduling Controls", "Agile / Lean Scrum"] },
   { name: "Microsoft Fabric & BI", icon: <BarChart3 className="w-4 h-4" />, items: ["Microsoft Fabric Lakehouse", "Synapse Analytics", "Power BI DirectLake", "DAX / DENEB Visuals", "Data Factory Pipelines"] },
   { name: "Data Science & AI", icon: <Cpu className="w-4 h-4" />, items: ["Python", "Predictive ML Modeling", "AI Automations", "LangChain & LLMs", "Advanced ETL / ELT"] },
   { name: "Database Engineering", icon: <Database className="w-4 h-4" />, items: ["SQL Server Optimization", "Database Architecture", "PostgreSQL", "Query Tuning & Indexing", "Data Partitioning"] }

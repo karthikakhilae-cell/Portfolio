@@ -7,7 +7,6 @@ import { Link } from "react-router-dom";
 const ONGOING_PROJECT_IDS = new Set([
   "laura-telegram-agent",
   "fabric-lakehouse",
-  "planning-automation",
   "db-optimization",
 ]);
 
