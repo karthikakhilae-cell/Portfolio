@@ -22,12 +22,10 @@ export default function Blogs() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await fetch(
-          `https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@karthikakhil.in`
-        );
+        const response = await fetch(`/api/blogs`);
         const data = await response.json();
-        if (data.status === "ok") {
-          setPosts(data.items);
+        if (response.ok && Array.isArray(data.posts)) {
+          setPosts(data.posts);
         } else {
           throw new Error("Failed to fetch blog posts");
         }
