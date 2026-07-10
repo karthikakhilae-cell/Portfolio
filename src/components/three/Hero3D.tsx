@@ -485,18 +485,15 @@ function Swimmer({ isMobile = false }: { isMobile?: boolean }) {
       Math.sin(t * 0.22) * 1.5 + 1
     );
 
-    // mobile: keep-out zone over the page content — if the path heads
-    // toward the middle of the screen, push it out to the edges instead
+    // mobile: two home zones — above the photo and below the buttons.
+    // A slow oscillator picks the zone; smoothstep makes crossings quick
+    // and dwells long, so it never lingers over the name/tagline.
     if (isMobile) {
-      const cx = target.x / Math.max(bx, 0.001);
-      const cy = target.y / Math.max(by, 0.001);
-      const r = Math.hypot(cx, cy); // 0 at screen center, ~1 at edges
-      const minR = 0.85;
-      if (r < minR) {
-        const push = r < 0.001 ? { x: 1, y: 0 } : { x: cx / r, y: cy / r };
-        target.x = push.x * minR * bx;
-        target.y = push.y * minR * by;
-      }
+      const s = Math.sin(t * 0.24); // zone selector
+      const zone = THREE.MathUtils.smoothstep(s, -0.2, 0.2); // 0 bottom, 1 top
+      const topY = by * (1.05 + 0.15 * Math.sin(t * 0.5)); // above the photo
+      const bottomY = -by * (0.85 + 0.2 * Math.sin(t * 0.4)); // below Dive In
+      target.y = THREE.MathUtils.lerp(bottomY, topY, zone);
     }
 
     group.current.position.lerp(target, 0.025);
