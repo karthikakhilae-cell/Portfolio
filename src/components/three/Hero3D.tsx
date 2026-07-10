@@ -527,12 +527,18 @@ function ParallaxRig({ children }: { children: React.ReactNode }) {
 }
 
 export default function Hero3D() {
+  // adaptive quality: phones get a lighter ocean so it stays smooth
+  const isMobile = useMemo(
+    () => typeof window !== "undefined" && window.matchMedia("(max-width: 768px)").matches,
+    []
+  );
+
   return (
     <div className="fixed inset-0 pointer-events-none z-50" aria-hidden>
       <Canvas
         camera={{ position: [0, 0, 9], fov: 50 }}
-        dpr={[1, 1.75]}
-        gl={{ antialias: true, alpha: true }}
+        dpr={isMobile ? [1, 1.25] : [1, 1.75]}
+        gl={{ antialias: !isMobile, alpha: true }}
         style={{ pointerEvents: "none" }}
         eventSource={document.body}
         eventPrefix="client"
@@ -544,10 +550,10 @@ export default function Hero3D() {
           <directionalLight position={[4, 6, 5]} intensity={0.8} color={CREAM} />
           <ParallaxRig>
             <GodRays />
-            <Plankton />
-            <Bubbles />
+            <Plankton count={isMobile ? 250 : 700} />
+            <Bubbles count={isMobile ? 35 : 90} />
             <DistantJelly offset={2.1} depth={-7} scale={0.32} dim={0.3} />
-            <DistantJelly offset={5.4} depth={-8.5} scale={0.22} dim={0.2} />
+            {!isMobile && <DistantJelly offset={5.4} depth={-8.5} scale={0.22} dim={0.2} />}
             <Swimmer />
           </ParallaxRig>
         </Suspense>
