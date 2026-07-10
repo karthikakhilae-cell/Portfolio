@@ -146,7 +146,7 @@ function makeSwayMaterial(
 // ══════════════════════════════════════════════════════════════════
 
 function BlenderJellyfish({ dim = 1 }: { dim?: number }) {
-  const { scene } = useGLTF(MODEL_URL, true);
+  const { scene } = useGLTF(MODEL_URL, "/draco/");
   const timeUniform = useMemo(() => ({ value: 0 }), []);
   const bellMats = useRef<THREE.ShaderMaterial[]>([]);
   const organMats = useRef<THREE.MeshBasicMaterial[]>([]);
@@ -228,7 +228,7 @@ function BlenderJellyfish({ dim = 1 }: { dim?: number }) {
   );
 }
 
-useGLTF.preload(MODEL_URL, true);
+useGLTF.preload(MODEL_URL, "/draco/");
 
 // ══════════════════════════════════════════════════════════════════
 //  OCEAN ENVIRONMENT

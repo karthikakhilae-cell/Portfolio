@@ -57,7 +57,7 @@ export default function Life() {
             className="group"
           >
             <div className="relative overflow-hidden rounded-2xl md:rounded-3xl mb-6 md:mb-8 aspect-video">
-              <img 
+              <img loading="lazy" decoding="async" 
                 src={moment.image} 
                 alt={moment.title} 
                 className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"

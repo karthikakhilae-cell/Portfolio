@@ -140,7 +140,7 @@ export default function Home() {
           className="absolute right-4 sm:right-8 md:right-12 lg:right-24 bottom-12 sm:bottom-24 w-32 h-44 sm:w-48 sm:h-64 md:w-72 md:h-96 hidden xs:block"
         >
           <div className="relative w-full h-full">
-            <img
+            <img loading="lazy" decoding="async"
               src={PROFILE_PIC}
               alt="Akhil Karthik"
               className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 rounded-[1.5rem] sm:rounded-[2.5rem] shadow-2xl"

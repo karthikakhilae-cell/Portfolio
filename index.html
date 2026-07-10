@@ -32,6 +32,10 @@
 
     <!-- Favicon placeholder (replace with your own) -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Start fetching the 3D model early, in parallel with the JS -->
+    <link rel="preload" href="/jellyfish.glb" as="fetch" crossorigin />
+    <link rel="preload" href="/images/profile.jpg" as="image" />
   </head>
   <body>
     <div id="root"></div>

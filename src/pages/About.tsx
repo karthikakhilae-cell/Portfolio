@@ -48,7 +48,7 @@ export default function About() {
           transition={{ duration: 0.8 }}
           className="relative mt-12 lg:mt-0"
         >
-          <img 
+          <img loading="lazy" decoding="async" 
             src={PROFILE_PIC} 
             alt="Portrait" 
             className="w-full aspect-[3/4] object-cover rounded-2xl md:rounded-3xl grayscale"

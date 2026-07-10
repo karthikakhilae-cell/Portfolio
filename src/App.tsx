@@ -1,26 +1,29 @@
-import { BrowserRouter as Router, Routes, Route, useLocation, useRoutes } from "react-router-dom";
+import { BrowserRouter as Router, useLocation, useRoutes } from "react-router-dom";
 import { AnimatePresence } from "motion/react";
-import { cloneElement, ReactElement } from "react";
+import { cloneElement, lazy, ReactElement, Suspense } from "react";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import ScrollToTop from "./components/layout/ScrollToTop";
 import PageTransition from "./components/layout/PageTransition";
-import AIAssistant from "./components/ai/AIAssistant";
 import Landing from "./pages/Landing";
-import Home from "./pages/Home";
-import Work from "./pages/Work";
-import Dashboard from "./pages/Dashboard";
-import Lab from "./pages/Lab";
-import About from "./pages/About";
-import Thinking from "./pages/Thinking";
-import Blogs from "./pages/Blogs";
-import Life from "./pages/Life";
-import Arts from "./pages/Arts";
-import Journal from "./pages/Journal";
-import Store from "./pages/Store";
-import Contact from "./pages/Contact";
-import HireMe from "./pages/HireMe";
-import NotFound from "./pages/NotFound";
+
+// Code-split: each page loads only when visited, so the first paint
+// doesn't wait for the whole site's JavaScript.
+const AIAssistant = lazy(() => import("./components/ai/AIAssistant"));
+const Home = lazy(() => import("./pages/Home"));
+const Work = lazy(() => import("./pages/Work"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const Lab = lazy(() => import("./pages/Lab"));
+const About = lazy(() => import("./pages/About"));
+const Thinking = lazy(() => import("./pages/Thinking"));
+const Blogs = lazy(() => import("./pages/Blogs"));
+const Life = lazy(() => import("./pages/Life"));
+const Arts = lazy(() => import("./pages/Arts"));
+const Journal = lazy(() => import("./pages/Journal"));
+const Store = lazy(() => import("./pages/Store"));
+const Contact = lazy(() => import("./pages/Contact"));
+const HireMe = lazy(() => import("./pages/HireMe"));
+const NotFound = lazy(() => import("./pages/NotFound"));
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -46,9 +49,11 @@ function AnimatedRoutes() {
   if (!element) return null;
 
   return (
-    <AnimatePresence mode="wait">
-      {cloneElement(element as ReactElement, { key: location.pathname })}
-    </AnimatePresence>
+    <Suspense fallback={null}>
+      <AnimatePresence mode="wait">
+        {cloneElement(element as ReactElement, { key: location.pathname })}
+      </AnimatePresence>
+    </Suspense>
   );
 }
 
@@ -69,5 +74,9 @@ export default function App() {
 function AIAssistantWrapper() {
   const location = useLocation();
   if (location.pathname === "/") return null;
-  return <AIAssistant />;
+  return (
+    <Suspense fallback={null}>
+      <AIAssistant />
+    </Suspense>
+  );
 }
