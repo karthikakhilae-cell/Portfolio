@@ -468,7 +468,7 @@ function DistantJelly({
 //  Free swimming across the whole viewport
 // ══════════════════════════════════════════════════════════════════
 
-function Swimmer() {
+function Swimmer({ isMobile = false }: { isMobile?: boolean }) {
   const group = useRef<THREE.Group>(null!);
   const { viewport } = useThree();
   const prev = useRef(new THREE.Vector3());
@@ -484,6 +484,21 @@ function Swimmer() {
       Math.cos(t * 0.31 + 1) * by * 0.7 + Math.sin(t * 0.09) * by * 0.3,
       Math.sin(t * 0.22) * 1.5 + 1
     );
+
+    // mobile: keep-out zone over the page content — if the path heads
+    // toward the middle of the screen, push it out to the edges instead
+    if (isMobile) {
+      const cx = target.x / Math.max(bx, 0.001);
+      const cy = target.y / Math.max(by, 0.001);
+      const r = Math.hypot(cx, cy); // 0 at screen center, ~1 at edges
+      const minR = 0.85;
+      if (r < minR) {
+        const push = r < 0.001 ? { x: 1, y: 0 } : { x: cx / r, y: cy / r };
+        target.x = push.x * minR * bx;
+        target.y = push.y * minR * by;
+      }
+    }
+
     group.current.position.lerp(target, 0.025);
 
     // pulse-and-glide: upward thrust on each bell contraction
@@ -499,7 +514,7 @@ function Swimmer() {
   });
 
   return (
-    <group ref={group} scale={0.9}>
+    <group ref={group} scale={isMobile ? 0.55 : 0.9}>
       <BlenderJellyfish />
     </group>
   );
@@ -554,7 +569,7 @@ export default function Hero3D() {
             <Bubbles count={isMobile ? 35 : 90} />
             <DistantJelly offset={2.1} depth={-7} scale={0.32} dim={0.3} />
             {!isMobile && <DistantJelly offset={5.4} depth={-8.5} scale={0.22} dim={0.2} />}
-            <Swimmer />
+            <Swimmer isMobile={isMobile} />
           </ParallaxRig>
         </Suspense>
       </Canvas>
