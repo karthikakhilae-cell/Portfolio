@@ -12,7 +12,7 @@ export const PROJECTS = [
     title: 'Apex — F1 Telemetry Reconstruction',
     category: 'Data Visualization',
     description: 'A real-time, 60 FPS interactive dashboard that reconstructs Formula 1 qualifying telemetry in 3D — fusing real OpenF1 data with a WebGL digital twin of the car and circuit. Performs signal conditioning and derives second-order kinematics (g-loading, path curvature), rendered as a synchronised multi-view surface: a Three.js digital twin on the racing line, a g–g friction circle, per-corner minimum-velocity analysis and time-aligned traces. Delivered as a Microsoft Fabric App with a Lakehouse → Semantic Model → Eventstream data tier.',
-    image: '/images/apex-f1.png',
+    image: 'https://raw.githubusercontent.com/akhilkarthik/apex-f1-telemetry/main/docs/track.png',
     year: '2025',
     tags: ['React', 'Three.js', 'WebGL', 'Microsoft Fabric', 'OpenF1 API', 'DAX'],
     link: 'https://github.com/akhilkarthik/apex-f1-telemetry'
@@ -22,7 +22,7 @@ export const PROJECTS = [
     title: 'Laura — AI Agent',
     category: 'AI Automations',
     description: 'A conversational AI agent that works as a fully-featured personal assistant: writes and schedules LinkedIn posts, drafts emails, saves Notion notes, and generates visual analytics dashboards. Powered by Groq LLaMA 3.3 70B with persistent cross-session memory via GitHub API. Hosted 24/7 for free on GitHub Actions.',
-    image: '/images/laura-agent.jpg',
+    image: 'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?q=80&w=1200&auto=format&fit=crop',
     year: '2025',
     tags: ['Python', 'LLaMA 3.3 70B', 'Groq', 'AI Agent', 'GitHub Actions', 'LinkedIn API'],
     link: 'https://github.com/akhilkarthik/laura-ai-agent'
@@ -32,7 +32,7 @@ export const PROJECTS = [
     title: 'Enterprise Fabric Data Lakehouse',
     category: 'Microsoft Fabric',
     description: 'Designed and deployed an end-to-end operational analytics platform in Microsoft Fabric using Synapse Spark pipelines, Lakehouse Delta tables, and DirectLake Power BI semantic models.',
-    image: '/images/fabric-lakehouse.jpg',
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=1200&auto=format&fit=crop',
     year: '2025',
     tags: ['Microsoft Fabric', 'Synapse Spark', 'DirectLake', 'Power BI'],
     link: 'https://github.com/akhilkarthik/Enterprise-Fabric-Data-Lakehouse'
@@ -42,7 +42,7 @@ export const PROJECTS = [
     title: 'Database Architecture & Query Optimization',
     category: 'Database Engineering',
     description: 'Optimized a high-throughput enterprise database schema, writing advanced query partitions and indexes to improve transaction response times by 65%.',
-    image: '/images/p4.jpg',
+    image: 'https://images.unsplash.com/photo-1544383835-bda2bc66a55d?q=80&w=1200&auto=format&fit=crop',
     year: '2024',
     tags: ['SQL Server', 'Database Tuning', 'ETL/ELT', 'Data Architectures'],
     link: 'https://github.com/akhilkarthik/Enterprise-Database-Optimization'
@@ -52,7 +52,7 @@ export const PROJECTS = [
     title: 'Spotify Power BI Analysis',
     category: 'Data Analytics',
     description: 'Advanced Power BI analysis covering enriched datasets with Python, Glass morphism background, and DENEB visuals.',
-    image: '/images/p5.jpg',
+    image: 'https://images.unsplash.com/photo-1614680376593-902f74cf0d41?q=80&w=1200&auto=format&fit=crop',
     year: '2024',
     tags: ['Power BI', 'Python', 'DENEB'],
     link: 'https://github.com/akhilkarthik/Adavanced-Power-bi-project'
@@ -62,7 +62,7 @@ export const PROJECTS = [
     title: 'Grocery-store Data Analysis',
     category: 'Data Analytics',
     description: 'Sophisticated Sales Analytics Dashboard for strategic decision-making through intricate data analysis and forecasting.',
-    image: '/images/p6.jpg',
+    image: 'https://images.unsplash.com/photo-1542838132-92c53300491e?q=80&w=1200&auto=format&fit=crop',
     year: '2023',
     tags: ['Power BI', 'Forecasting', 'SQL'],
     link: 'https://github.com/akhilkarthik/Power-bi-Grocery-store-Data-Analysis'
@@ -72,7 +72,7 @@ export const PROJECTS = [
     title: 'SpaceX Falcon-9 Landing Prediction',
     category: 'Machine Learning',
     description: 'Predictive model to determine successful Falcon 9 first-stage landings, leveraging historical launch data.',
-    image: '/images/p7.jpg',
+    image: 'https://images.unsplash.com/photo-1517976487492-5750f3195933?q=80&w=1200&auto=format&fit=crop',
     year: '2023',
     tags: ['Python', 'Machine Learning', 'Data Science'],
     link: 'https://github.com/akhilkarthik/SpaceX-Falcon-9-first-stage-Landing-Prediction'
@@ -82,7 +82,7 @@ export const PROJECTS = [
     title: 'Professional Survey Analysis',
     category: 'Data Analytics',
     description: 'Deep dive into survey data, unraveling trends in geographical distributions and job satisfaction levels.',
-    image: '/images/p8.jpg',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop',
     year: '2022',
     tags: ['Power BI', 'Data Visualization', 'Insights'],
     link: 'https://github.com/akhilkarthik/Professional-survey-Analysis-using-Power-bi'
@@ -92,7 +92,7 @@ export const PROJECTS = [
     title: 'Housing Data Cleaning (SQL)',
     category: 'Data Analytics',
     description: 'Comprehensive data cleaning process in SQL Server to transform raw housing data into a usable format for analysis.',
-    image: '/images/p9.jpg',
+    image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1200&auto=format&fit=crop',
     year: '2022',
     tags: ['SQL', 'Data Cleaning', 'Database'],
     link: 'https://github.com/akhilkarthik/Housing-Data_cleaning_Sql'
@@ -102,7 +102,7 @@ export const PROJECTS = [
     title: 'Chicago Data Analysis',
     category: 'Data Analytics',
     description: 'Integrating SQL and Python to analyze socioeconomic indicators, public schools, and crime data in Chicago.',
-    image: '/images/p10.jpg',
+    image: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?q=80&w=1200&auto=format&fit=crop',
     year: '2021',
     tags: ['SQL', 'Python', 'Data Analysis'],
     link: 'https://github.com/akhilkarthik/Chicago-data-analysis-with-sql-and-Python'
@@ -112,7 +112,7 @@ export const PROJECTS = [
     title: 'Real-time Bitcoin Candlestick',
     category: 'Data Analytics',
     description: 'Python-based real-time visualization of Bitcoin price movements using candlestick charts and live API data.',
-    image: '/images/p11.jpg',
+    image: 'https://images.unsplash.com/photo-1518546305927-5a555bb7020d?q=80&w=1200&auto=format&fit=crop',
     year: '2021',
     tags: ['Python', 'API', 'Visualization'],
     link: 'https://github.com/akhilkarthik/Realtime-Bitcoin-Candlestick-chart_python'
@@ -122,7 +122,7 @@ export const PROJECTS = [
     title: 'Face Detection System',
     category: 'Machine Learning',
     description: 'Computer vision project implementing real-time face detection using Python and OpenCV libraries.',
-    image: '/images/face-recognition.jpg',
+    image: 'https://home.dartmouth.edu/sites/home/files/styles/16_9_lg/public/2023-11/AI_face_recognition_technology.jpg?h=0a8b6f8b&itok=n7x7WDVk',
     year: '2021',
     tags: ['Python', 'OpenCV', 'Computer Vision'],
     link: 'https://github.com/akhilkarthik/Face-detection'
@@ -132,7 +132,7 @@ export const PROJECTS = [
     title: 'Satellite Tracking System',
     category: 'Machine Learning',
     description: 'Real-time satellite position tracking and visualization using Python and orbital mechanics libraries.',
-    image: '/images/p13.jpg',
+    image: 'https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?q=80&w=1200&auto=format&fit=crop',
     year: '2020',
     tags: ['Python', 'SpaceTech', 'Data Science'],
     link: 'https://github.com/akhilkarthik/Satellite_tracking'
@@ -142,7 +142,7 @@ export const PROJECTS = [
     title: 'Pizza Delivery Database',
     category: 'Data Analytics',
     description: 'Designing and implementing a robust SQL database for a pizza delivery service, optimizing order management.',
-    image: '/images/p14.jpg',
+    image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=1200&auto=format&fit=crop',
     year: '2020',
     tags: ['SQL', 'Database Design', 'Optimization'],
     link: 'https://github.com/akhilkarthik/Sql_Pizza_delivery_database'
@@ -162,7 +162,7 @@ export const PROJECTS = [
     title: 'Tableau Visualization Project',
     category: 'Data Analytics',
     description: 'Interactive Tableau dashboards visualizing complex datasets to uncover hidden patterns and business insights.',
-    image: '/images/p15.jpg',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1115&auto=format&fit=crop',
     year: '2022',
     tags: ['Tableau', 'Data Visualization', 'Dashboard'],
     link: 'https://github.com/akhilkarthik/Tableau-Visualization-Project'
@@ -172,7 +172,7 @@ export const PROJECTS = [
     title: 'SQL Covid Project',
     category: 'Data Analytics',
     description: 'Analyzing global COVID-19 data using SQL to track infection rates, deaths, and vaccination progress across regions.',
-    image: '/images/kaggle-cover.jpg',
+    image: 'https://storage.googleapis.com/kaggle-datasets-images/3159770/5470717/7dbbf5e7331eb39d4309a8f8c778d63d/dataset-cover.jpg?t=2023-04-20-19-26-35',
     year: '2021',
     tags: ['SQL', 'Data Analysis', 'Healthcare'],
     link: 'https://github.com/akhilkarthik/Sql_Covid_Project'
@@ -182,7 +182,7 @@ export const PROJECTS = [
     title: 'Python Data Analysis Suite',
     category: 'Data Analytics',
     description: 'Comprehensive toolkit for data manipulation, statistical analysis, and visualization using Pandas and NumPy.',
-    image: '/images/reddit.jpg',
+    image: 'https://i.redd.it/rxezjyf4ojx41.png',
     year: '2021',
     tags: ['Python', 'Pandas', 'NumPy'],
     link: 'https://github.com/akhilkarthik/Data-Analysis-using-python'
@@ -204,4 +204,4 @@ export const SOCIAL_LINKS = {
   cv: "https://drive.google.com/file/d/1AoxKOL9A18WQzuU3m-YUtwb9QxRyRLqh/view"
 };
 
-export const PROFILE_PIC = "/images/profile.jpg";
+export const PROFILE_PIC = "https://lh3.googleusercontent.com/d/1tk7ppgl-vYdJsRNaWQ2_F3-qCXcbWItI";

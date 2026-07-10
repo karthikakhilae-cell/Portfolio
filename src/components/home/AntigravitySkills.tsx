@@ -59,7 +59,7 @@ export default function AntigravitySkills() {
                   : {}
               }
               whileHover={{ scale: 1.1 }}
-              className="bg-white/90 border border-line/10 text-ink px-6 sm:px-8 py-3 sm:py-4 rounded-full shadow-2xl shadow-ink/5 flex items-center justify-center cursor-default hover:bg-accent hover:text-white hover:border-accent hover:shadow-accent/20 transition-colors duration-300"
+              className="bg-white/90 backdrop-blur-md border border-line/10 text-ink px-6 sm:px-8 py-3 sm:py-4 rounded-full shadow-2xl shadow-ink/5 flex items-center justify-center cursor-default hover:bg-accent hover:text-white hover:border-accent hover:shadow-accent/20 transition-colors duration-300"
             >
               <span className="text-sm md:text-base font-bold tracking-widest uppercase">
                 {skill}

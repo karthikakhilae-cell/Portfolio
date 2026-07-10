@@ -1,20 +1,20 @@
-import { lazy, Suspense } from "react";
 import { motion } from "motion/react";
 import { ArrowRight, BookOpen } from "lucide-react";
 import { Link } from "react-router-dom";
 import { PROFILE_PIC } from "../constants";
-
-// Lazy: the page text paints instantly; Three.js + the ocean stream in
-// right after and fade in via the canvas alpha.
-const Hero3D = lazy(() => import("../components/three/Hero3D"));
+import Hero3D from "../components/three/Hero3D";
 
 export default function Landing() {
   return (
     <main className="h-screen bg-ink text-white flex flex-col items-center justify-center px-6 overflow-hidden relative">
       {/* 3D Interactive Background */}
-      <Suspense fallback={null}>
-        <Hero3D />
-      </Suspense>
+      <Hero3D />
+
+      {/* Background Decorative Elements */}
+      <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent blur-[120px] rounded-full" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-white blur-[120px] rounded-full" />
+      </div>
 
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}

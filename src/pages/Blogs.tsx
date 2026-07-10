@@ -167,7 +167,7 @@ export default function Blogs() {
             className="group block overflow-hidden border border-ink/10 bg-white shadow-sm transition-transform hover:-translate-y-1"
           >
             <div className="aspect-[4/3] overflow-hidden bg-ink">
-              <img loading="lazy" decoding="async"
+              <img
                 src={featuredPost.thumbnail || FEATURED_POST.thumbnail}
                 alt={featuredPost.title}
                 className="h-full w-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-105"
@@ -255,7 +255,7 @@ export default function Blogs() {
               className="group flex min-h-[28rem] flex-col border border-ink/10 bg-white transition-colors hover:border-accent/50"
             >
               <div className="aspect-[16/10] overflow-hidden bg-[#1a1a18]">
-                <img loading="lazy" decoding="async"
+                <img
                   src={post.thumbnail || FEATURED_POST.thumbnail}
                   alt={post.title}
                   className="h-full w-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-105"

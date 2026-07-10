@@ -46,7 +46,7 @@ export default function Navbar() {
           onClick={() => navigate('/about')}
         >
           <div className="relative">
-            <img loading="lazy" decoding="async"
+            <img
               src={PROFILE_PIC}
               alt="Akhil"
               className="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover border border-ink/10 group-hover:border-accent transition-colors"
