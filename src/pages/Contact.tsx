@@ -113,8 +113,8 @@ export default function Contact() {
         </motion.div>
 
         <motion.form 
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           onSubmit={handleFormSubmit} 
           className="bg-white p-8 md:p-12 rounded-[2rem] md:rounded-3xl shadow-xl space-y-6 md:space-y-8"
         >

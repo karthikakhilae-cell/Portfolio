@@ -1,4 +1,4 @@
-import { useRef, useMemo, Suspense } from "react";
+import { useRef, useMemo, useState, useEffect, Suspense } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
 import * as THREE from "three";
@@ -540,10 +540,16 @@ function ParallaxRig({ children }: { children: React.ReactNode }) {
 
 export default function Hero3D() {
   // adaptive quality: phones get a lighter ocean so it stays smooth
-  const isMobile = useMemo(
-    () => typeof window !== "undefined" && window.matchMedia("(max-width: 768px)").matches,
-    []
+  // (tracks rotation / window resizes, not just the initial mount)
+  const [isMobile, setIsMobile] = useState(
+    () => typeof window !== "undefined" && window.matchMedia("(max-width: 768px)").matches
   );
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 768px)");
+    const onChange = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
 
   return (
     <div className="fixed inset-0 pointer-events-none z-50" aria-hidden>
