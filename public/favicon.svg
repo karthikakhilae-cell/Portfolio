@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="bell" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F5F1DC"/>
+      <stop offset="1" stop-color="#D8D8AC"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.45" r="0.6">
+      <stop offset="0" stop-color="#D8D8AC" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#D8D8AC" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- warm deep-water background -->
+  <rect width="64" height="64" rx="14" fill="#14130E"/>
+  <circle cx="32" cy="28" r="24" fill="url(#glow)"/>
+
+  <!-- bell -->
+  <path d="M14 31 C14 19.5 22 12 32 12 C42 12 50 19.5 50 31
+           C47 28.8 44.5 28.8 42 31 C39.5 28.8 36.5 28.8 34 31
+           C31.5 28.8 29 28.8 27 31 C24.5 28.8 21.5 28.8 19 31
+           C17.2 29.5 15.5 29.6 14 31 Z" fill="url(#bell)"/>
+
+  <!-- inner organ glow -->
+  <ellipse cx="32" cy="24" rx="7" ry="4.5" fill="#FFFDF2" opacity="0.55"/>
+
+  <!-- tentacles -->
+  <g stroke="#D8D8AC" stroke-width="2.6" stroke-linecap="round" fill="none">
+    <path d="M22 34 C21 40 24 43 22 49" opacity="0.75"/>
+    <path d="M32 35 C33 42 30 46 32 53" opacity="0.9"/>
+    <path d="M42 34 C43 40 40 43 42 49" opacity="0.75"/>
+  </g>
+  <g stroke="#8A8A60" stroke-width="2" stroke-linecap="round" fill="none">
+    <path d="M27 35 C26 41 28 44 26 50" opacity="0.7"/>
+    <path d="M37 35 C38 41 36 44 38 50" opacity="0.7"/>
+  </g>
+</svg>
