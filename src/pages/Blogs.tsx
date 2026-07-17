@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "motion/react";
+import { Link } from "react-router-dom";
 import {
+  ArrowLeft,
   ArrowUpRight,
   BarChart3,
   BookOpen,
@@ -109,6 +111,13 @@ export default function Blogs() {
   return (
     <main className="min-h-screen bg-[#f7f4ee] text-ink">
       <section className="pt-24 md:pt-32 px-4 sm:px-8 md:px-12 lg:px-24">
+        <Link
+          to="/blogs"
+          className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-ink/45 hover:text-accent transition-colors mb-10"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          All Blogs
+        </Link>
         <div className="grid min-h-[calc(100vh-7rem)] grid-cols-1 lg:grid-cols-[1.15fr_0.85fr] gap-8 lg:gap-12 items-center pb-12 md:pb-16">
           <motion.div
             initial={{ opacity: 0, y: 18 }}
