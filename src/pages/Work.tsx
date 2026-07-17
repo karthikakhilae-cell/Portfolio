@@ -71,23 +71,21 @@ export default function Work() {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 md:gap-y-16">
           {projects.map((project) => (
-            <motion.a
+            <motion.div
               key={project.id}
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               className="group cursor-pointer block"
             >
+            <Link to={`/work/${project.id}`} className="block">
               <div className="relative overflow-hidden rounded-2xl mb-6 aspect-[4/3]">
                 <motion.img
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.6 }}
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                  className="w-full h-full object-cover transition-all duration-700"
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute inset-0 bg-accent/0 group-hover:bg-accent/10 transition-colors duration-500" />
@@ -116,7 +114,8 @@ export default function Work() {
                 <h3 className="text-xl font-medium group-hover:text-accent transition-colors">{project.title}</h3>
                 <p className="text-xs text-muted leading-relaxed line-clamp-2">{project.description}</p>
               </div>
-            </motion.a>
+            </Link>
+            </motion.div>
           ))}
         </div>
       )}

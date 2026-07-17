@@ -8,9 +8,86 @@ dotenv.config();
 const MEDIUM_FEED_URL = "https://medium.com/feed/@karthikakhil.in";
 const MEDIUM_PROXY_FEED_URL = `https://api.allorigins.win/raw?url=${encodeURIComponent(MEDIUM_FEED_URL)}`;
 const MEDIUM_RSS_JSON_URL = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(MEDIUM_FEED_URL)}`;
+
+const PERSONAL_FEED_URL = "https://medium.com/feed/@akhilkarthik";
+const PERSONAL_PROXY_FEED_URL = `https://api.allorigins.win/raw?url=${encodeURIComponent(PERSONAL_FEED_URL)}`;
+const PERSONAL_RSS_JSON_URL = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(PERSONAL_FEED_URL)}`;
+
 const BLOG_CACHE_TTL_MS = 15 * 60 * 1000;
 
 let blogCache: { posts: ReturnType<typeof normalizeMediumItem>[]; source: string; updatedAt: number } | null = null;
+let personalBlogCache: { posts: ReturnType<typeof normalizeMediumItem>[]; source: string; updatedAt: number } | null = null;
+
+// ── GitHub project auto-discovery ────────────────────────────────────
+const GITHUB_USERNAME = "akhilkarthik";
+const REPOS_CACHE_TTL_MS = 15 * 60 * 1000;
+
+let reposCache: { repos: any[]; updatedAt: number } | null = null;
+
+function githubHeaders(accept: string) {
+  return {
+    Accept: accept,
+    ...(process.env.GITHUB_TOKEN ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` } : {}),
+  };
+}
+
+function slugify(name: string) {
+  return name
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "");
+}
+
+function titleCase(name: string) {
+  return name
+    .replace(/[-_]+/g, " ")
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
+async function fetchGithubRepos() {
+  if (reposCache && Date.now() - reposCache.updatedAt < REPOS_CACHE_TTL_MS) {
+    return reposCache.repos;
+  }
+
+  const response = await fetch(
+    `https://api.github.com/users/${GITHUB_USERNAME}/repos?per_page=100&sort=updated`,
+    { headers: githubHeaders("application/vnd.github.v3+json") }
+  );
+
+  if (!response.ok) {
+    throw new Error(`GitHub repos fetch failed: ${response.status}`);
+  }
+
+  const allRepos = await response.json();
+  const repos = (Array.isArray(allRepos) ? allRepos : []).filter(
+    (r: any) => !r.fork && !r.private && !r.archived && r.description && r.description.trim().length > 0
+  );
+
+  reposCache = { repos, updatedAt: Date.now() };
+  return repos;
+}
+
+function repoToProject(repo: any) {
+  return {
+    id: slugify(repo.name),
+    title: titleCase(repo.name),
+    category: repo.language || "Project",
+    description: repo.description || "No description provided yet.",
+    image: `https://opengraph.githubassets.com/1/${repo.full_name}`,
+    year: String(new Date(repo.created_at).getFullYear()),
+    tags: repo.topics && repo.topics.length > 0 ? repo.topics : repo.language ? [repo.language] : [],
+    link: repo.html_url,
+  };
+}
+
+async function fetchRepoReadme(repoPath: string) {
+  const response = await fetch(`https://api.github.com/repos/${repoPath}/readme`, {
+    headers: githubHeaders("application/vnd.github.v3.raw"),
+  });
+
+  if (!response.ok) return null;
+  return response.text();
+}
 
 type MediumRssItem = {
   title?: string | { "#text"?: string; "__cdata"?: string };
@@ -214,9 +291,46 @@ export function createExpressApp() {
     }
   });
 
-  // API Route for Projects
+  // API Route for Projects — auto-discovers all public GitHub repos
   router.get("/projects", async (req, res) => {
-    res.status(200).json([]);
+    try {
+      const repos = await fetchGithubRepos();
+      res.status(200).json(repos.map(repoToProject));
+    } catch (error) {
+      console.error("Error fetching GitHub repos:", error);
+      res.status(200).json([]);
+    }
+  });
+
+  // API Route for a single project (curated or auto-discovered) + its README
+  router.get("/project/:id", async (req, res) => {
+    const { id } = req.params;
+    const { PROJECTS } = await import("../constants-data");
+    let project: any = PROJECTS.find((p: any) => p.id === id);
+
+    if (!project) {
+      try {
+        const repos = await fetchGithubRepos();
+        const match = repos.find((r: any) => slugify(r.name) === id);
+        if (match) project = repoToProject(match);
+      } catch (error) {
+        console.error("Error resolving project from GitHub:", error);
+      }
+    }
+
+    if (!project) {
+      return res.status(404).json({ error: "Project not found" });
+    }
+
+    let readme: string | null = null;
+    try {
+      const repoPath = new URL(project.link).pathname.replace(/^\//, "");
+      readme = await fetchRepoReadme(repoPath);
+    } catch (error) {
+      console.error("Error fetching README:", error);
+    }
+
+    res.status(200).json({ project, readme });
   });
 
   // API Route for Blogs (fetched live from Medium RSS)
@@ -263,6 +377,56 @@ export function createExpressApp() {
     }
 
     res.status(502).json({ error: "Unable to fetch Medium posts", details: errors });
+  });
+
+  // API Route for Personal Blogs (fetched from personal Medium RSS)
+  router.get("/blogs/personal", async (req, res) => {
+    if (personalBlogCache && Date.now() - personalBlogCache.updatedAt < BLOG_CACHE_TTL_MS) {
+      return res.status(200).json({
+        posts: personalBlogCache.posts,
+        source: personalBlogCache.source,
+        cached: true,
+      });
+    }
+
+    const providers = [
+      { source: "personal-medium-rss", fetchPosts: () => fetchMediumPostsFromXmlUrl(PERSONAL_FEED_URL, "Personal Medium feed returned") },
+      { source: "personal-proxied-medium-rss", fetchPosts: () => fetchMediumPostsFromXmlUrl(PERSONAL_PROXY_FEED_URL, "Personal Medium proxy feed returned") },
+      { source: "personal-rss2json", fetchPosts: async () => {
+        const response = await fetch(PERSONAL_RSS_JSON_URL);
+        if (!response.ok) throw new Error(`Personal RSS JSON fallback returned ${response.status}`);
+        const data = await response.json();
+        if (data.status !== "ok" || !Array.isArray(data.items)) throw new Error("Personal RSS JSON fallback returned an invalid response");
+        return data.items.map(normalizeRssJsonItem);
+      }},
+    ];
+
+    const errors: string[] = [];
+
+    for (const provider of providers) {
+      try {
+        const posts = await provider.fetchPosts();
+        if (posts.length > 0) {
+          personalBlogCache = { posts, source: provider.source, updatedAt: Date.now() };
+          return res.status(200).json({ posts, source: provider.source, cached: false });
+        }
+        errors.push(`${provider.source}: no posts returned`);
+      } catch (error) {
+        console.warn(`Personal blog provider failed (${provider.source}):`, error);
+        errors.push(`${provider.source}: ${error instanceof Error ? error.message : String(error)}`);
+      }
+    }
+
+    if (personalBlogCache) {
+      return res.status(200).json({
+        posts: personalBlogCache.posts,
+        source: personalBlogCache.source,
+        cached: true,
+        stale: true,
+      });
+    }
+
+    res.status(502).json({ error: "Unable to fetch personal Medium posts", details: errors });
   });
 
   // ── Grok (xAI) Chat API ──────────────────────────────────────────
