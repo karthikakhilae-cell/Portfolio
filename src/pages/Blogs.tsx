@@ -310,9 +310,8 @@ export default function Blogs() {
               </h2>
             </div>
             <p className="text-base md:text-lg leading-relaxed text-ink/65">
-              This page leads with the work that best proves your Power BI, data science, and
-              analytics skill set. Visitors land on a clear promise, see the practical
-              architecture, and have one obvious action: start reading.
+              This page leads with the work that best proves my Power BI, data science, and
+              analytics skill set.
             </p>
           </div>
         </div>
