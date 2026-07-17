@@ -31,7 +31,7 @@ export default function Landing() {
           <img 
             src={PROFILE_PIC} 
             alt="Akhil Karthik" 
-            className="w-32 h-32 rounded-full object-cover border-2 border-accent/30 p-1 grayscale hover:grayscale-0 transition-all duration-700"
+            className="w-32 h-32 rounded-full object-cover border-2 border-accent/30 p-1 transition-all duration-700"
             referrerPolicy="no-referrer"
           />
         </motion.div>

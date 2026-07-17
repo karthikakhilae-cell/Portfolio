@@ -143,7 +143,7 @@ export default function Home() {
             <img
               src={PROFILE_PIC}
               alt="Akhil Karthik"
-              className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 rounded-[1.5rem] sm:rounded-[2.5rem] shadow-2xl"
+              className="w-full h-full object-cover transition-all duration-1000 rounded-[1.5rem] sm:rounded-[2.5rem] shadow-2xl"
               referrerPolicy="no-referrer"
             />
             <div className="absolute -bottom-4 -left-4 sm:-bottom-8 sm:-left-8 bg-white/80 backdrop-blur-md p-4 sm:p-8 shadow-2xl rounded-2xl sm:rounded-3xl max-w-[140px] sm:max-w-[220px] border border-white/20">

@@ -51,7 +51,7 @@ export default function About() {
           <img 
             src={PROFILE_PIC} 
             alt="Portrait" 
-            className="w-full aspect-[3/4] object-cover rounded-2xl md:rounded-3xl grayscale"
+            className="w-full aspect-[3/4] object-cover rounded-2xl md:rounded-3xl"
             referrerPolicy="no-referrer"
           />
           <div className="absolute -top-6 -right-4 sm:top-12 sm:-left-12 sm:right-auto bg-accent p-6 sm:p-12 rounded-2xl sm:rounded-3xl shadow-2xl">
