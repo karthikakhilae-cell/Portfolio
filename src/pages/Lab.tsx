@@ -1,5 +1,10 @@
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
+import { Suspense, lazy } from "react";
 import { Beaker, Lightbulb, FlaskConical, Rocket } from "lucide-react";
+import Card3D from "../components/3d/Card3D";
+import { SOCIAL_LINKS } from "../constants";
+
+const ParticleField = lazy(() => import("../components/3d/ParticleField"));
 
 const EXPERIMENTS = [
   {
@@ -30,7 +35,10 @@ const EXPERIMENTS = [
 
 export default function Lab() {
   return (
-    <main className="pt-24 md:pt-32 pb-20 px-6 md:px-24 min-h-screen bg-bg">
+    <main className="pt-24 md:pt-32 pb-20 px-6 md:px-24 min-h-screen bg-bg relative overflow-hidden">
+      <Suspense fallback={null}>
+        <ParticleField className="absolute inset-0" />
+      </Suspense>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -47,10 +55,10 @@ export default function Lab() {
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 relative z-10">
         {EXPERIMENTS.map((exp, i) => (
+          <Card3D key={exp.title}>
           <motion.div
-            key={exp.title}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.1 }}
@@ -64,10 +72,16 @@ export default function Lab() {
             </div>
             <h3 className="text-2xl mb-4 group-hover:text-accent transition-colors">{exp.title}</h3>
             <p className="text-muted leading-relaxed">{exp.description}</p>
-            <button className="mt-8 text-[10px] uppercase tracking-widest font-bold border-b border-ink pb-1 hover:text-accent hover:border-accent transition-all">
-              View Prototype
-            </button>
+            <a
+              href={SOCIAL_LINKS.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 inline-block text-[10px] uppercase tracking-widest font-bold border-b border-ink pb-1 hover:text-accent hover:border-accent transition-all"
+            >
+              View on GitHub
+            </a>
           </motion.div>
+          </Card3D>
         ))}
       </div>
     </main>

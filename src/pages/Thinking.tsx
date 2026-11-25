@@ -1,5 +1,6 @@
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { BarChart3, TrendingUp, PieChart, Activity } from "lucide-react";
+import { SOCIAL_LINKS } from "../constants";
 
 const THOUGHTS = [
   {
@@ -64,9 +65,14 @@ export default function Thinking() {
             </div>
             <h3 className="text-2xl mb-4 group-hover:text-accent transition-colors">{thought.title}</h3>
             <p className="text-muted leading-relaxed">{thought.description}</p>
-            <button className="mt-8 text-[10px] uppercase tracking-widest font-bold border-b border-ink pb-1 hover:text-accent hover:border-accent transition-all">
-              Read Article
-            </button>
+            <a
+              href={SOCIAL_LINKS.medium}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 inline-block text-[10px] uppercase tracking-widest font-bold border-b border-ink pb-1 hover:text-accent hover:border-accent transition-all"
+            >
+              Read on Medium
+            </a>
           </motion.div>
         ))}
       </div>

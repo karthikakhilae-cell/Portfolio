@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { MessageSquare, Calendar, Clock, ExternalLink, Loader2 } from "lucide-react";
 
 interface BlogPost {

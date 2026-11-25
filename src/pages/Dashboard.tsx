@@ -1,10 +1,9 @@
-import { motion } from "motion/react";
+﻿import { motion } from "framer-motion";
 import {
   Activity,
   BarChart3,
   Brain,
   CheckCircle2,
-  CircleDollarSign,
   Cpu,
   Database,
   Gauge,
@@ -12,7 +11,6 @@ import {
   LineChart,
   Network,
   ShieldCheck,
-  TimerReset,
   TrendingUp,
   Zap,
 } from "lucide-react";
@@ -117,7 +115,7 @@ function Panel({ children, className = "" }: { children: React.ReactNode; classN
 
 export default function Dashboard() {
   return (
-    <main className="pt-24 md:pt-32 pb-16 min-h-screen bg-[#F4F0E8]">
+    <main className="pt-24 md:pt-32 pb-16 min-h-screen bg-[#F4F2E8]">
       <div className="pointer-events-none fixed inset-0 -z-10 opacity-60 [background-image:linear-gradient(rgba(26,26,26,0.055)_1px,transparent_1px),linear-gradient(90deg,rgba(26,26,26,0.045)_1px,transparent_1px)] [background-size:72px_72px]" />
 
       {/* Hero */}
@@ -128,7 +126,7 @@ export default function Dashboard() {
               <span className="rounded-full bg-white/80 px-4 py-2 text-[10px] uppercase tracking-[0.3em] font-bold text-accent shadow-sm ring-1 ring-line/10">
                 Data Science Portfolio
               </span>
-              <span className="rounded-full bg-[#172120] px-4 py-2 text-[10px] uppercase tracking-[0.25em] font-bold text-white/70 shadow-sm">
+              <span className="rounded-full bg-[#1C1A15] px-4 py-2 text-[10px] uppercase tracking-[0.25em] font-bold text-white/70 shadow-sm">
                 Live analytics view
               </span>
             </div>
@@ -142,7 +140,7 @@ export default function Dashboard() {
             <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl">
               {commandStats.map(([label, value]) => (
                 <div key={label} className="rounded-lg bg-white/70 p-4 ring-1 ring-line/10 backdrop-blur">
-                  <div className="text-[9px] uppercase tracking-widest font-bold text-muted/50">{label}</div>
+                  <div className="text-[9px] uppercase tracking-widest font-bold text-muted">{label}</div>
                   <div className="mt-2 text-sm font-bold text-ink/80">{value}</div>
                 </div>
               ))}
@@ -150,9 +148,9 @@ export default function Dashboard() {
           </motion.div>
 
           <Panel className="overflow-hidden p-0">
-            <div className="flex items-center justify-between border-b border-line/10 bg-[#172120] px-5 py-4 text-white">
+            <div className="flex items-center justify-between border-b border-line/10 bg-[#1C1A15] px-5 py-4 text-white">
               <div>
-                <div className="text-[9px] uppercase tracking-[0.25em] font-bold text-white/40">Capability Stack</div>
+                <div className="text-[9px] uppercase tracking-[0.25em] font-bold text-white/60">Capability Stack</div>
                 <div className="mt-1 text-lg font-display">KPI cockpit</div>
               </div>
               <div className="flex gap-1.5">
@@ -165,9 +163,9 @@ export default function Dashboard() {
               {executiveKpis.map((kpi) => {
                 const Icon = kpi.icon;
                 return (
-                  <div key={kpi.label} className="rounded-lg border border-line/10 bg-[#F8F6F1] p-4 transition-colors hover:bg-white">
+                  <div key={kpi.label} className="rounded-lg border border-line/10 bg-[#F1EFE4] p-4 transition-colors hover:bg-white">
                     <div className="flex items-center justify-between gap-3">
-                      <span className="text-[9px] uppercase tracking-widest font-bold text-muted/60">{kpi.label}</span>
+                      <span className="text-[9px] uppercase tracking-widest font-bold text-muted">{kpi.label}</span>
                       <span className="rounded-md bg-white p-2 ring-1 ring-line/10">
                         <Icon className="w-4 h-4 text-accent shrink-0" />
                       </span>
@@ -175,7 +173,7 @@ export default function Dashboard() {
                     <div className="mt-5 text-3xl font-display leading-none">{kpi.value}</div>
                     <div className="mt-2 flex items-center justify-between gap-3">
                       <span className="text-[10px] font-bold text-[#267365]">{kpi.trend}</span>
-                      <span className="text-[9px] uppercase tracking-widest font-bold text-muted/45 text-right">{kpi.note}</span>
+                      <span className="text-[9px] uppercase tracking-widest font-bold text-muted text-right">{kpi.note}</span>
                     </div>
                   </div>
                 );
@@ -194,14 +192,14 @@ export default function Dashboard() {
                 <div className="text-[10px] uppercase tracking-[0.3em] font-bold text-accent mb-2">Project Delivery</div>
                 <h2 className="text-3xl md:text-[2.35rem] font-display leading-tight">Planned vs shipped</h2>
               </div>
-              <div className="flex flex-wrap gap-2 text-[10px] uppercase tracking-widest font-bold text-muted/60">
+              <div className="flex flex-wrap gap-2 text-[10px] uppercase tracking-widest font-bold text-muted">
                 <span className="flex items-center gap-2 rounded-full bg-bg px-3 py-2"><span className="w-3 h-3 rounded-full bg-[#314E52]" /> Planned</span>
                 <span className="flex items-center gap-2 rounded-full bg-bg px-3 py-2"><span className="w-3 h-3 rounded-full bg-[#267365]" /> Delivered</span>
                 <span className="flex items-center gap-2 rounded-full bg-bg px-3 py-2"><span className="w-3 h-3 rounded-full bg-[#C06C54]" /> In progress</span>
               </div>
             </div>
 
-            <div className="rounded-lg bg-[#F8F6F1] p-4 ring-1 ring-line/10">
+            <div className="rounded-lg bg-[#F1EFE4] p-4 ring-1 ring-line/10">
               <svg viewBox="0 0 560 260" className="w-full h-auto" role="img" aria-label="Project delivery S-curve chart">
                 {[52, 100, 148, 196, 244].map((y) => (
                   <path key={y} d={`M28 ${y}H528`} stroke="rgba(26,26,26,0.08)" strokeWidth="1" />
@@ -220,13 +218,13 @@ export default function Dashboard() {
             </div>
 
             <div className="mt-5 grid gap-4 xl:grid-cols-[1fr_0.8fr]">
-              <div className="rounded-lg bg-[#F8F6F1] p-4 ring-1 ring-line/10">
+              <div className="rounded-lg bg-[#F1EFE4] p-4 ring-1 ring-line/10">
                 <div className="mb-4 flex items-center justify-between gap-3">
                   <div>
                     <div className="text-[10px] uppercase tracking-[0.25em] font-bold text-accent">
                       Portfolio Delivery Pulse
                     </div>
-                    <div className="mt-1 text-xs text-muted/70">
+                    <div className="mt-1 text-xs text-muted">
                       Projects, models, and datasets against targets
                     </div>
                   </div>
@@ -254,7 +252,7 @@ export default function Dashboard() {
               </div>
 
               <div className="grid grid-cols-2 gap-3">
-                <div className="rounded-lg bg-[#172120] p-4 text-white ring-1 ring-line/10">
+                <div className="rounded-lg bg-[#1C1A15] p-4 text-white ring-1 ring-line/10">
                   <div className="text-[10px] uppercase tracking-widest font-bold text-[#F0C76A]">Accuracy</div>
                   <div className="mt-3 text-3xl font-display">94%</div>
                   <div className="mt-2 text-[10px] uppercase tracking-widest font-bold text-white/60">ml avg</div>
@@ -262,10 +260,10 @@ export default function Dashboard() {
                 <div className="rounded-lg bg-white p-4 ring-1 ring-line/10">
                   <div className="text-[10px] uppercase tracking-widest font-bold text-accent">F1</div>
                   <div className="mt-3 text-3xl font-display">0.91</div>
-                  <div className="mt-2 text-[10px] uppercase tracking-widest font-bold text-muted/50">score avg</div>
+                  <div className="mt-2 text-[10px] uppercase tracking-widest font-bold text-muted">score avg</div>
                 </div>
                 <div className="col-span-2 rounded-lg bg-white p-4 ring-1 ring-line/10">
-                  <div className="mb-3 flex items-center justify-between text-[10px] uppercase tracking-widest font-bold text-muted/55">
+                  <div className="mb-3 flex items-center justify-between text-[10px] uppercase tracking-widest font-bold text-muted">
                     <span>Project milestone trail</span>
                     <span>5 gates</span>
                   </div>
@@ -292,7 +290,7 @@ export default function Dashboard() {
                   <div className="text-[10px] uppercase tracking-[0.25em] font-bold text-accent">
                     Portfolio Progress Breakdown
                   </div>
-                  <div className="mt-1 text-xs text-muted/70">
+                  <div className="mt-1 text-xs text-muted">
                     Planned, completed, in-progress, and forecast positions
                   </div>
                 </div>
@@ -303,7 +301,7 @@ export default function Dashboard() {
               <div className="space-y-3">
                 {reconciliation.map((item, index) => (
                   <div key={item.label} className="grid grid-cols-[92px_1fr_100px] items-center gap-3">
-                    <div className="text-[10px] uppercase tracking-widest font-bold text-muted/60">{item.label}</div>
+                    <div className="text-[10px] uppercase tracking-widest font-bold text-muted">{item.label}</div>
                     <div className="h-8 rounded-md bg-bg p-1 ring-1 ring-line/10">
                       <motion.div
                         initial={{ width: 0 }}
@@ -320,7 +318,7 @@ export default function Dashboard() {
             </div>
           </Panel>
 
-          <Panel className="h-full overflow-hidden border-[#314E52] bg-[#0B1211] p-5 text-white md:p-6">
+          <Panel className="h-full overflow-hidden border-[#314E52] bg-[#171410] p-5 text-white md:p-6">
             <div className="flex items-center justify-between mb-5">
               <div>
                 <div className="text-[11px] uppercase tracking-[0.3em] font-bold text-[#F0C76A] mb-2">Skill Engine</div>
@@ -335,13 +333,13 @@ export default function Dashboard() {
                 ["ML / AI", "Advanced"],
                 ["MS Fabric", "Advanced"],
               ].map(([label, value]) => (
-                <div key={label} className="rounded-lg border border-[#3F5550] bg-[#172120] p-4 shadow-inner">
+                <div key={label} className="rounded-lg border border-[#4A4538] bg-[#1C1A15] p-4 shadow-inner">
                   <div className="text-[10px] uppercase tracking-widest font-bold text-[#F0C76A]">{label}</div>
                   <div className="text-xl 2xl:text-2xl font-display mt-3 text-white">{value}</div>
                 </div>
               ))}
             </div>
-            <div className="rounded-lg border border-[#3F5550] bg-[#172120] p-4 shadow-inner">
+            <div className="rounded-lg border border-[#4A4538] bg-[#1C1A15] p-4 shadow-inner">
               <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div>
                   <div className="text-[12px] uppercase tracking-[0.25em] font-bold text-[#F0C76A]">
@@ -351,13 +349,13 @@ export default function Dashboard() {
                     Tech coverage, model maturity, and project delivery in one control view.
                   </div>
                 </div>
-                <div className="rounded-full bg-[#F0C76A] px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-[#0B1211]">
+                <div className="rounded-full bg-[#F0C76A] px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-[#171410]">
                   87 avg
                 </div>
               </div>
 
               <div className="grid gap-4 min-[1400px]:grid-cols-[0.74fr_1.26fr]">
-                <div className="rounded-lg bg-[#0B1211] p-4 ring-1 ring-[#3F5550]">
+                <div className="rounded-lg bg-[#171410] p-4 ring-1 ring-[#4A4538]">
                   <div className="relative mx-auto h-36 w-36 min-[1400px]:h-40 min-[1400px]:w-40">
                     <svg viewBox="0 0 160 160" className="h-full w-full -rotate-90" role="img" aria-label="Readiness radial gauge">
                       <circle cx="80" cy="80" r="62" fill="none" stroke="rgba(255,255,255,0.08)" strokeWidth="16" />
@@ -386,7 +384,7 @@ export default function Dashboard() {
                   </div>
                   <div className="mt-4 grid grid-cols-3 gap-2 text-center">
                     {["Learning", "Active", "Expert"].map((label, index) => (
-                      <div key={label} className="rounded-md bg-[#172120] px-2 py-2 ring-1 ring-[#3F5550]">
+                      <div key={label} className="rounded-md bg-[#1C1A15] px-2 py-2 ring-1 ring-[#4A4538]">
                         <div className={`mx-auto mb-1 h-2 w-2 rounded-full ${index === 0 ? "bg-[#C06C54]" : index === 1 ? "bg-[#D9A441]" : "bg-[#267365]"}`} />
                         <div className="text-[8px] uppercase tracking-widest text-white">{label}</div>
                       </div>
@@ -397,7 +395,7 @@ export default function Dashboard() {
                 <div className="space-y-4">
                   <div className="grid grid-cols-2 gap-3">
                     {varianceBands.map((band) => (
-                      <div key={band.label} className="rounded-lg bg-[#0B1211] p-3 ring-1 ring-[#3F5550]">
+                      <div key={band.label} className="rounded-lg bg-[#171410] p-3 ring-1 ring-[#4A4538]">
                         <div className="mb-3 flex items-center justify-between">
                           <span className="text-[10px] uppercase tracking-widest font-bold text-white">{band.label}</span>
                           <span className="text-[10px] font-bold" style={{ color: band.color }}>{band.delta}</span>
@@ -416,7 +414,7 @@ export default function Dashboard() {
                     ))}
                   </div>
 
-                  <div className="rounded-lg bg-[#0B1211] p-4 ring-1 ring-[#3F5550]">
+                  <div className="rounded-lg bg-[#171410] p-4 ring-1 ring-[#4A4538]">
                     <div className="mb-4 grid grid-cols-[1fr_44px_44px] gap-3 text-[9px] uppercase tracking-widest font-bold text-[#F0C76A]">
                       <span>Workstream progress</span>
                       <span className="text-right">Now</span>
@@ -475,7 +473,7 @@ export default function Dashboard() {
               ))}
             </div>
           </div>
-          <div className="relative w-full overflow-hidden rounded-lg ring-1 ring-line/10 bg-[#172120]" style={{ paddingTop: "62.5%" }}>
+          <div className="relative w-full overflow-hidden rounded-lg ring-1 ring-line/10 bg-[#1C1A15]" style={{ paddingTop: "62.5%" }}>
             <iframe
               title="EPC_EVM_Dashboard"
               src="https://app.powerbi.com/view?r=eyJrIjoiZjFjZTBmN2MtN2Y1OC00MGU3LTg1NDYtZDYxZDhhM2NhMTk0IiwidCI6ImYwNmE0NTJkLTMzZDAtNDYxYi1hZWFkLWE2NDI5NjI0OTY4NyIsImMiOjEwfQ%3D%3D"
@@ -484,7 +482,7 @@ export default function Dashboard() {
               className="absolute inset-0 w-full h-full"
             />
           </div>
-          <div className="mt-5 grid grid-cols-2 sm:grid-cols-4 gap-3 text-[10px] uppercase tracking-widest font-bold text-muted/60">
+          <div className="mt-5 grid grid-cols-2 sm:grid-cols-4 gap-3 text-[10px] uppercase tracking-widest font-bold text-muted">
             <span>BAC: AED 6.00 B</span>
             <span>SPI: 0.975</span>
             <span>CPI: 0.995</span>
@@ -513,7 +511,7 @@ export default function Dashboard() {
               ))}
             </div>
           </div>
-          <div className="relative w-full overflow-hidden rounded-lg ring-1 ring-line/10 bg-[#172120]" style={{ paddingTop: "62.5%" }}>
+          <div className="relative w-full overflow-hidden rounded-lg ring-1 ring-line/10 bg-[#1C1A15]" style={{ paddingTop: "62.5%" }}>
             <iframe
               title="EPC_CashFlow_Dashboard"
               src="https://app.powerbi.com/view?r=eyJrIjoiNjVkMDg2ODItNzUyYS00YzMwLThlMzUtZjYwN2M5MWYyODQ4IiwidCI6ImYwNmE0NTJkLTMzZDAtNDYxYi1hZWFkLWE2NDI5NjI0OTY4NyIsImMiOjEwfQ%3D%3D"
@@ -522,7 +520,7 @@ export default function Dashboard() {
               className="absolute inset-0 w-full h-full"
             />
           </div>
-          <div className="mt-5 grid grid-cols-2 sm:grid-cols-4 gap-3 text-[10px] uppercase tracking-widest font-bold text-muted/60">
+          <div className="mt-5 grid grid-cols-2 sm:grid-cols-4 gap-3 text-[10px] uppercase tracking-widest font-bold text-muted">
             <span>Committed: 93%</span>
             <span>Cost Var: −AED 164 M</span>
             <span>Net Position: −AED 579 M</span>
@@ -572,7 +570,7 @@ export default function Dashboard() {
                 { label: "AI Automation", pct: 76 },
               ].map((item) => (
                 <div key={item.label} className="space-y-2">
-                  <div className="flex justify-between text-xs font-bold text-muted/70 uppercase tracking-widest">
+                  <div className="flex justify-between text-xs font-bold text-muted uppercase tracking-widest">
                     <span>{item.label}</span><span>{item.pct}%</span>
                   </div>
                   <div className="h-2 rounded-full bg-bg">
@@ -587,7 +585,7 @@ export default function Dashboard() {
                 </div>
               ))}
             </div>
-            <div className="mt-5 grid grid-cols-2 gap-3 text-[10px] uppercase tracking-widest font-bold text-muted/60">
+            <div className="mt-5 grid grid-cols-2 gap-3 text-[10px] uppercase tracking-widest font-bold text-muted">
               <span>Languages: 3+</span>
               <span>Frameworks: 8+</span>
               <span>Tools: 12+</span>
@@ -610,9 +608,9 @@ export default function Dashboard() {
             </div>
             <SparkBars values={githubActivity} color="bg-[#267365]" />
             <div className="mt-5 grid grid-cols-3 gap-3">
-              <div className="rounded-lg bg-bg p-4 ring-1 ring-line/10"><div className="text-[10px] uppercase tracking-widest font-bold text-muted/50">Peak month</div><div className="text-2xl font-display mt-2">128</div></div>
-              <div className="rounded-lg bg-bg p-4 ring-1 ring-line/10"><div className="text-[10px] uppercase tracking-widest font-bold text-muted/50">Avg commits</div><div className="text-2xl font-display mt-2">87</div></div>
-              <div className="rounded-lg bg-bg p-4 ring-1 ring-line/10"><div className="text-[10px] uppercase tracking-widest font-bold text-muted/50">Repos</div><div className="text-2xl font-display mt-2">20+</div></div>
+              <div className="rounded-lg bg-bg p-4 ring-1 ring-line/10"><div className="text-[10px] uppercase tracking-widest font-bold text-muted">Peak month</div><div className="text-2xl font-display mt-2">128</div></div>
+              <div className="rounded-lg bg-bg p-4 ring-1 ring-line/10"><div className="text-[10px] uppercase tracking-widest font-bold text-muted">Avg commits</div><div className="text-2xl font-display mt-2">87</div></div>
+              <div className="rounded-lg bg-bg p-4 ring-1 ring-line/10"><div className="text-[10px] uppercase tracking-widest font-bold text-muted">Repos</div><div className="text-2xl font-display mt-2">20+</div></div>
             </div>
           </Panel>
 
@@ -628,7 +626,7 @@ export default function Dashboard() {
             <div className="mt-6 grid grid-cols-2 sm:grid-cols-4 gap-3">
               {["SpaceX ML", "Forecast", "Anomaly", "NLP"].map((model, index) => (
                 <div key={model} className="rounded-lg border border-line/10 bg-bg/70 p-4">
-                  <div className="text-[10px] uppercase tracking-widest font-bold text-muted/50">{model}</div>
+                  <div className="text-[10px] uppercase tracking-widest font-bold text-muted">{model}</div>
                   <div className="text-2xl font-display mt-2">{[94, 91, 88, 86][index]}%</div>
                 </div>
               ))}
@@ -651,12 +649,12 @@ export default function Dashboard() {
             <div className="grid md:grid-cols-5 gap-3">
               {milestones.map((item) => (
                 <div key={item.label} className="min-h-36 rounded-lg border border-line/10 bg-bg p-4 flex flex-col justify-between transition-transform hover:-translate-y-1">
-                  <Brain className={`w-5 h-5 ${item.state === "risk" ? "text-[#C06C54]" : item.state === "watch" ? "text-[#D9A441]" : item.state === "active" ? "text-[#314E52]" : "text-[#267365]"}`} />
+                  <Brain className={`w-5 h-5 ${item.state === "risk" ? "text-[#C06C54]" : item.state === "watch" ? "text-[#A6790C]" : item.state === "active" ? "text-[#314E52]" : "text-[#267365]"}`} />
                   <div>
-                    <div className="text-[10px] uppercase tracking-widest font-bold text-muted/50 mb-2">{item.date}</div>
+                    <div className="text-[10px] uppercase tracking-widest font-bold text-muted mb-2">{item.date}</div>
                     <div className="text-sm font-bold leading-tight">{item.label}</div>
                   </div>
-                  <div className="flex items-center gap-2 text-[9px] uppercase tracking-widest font-bold text-muted/60">
+                  <div className="flex items-center gap-2 text-[9px] uppercase tracking-widest font-bold text-muted">
                     {item.state === "done" ? <CheckCircle2 className="w-3 h-3 text-[#267365]" /> : <GitBranch className="w-3 h-3 text-accent" />}
                     {item.state}
                   </div>

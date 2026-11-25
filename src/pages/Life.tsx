@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { Camera, MapPin, Music, Coffee } from "lucide-react";
 
 const LIFE_MOMENTS = [

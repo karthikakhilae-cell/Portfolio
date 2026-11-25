@@ -1,5 +1,6 @@
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { Book, Calendar, Clock } from "lucide-react";
+import { SOCIAL_LINKS } from "../constants";
 
 const JOURNAL_ENTRIES = [
   {
@@ -49,12 +50,15 @@ export default function Journal() {
 
       <div className="space-y-8 md:space-y-12">
         {JOURNAL_ENTRIES.map((entry, i) => (
-          <motion.div
+          <motion.a
             key={entry.title}
+            href={SOCIAL_LINKS.medium}
+            target="_blank"
+            rel="noopener noreferrer"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: i * 0.1 }}
-            className="group cursor-pointer border-b border-line/10 pb-8 md:pb-12 hover:border-accent/30 transition-all"
+            className="group block cursor-pointer border-b border-line/10 pb-8 md:pb-12 hover:border-accent/30 transition-all"
           >
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-6 mb-6">
               <div className="flex items-center gap-4 md:gap-6 text-[10px] uppercase tracking-widest font-bold text-muted">
@@ -71,7 +75,7 @@ export default function Journal() {
             </div>
             <h3 className="text-2xl md:text-4xl mb-4 group-hover:text-accent transition-colors">{entry.title}</h3>
             <p className="text-muted leading-relaxed max-w-3xl text-sm md:text-base">{entry.excerpt}</p>
-          </motion.div>
+          </motion.a>
         ))}
       </div>
     </main>

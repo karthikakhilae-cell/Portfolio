@@ -24,7 +24,7 @@ export default function Footer() {
           <a href={SOCIAL_LINKS.medium} target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">Medium</a>
         </div>
       </div>
-      <div className="flex flex-col md:flex-row justify-between items-center gap-6 pt-12 border-t border-line/50 text-[10px] uppercase tracking-widest font-bold text-muted/50 text-center md:text-left">
+      <div className="flex flex-col md:flex-row justify-between items-center gap-6 pt-12 border-t border-line/50 text-[10px] uppercase tracking-widest font-bold text-muted/80 text-center md:text-left">
         <div>© 2026 Akhil Karthik. All Rights Reserved.</div>
         <button 
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}

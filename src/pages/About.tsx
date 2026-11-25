@@ -1,10 +1,16 @@
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
+import { Suspense, lazy } from "react";
 import { SKILLS, PROFILE_PIC } from "../constants";
+
+const NeuralBackground = lazy(() => import("../components/3d/NeuralBackground"));
 
 export default function About() {
   return (
-    <main className="pt-24 md:pt-32 pb-20 px-4 sm:px-8 md:px-12 lg:px-24 min-h-screen bg-ink text-white">
-      <div className="grid lg:grid-cols-2 gap-12 md:gap-24">
+    <main className="pt-24 md:pt-32 pb-20 px-4 sm:px-8 md:px-12 lg:px-24 min-h-screen bg-ink text-white relative overflow-hidden">
+      <Suspense fallback={null}>
+        <NeuralBackground />
+      </Suspense>
+      <div className="grid lg:grid-cols-2 gap-12 md:gap-24 relative z-10">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}

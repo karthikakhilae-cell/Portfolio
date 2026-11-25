@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { Mail, Linkedin, Github, Instagram, ArrowRight, Loader2 } from "lucide-react";
 import { useState, FormEvent } from "react";
 import { SOCIAL_LINKS } from "../constants";
