@@ -1,17 +1,18 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowRight, Mail, Linkedin, Github, Instagram, ExternalLink, Loader2, BookOpen, Target, Gauge, CalendarClock, Zap } from "lucide-react";
+import { ArrowRight, Mail, Linkedin, Github, Instagram, ExternalLink, Loader2, BookOpen, Target, Gauge, CalendarClock, Zap, Search, Layers, Code2, Activity } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, FormEvent, Suspense, lazy, useRef } from "react";
 import { PROJECTS as STATIC_PROJECTS, PROFILE_PIC, SOCIAL_LINKS, SKILLS } from "../constants";
 import AntigravitySkills from "../components/home/AntigravitySkills";
 import AnalyticsVisuals from "../components/home/AnalyticsVisuals";
 import Card3D from "../components/3d/Card3D";
+import CircuitLines from "../components/decor/CircuitLines";
 
 const PROCESS_STEPS = [
-  { n: "01", title: "Discover", desc: "Understand the data, the business question, and what success actually looks like." },
-  { n: "02", title: "Model", desc: "Design the pipeline or model architecture with the right tools for the problem at hand." },
-  { n: "03", title: "Build", desc: "Ship clean, tested, production-grade work — dashboards, pipelines, or ML services." },
-  { n: "04", title: "Monitor", desc: "Track performance, drift, and real-world impact once it's live." },
+  { n: "01", icon: Search, title: "Discover", desc: "Understand the data, the business question, and what success actually looks like." },
+  { n: "02", icon: Layers, title: "Model", desc: "Design the pipeline or model architecture with the right tools for the problem at hand." },
+  { n: "03", icon: Code2, title: "Build", desc: "Ship clean, tested, production-grade work — dashboards, pipelines, or ML services." },
+  { n: "04", icon: Activity, title: "Monitor", desc: "Track performance, drift, and real-world impact once it's live." },
 ];
 
 const HERO_STATS = [
@@ -129,6 +130,14 @@ export default function Home() {
           <FloatingOrb className="absolute right-0 top-0 w-[45%] h-full hidden md:block opacity-80" />
         </Suspense>
 
+        {/* Circuit-line decoration + label, echoing the "AI meets human" motif */}
+        <div className="absolute top-20 right-8 lg:right-16 hidden lg:flex flex-col items-end gap-3 z-10 pointer-events-none">
+          <span className="text-[9px] uppercase tracking-[0.3em] font-bold text-ink/30 text-right leading-relaxed">
+            AI + Design <br /> Human + Impact
+          </span>
+          <CircuitLines variant="corner" className="w-28 h-28 text-ink/15" />
+        </div>
+
         <motion.div
           initial={{ opacity: 0, scale: 1.05, rotate: 2 }}
           animate={{ opacity: 1, scale: 1, rotate: 0 }}
@@ -238,8 +247,10 @@ export default function Home() {
       <AntigravitySkills />
 
       {/* Stats band */}
-      <section className="py-16 md:py-24 px-4 sm:px-8 md:px-12 lg:px-24 bg-accent/6">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-6 text-center">
+      <section className="relative py-16 md:py-24 px-4 sm:px-8 md:px-12 lg:px-24 bg-accent/6 overflow-hidden">
+        <CircuitLines variant="corner" className="absolute -top-4 -left-4 w-32 h-32 text-ink/10 pointer-events-none" />
+        <CircuitLines variant="corner" className="absolute -bottom-4 -right-4 w-32 h-32 text-ink/10 rotate-180 pointer-events-none" />
+        <div className="relative grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-6 text-center">
           {HERO_STATS.map((stat) => {
             const Icon = stat.icon;
             return (
@@ -263,14 +274,21 @@ export default function Home() {
           <span className="text-[10px] uppercase tracking-[0.4em] font-bold text-accent mb-4 block">My Process</span>
           <h2 className="text-3xl sm:text-4xl md:text-6xl font-display leading-tight">How I work.</h2>
         </div>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-8">
-          {PROCESS_STEPS.map((step) => (
-            <div key={step.n}>
-              <div className="text-xs font-bold text-accent/50 mb-4">{step.n}</div>
-              <h3 className="text-xl font-display mb-3">{step.title}</h3>
-              <p className="text-sm text-muted leading-relaxed">{step.desc}</p>
-            </div>
-          ))}
+        <div className="relative grid sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-8">
+          <div className="hidden lg:block absolute top-7 left-[12.5%] right-[12.5%] h-px bg-[length:8px_1px] bg-repeat-x" style={{ backgroundImage: "repeating-linear-gradient(to right, var(--color-line) 0 6px, transparent 6px 12px)" }} />
+          {PROCESS_STEPS.map((step) => {
+            const Icon = step.icon;
+            return (
+              <div key={step.n} className="relative">
+                <div className="relative z-10 w-14 h-14 rounded-full bg-white border-2 border-accent/20 flex items-center justify-center mb-6 shadow-sm">
+                  <Icon className="w-5 h-5 text-accent" />
+                </div>
+                <div className="text-xs font-bold text-accent/50 mb-2">{step.n}</div>
+                <h3 className="text-xl font-display mb-3">{step.title}</h3>
+                <p className="text-sm text-muted leading-relaxed">{step.desc}</p>
+              </div>
+            );
+          })}
         </div>
       </section>
 
@@ -312,7 +330,8 @@ export default function Home() {
       </section>
 
       {/* Inquiry Form Section */}
-      <section className="py-24 md:py-40 px-4 sm:px-8 md:px-12 lg:px-24 bg-white rounded-[2.5rem] md:rounded-[4rem] mx-2 sm:mx-4 md:mx-12 mb-12 shadow-2xl shadow-ink/5">
+      <section className="relative py-24 md:py-40 px-4 sm:px-8 md:px-12 lg:px-24 bg-white rounded-[2.5rem] md:rounded-[4rem] mx-2 sm:mx-4 md:mx-12 mb-12 shadow-2xl shadow-ink/5 overflow-hidden">
+        <CircuitLines variant="cluster" className="absolute top-8 right-8 md:top-12 md:right-16 w-32 h-32 md:w-44 md:h-44 text-accent/15 pointer-events-none" />
         <div className="grid lg:grid-cols-2 gap-16 md:gap-24 items-start">
           <div className="space-y-12 md:space-y-16">
             <div>
