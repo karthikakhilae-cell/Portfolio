@@ -1,39 +1,30 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { PenTool, Palette, BookOpen, Sparkles } from "lucide-react";
-import { SOCIAL_LINKS } from "../constants";
 
 const CREATIVE_WORKS = [
   {
     title: "Essays on Data Ethics",
     description: "A series of long-form essays exploring the ethical implications of data collection and AI.",
     icon: <PenTool className="w-8 h-8" />,
-    category: "Writing",
-    link: SOCIAL_LINKS.medium,
-    linkLabel: "Read on Medium"
+    category: "Writing"
   },
   {
     title: "Digital Art Collection",
     description: "Experimental digital art pieces created using generative algorithms and manual touch.",
     icon: <Palette className="w-8 h-8" />,
-    category: "Visual Arts",
-    link: SOCIAL_LINKS.instagram,
-    linkLabel: "View on Instagram"
+    category: "Visual Arts"
   },
   {
     title: "Short Stories",
     description: "Exploring human connection and digital isolation through speculative fiction.",
     icon: <BookOpen className="w-8 h-8" />,
-    category: "Fiction",
-    link: SOCIAL_LINKS.medium,
-    linkLabel: "Read on Medium"
+    category: "Fiction"
   },
   {
     title: "Creative Coding",
     description: "Using code as a medium for artistic expression and interactive experiences.",
     icon: <Sparkles className="w-8 h-8" />,
-    category: "Code Art",
-    link: SOCIAL_LINKS.github,
-    linkLabel: "View on GitHub"
+    category: "Code Art"
   }
 ];
 
@@ -73,14 +64,9 @@ export default function Arts() {
             </div>
             <h3 className="text-xl md:text-2xl mb-3 md:mb-4 group-hover:text-accent transition-colors font-display">{work.title}</h3>
             <p className="text-muted text-xs md:text-sm leading-relaxed">{work.description}</p>
-            <a
-              href={work.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 md:mt-8 inline-block text-[9px] md:text-[10px] uppercase tracking-widest font-bold border-b border-ink pb-1 hover:text-accent hover:border-accent transition-all"
-            >
-              {work.linkLabel}
-            </a>
+            <button className="mt-6 md:mt-8 text-[9px] md:text-[10px] uppercase tracking-widest font-bold border-b border-ink pb-1 hover:text-accent hover:border-accent transition-all">
+              Explore Work
+            </button>
           </motion.div>
         ))}
       </div>

@@ -1,19 +1,10 @@
-import { motion } from "framer-motion";
-import { Suspense, lazy } from "react";
+import { motion } from "motion/react";
 import { SKILLS, PROFILE_PIC } from "../constants";
-
-const NeuralBackground = lazy(() => import("../components/3d/NeuralBackground"));
 
 export default function About() {
   return (
-    // Fixed dark literal, not the theme-reversible `bg-ink` token — this page
-    // is always-dark regardless of the light/dark toggle, so a token that
-    // flips to near-white in dark mode would break it.
-    <main className="pt-24 md:pt-32 pb-20 px-4 sm:px-8 md:px-12 lg:px-24 min-h-screen bg-[#141310] text-white relative overflow-hidden">
-      <Suspense fallback={null}>
-        <NeuralBackground />
-      </Suspense>
-      <div className="grid lg:grid-cols-2 gap-12 md:gap-24 relative z-10">
+    <main className="pt-24 md:pt-32 pb-20 px-4 sm:px-8 md:px-12 lg:px-24 min-h-screen bg-[#141310] text-white">
+      <div className="grid lg:grid-cols-2 gap-12 md:gap-24">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -52,14 +43,14 @@ export default function About() {
         </motion.div>
         
         <motion.div 
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="relative mt-12 lg:mt-0"
         >
-          <img
-            src={PROFILE_PIC}
-            alt="Portrait"
+          <img 
+            src={PROFILE_PIC} 
+            alt="Portrait" 
             className="w-full aspect-[3/4] object-cover rounded-2xl md:rounded-3xl"
             referrerPolicy="no-referrer"
           />

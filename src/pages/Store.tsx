@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
-import { ShoppingBag, Star, Clock, Tag } from "lucide-react";
+import { motion } from "motion/react";
+import { ShoppingBag, Star, ArrowRight, Tag } from "lucide-react";
 
 const PRODUCTS = [
   {
@@ -80,13 +80,8 @@ export default function Store() {
             
             <div className="flex items-center justify-between pt-8 border-t border-line/10">
               <div className="text-2xl font-sans">{product.price}</div>
-              <button
-                disabled
-                aria-disabled="true"
-                title="Not yet available for purchase"
-                className="bg-bg text-muted px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest flex items-center gap-2 cursor-not-allowed"
-              >
-                <Clock className="w-4 h-4" /> Coming Soon
+              <button className="bg-ink text-white px-8 py-4 rounded-full text-xs font-bold uppercase tracking-widest flex items-center gap-2 hover:bg-accent transition-colors">
+                Purchase <ArrowRight className="w-4 h-4" />
               </button>
             </div>
           </motion.div>

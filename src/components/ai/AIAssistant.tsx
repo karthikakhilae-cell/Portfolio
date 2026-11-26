@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { X, Send, Bot, User, Loader2 } from "lucide-react";
 import Markdown from "react-markdown";
 import { PROJECTS as STATIC_PROJECTS, SOCIAL_LINKS } from "../../constants";
@@ -115,13 +115,13 @@ export default function AIAssistant() {
     setIsTyping(true);
     setIsGenerating(true);
 
-    // Try the live Groq AI first via the API
+    // Try the live Groq AI first via Netlify function
     try {
       const history = messages
         .filter(m => m.role === "user" || m.role === "model")
         .map(m => ({ role: m.role === "model" ? "assistant" : "user", content: m.text }));
 
-      const res = await fetch("/api/chat", {
+      const res = await fetch("/.netlify/functions/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: messageToSend.trim(), history }),
