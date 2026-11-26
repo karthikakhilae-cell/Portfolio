@@ -15,11 +15,21 @@ const PROCESS_STEPS = [
   { n: "04", icon: Activity, title: "Monitor", desc: "Track performance, drift, and real-world impact once it's live." },
 ];
 
+// Reuses the same categorical palette already established in the
+// Dashboard/Analytics charts, so the color variety feels like one
+// intentional system rather than a second, unrelated palette.
+const PALETTE = {
+  teal: "#267365",
+  navy: "#314E52",
+  terracotta: "#C06C54",
+  gold: "#A6790C",
+};
+
 const HERO_STATS = [
-  { icon: Target, value: "20+", label: "Projects Shipped" },
-  { icon: Gauge, value: "94%", label: "ML Model Accuracy" },
-  { icon: CalendarClock, value: "5+", label: "Years Experience" },
-  { icon: Zap, value: "65%", label: "Query Speedup" },
+  { icon: Target, value: "20+", label: "Projects Shipped", color: PALETTE.teal },
+  { icon: Gauge, value: "94%", label: "ML Model Accuracy", color: PALETTE.navy },
+  { icon: CalendarClock, value: "5+", label: "Years Experience", color: PALETTE.terracotta },
+  { icon: Zap, value: "65%", label: "Query Speedup", color: PALETTE.gold },
 ];
 
 const FloatingOrb = lazy(() => import("../components/3d/FloatingOrb"));
@@ -209,7 +219,7 @@ export default function Home() {
                 </div>
               </>
             );
-            const tintClass = p.variant === "dark" ? "bg-[#1C1A15] text-white" : p.variant === "tint" ? "bg-accent/15" : "bg-white";
+            const tintClass = p.variant === "dark" ? "bg-[#1C1A15] text-white" : p.variant === "tint" ? "bg-[#C06C54]/14" : "bg-white";
             const cls = `group p-8 md:p-10 ${tintClass} rounded-[2rem] md:rounded-[2.5rem] border border-line/5 hover:border-accent/20 hover:shadow-2xl hover:shadow-accent/5 transition-all duration-700 flex flex-col justify-between min-h-[280px]`;
             const card = p.external ? (
               <a key={i} href={p.to} target="_blank" rel="noopener noreferrer" className={cls}>{inner}</a>
@@ -229,9 +239,12 @@ export default function Home() {
             <h2 className="text-3xl sm:text-4xl md:text-6xl font-display leading-tight">Services</h2>
           </div>
           <div className="grid sm:grid-cols-2 gap-8 md:gap-10">
-            {SKILLS.map((skill) => (
+            {SKILLS.map((skill, i) => (
               <div key={skill.name} className="flex gap-4 items-start">
-                <div className="w-12 h-12 rounded-full bg-accent text-white flex items-center justify-center shrink-0">
+                <div
+                  className="w-12 h-12 rounded-full text-white flex items-center justify-center shrink-0"
+                  style={{ backgroundColor: [PALETTE.teal, PALETTE.navy, PALETTE.terracotta, PALETTE.gold][i % 4] }}
+                >
                   {skill.icon}
                 </div>
                 <div>
@@ -255,7 +268,7 @@ export default function Home() {
             const Icon = stat.icon;
             return (
               <div key={stat.label} className="flex flex-col items-center gap-3">
-                <div className="w-14 h-14 rounded-full border-2 border-accent/25 flex items-center justify-center text-accent">
+                <div className="w-14 h-14 rounded-full border-2 flex items-center justify-center" style={{ borderColor: `${stat.color}40`, color: stat.color }}>
                   <Icon className="w-5 h-5" />
                 </div>
                 <div className="text-3xl md:text-4xl font-display text-ink">{stat.value}</div>
@@ -302,11 +315,11 @@ export default function Home() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
           {[
             { to: "/work", title: "Work", desc: "Selected professional projects and case studies.", tint: "bg-white" },
-            { to: "/dashboard", title: "Dashboards", desc: "Live, interactive Power BI and data science dashboards.", tint: "bg-accent/8" },
-            { to: "/blogs", title: "Blogs", desc: "Long-form articles and technical deep-dives.", tint: "bg-white" },
-            { to: "/lab", title: "Lab", desc: "Experiments, technical ideas, and raw prototypes.", tint: "bg-accent/8" },
-            { to: "/thinking", title: "Thinking", desc: "Strategic insights and technical deep-dives.", tint: "bg-white" },
-            { to: "/journal", title: "Journal", desc: "Weekly reflections and personal learnings.", tint: "bg-accent/8" }
+            { to: "/dashboard", title: "Dashboards", desc: "Live, interactive Power BI and data science dashboards.", tint: "bg-[#314E52]/10" },
+            { to: "/blogs", title: "Blogs", desc: "Long-form articles and technical deep-dives.", tint: "bg-[#267365]/10" },
+            { to: "/lab", title: "Lab", desc: "Experiments, technical ideas, and raw prototypes.", tint: "bg-[#C06C54]/12" },
+            { to: "/thinking", title: "Thinking", desc: "Strategic insights and technical deep-dives.", tint: "bg-accent/10" },
+            { to: "/journal", title: "Journal", desc: "Weekly reflections and personal learnings.", tint: "bg-[#A6790C]/12" }
           ].map((link, i) => (
             <Card3D key={link.to}>
               <Link

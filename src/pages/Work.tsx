@@ -10,6 +10,24 @@ const ONGOING_PROJECT_IDS = new Set([
   "db-optimization",
 ]);
 
+// Same categorical palette used across Dashboard/Analytics/Home — tag color
+// is derived from the tag text itself so each project's tag row gets some
+// natural variety without needing a manual category-to-color mapping.
+// Only colors that pass 4.5:1 text contrast on a light tint are included
+// here (the darker "gold" and terracotta variants read fine as icon/badge
+// fills elsewhere but fall short for this small 8px text).
+const TAG_COLORS = [
+  { text: "text-accent", bg: "bg-accent/5" },
+  { text: "text-[#267365]", bg: "bg-[#267365]/8" },
+  { text: "text-[#314E52]", bg: "bg-[#314E52]/8" },
+];
+
+function tagColor(tag: string) {
+  let hash = 0;
+  for (let i = 0; i < tag.length; i++) hash = (hash * 31 + tag.charCodeAt(i)) % TAG_COLORS.length;
+  return TAG_COLORS[hash];
+}
+
 export default function Work() {
   const projects = STATIC_PROJECTS;
 
@@ -77,11 +95,14 @@ export default function Work() {
 
               <div className="space-y-3">
                 <div className="flex flex-wrap gap-2">
-                  {project.tags.map(tag => (
-                    <span key={tag} className="text-[8px] uppercase tracking-[0.2em] font-bold text-accent bg-accent/5 px-2 py-1 rounded">
-                      {tag}
-                    </span>
-                  ))}
+                  {project.tags.map(tag => {
+                    const c = tagColor(tag);
+                    return (
+                      <span key={tag} className={`text-[8px] uppercase tracking-[0.2em] font-bold ${c.text} ${c.bg} px-2 py-1 rounded`}>
+                        {tag}
+                      </span>
+                    );
+                  })}
                 </div>
                 <h3 className="text-xl font-medium group-hover:text-accent transition-colors">{project.title}</h3>
                 {project.summary && (
