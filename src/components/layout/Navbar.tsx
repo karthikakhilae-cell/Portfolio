@@ -27,6 +27,9 @@ export default function Navbar() {
   const navigate = useNavigate();
   const { theme, toggle } = useTheme();
   const isLandingPage = location.pathname === "/";
+  // pages with a dark hero: navbar needs light text until it gains its own bg
+  const onDarkPage = location.pathname === "/about";
+  const lightText = onDarkPage && !scrolled;
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -60,13 +63,13 @@ export default function Navbar() {
             />
             <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-green-500 border-2 border-bg rounded-full" />
           </div>
-          <div className="text-sm md:text-base font-display tracking-tight text-ink leading-tight">
+          <div className={`text-sm md:text-base font-display tracking-tight leading-tight ${lightText ? "text-white" : "text-ink"}`}>
             Akhil Karthik
             <div className="text-[8px] md:text-[9px] uppercase tracking-[0.2em] font-sans font-bold text-muted">Data &amp; AI</div>
           </div>
         </motion.div>
 
-        <div className="hidden lg:flex items-center gap-7 xl:gap-9 text-[11px] uppercase tracking-[0.15em] font-bold text-ink/70">
+        <div className={`hidden lg:flex items-center gap-7 xl:gap-9 text-[11px] uppercase tracking-[0.15em] font-bold ${lightText ? "text-white/70" : "text-ink/70"}`}>
           {PRIMARY_LINKS.map((link) => (
             <Link
               key={link.path}
@@ -85,7 +88,7 @@ export default function Navbar() {
           <button
             onClick={toggle}
             aria-label="Toggle dark mode"
-            className="p-2 rounded-full hover:bg-ink/5 transition-colors text-ink"
+            className={`p-2 rounded-full transition-colors ${lightText ? "text-white hover:bg-white/10" : "text-ink hover:bg-ink/5"}`}
           >
             {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
           </button>
@@ -97,7 +100,7 @@ export default function Navbar() {
           </Link>
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden p-2 text-ink rounded-full hover:bg-ink/5 transition-colors"
+            className={`lg:hidden p-2 rounded-full hover:bg-ink/5 transition-colors ${lightText ? "text-white" : "text-ink"}`}
             aria-label="Toggle Menu"
           >
             <Menu className="w-5 h-5" />

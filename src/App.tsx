@@ -13,13 +13,16 @@ import Dashboard from "./pages/Dashboard";
 import Lab from "./pages/Lab";
 import About from "./pages/About";
 import Thinking from "./pages/Thinking";
+import BlogsHub from "./pages/BlogsHub";
 import Blogs from "./pages/Blogs";
+import PersonalBlogs from "./pages/PersonalBlogs";
 import Life from "./pages/Life";
 import Arts from "./pages/Arts";
 import Journal from "./pages/Journal";
 import Store from "./pages/Store";
 import Contact from "./pages/Contact";
 import HireMe from "./pages/HireMe";
+import ProjectDetail from "./pages/ProjectDetail";
 import NotFound from "./pages/NotFound";
 
 function AnimatedRoutes() {
@@ -29,11 +32,14 @@ function AnimatedRoutes() {
     { path: "/", element: <PageTransition><Landing /></PageTransition> },
     { path: "/home", element: <PageTransition><Home /></PageTransition> },
     { path: "/work", element: <PageTransition><Work /></PageTransition> },
+    { path: "/work/:id", element: <PageTransition><ProjectDetail /></PageTransition> },
     { path: "/dashboard", element: <PageTransition><Dashboard /></PageTransition> },
     { path: "/lab", element: <PageTransition><Lab /></PageTransition> },
     { path: "/about", element: <PageTransition><About /></PageTransition> },
     { path: "/thinking", element: <PageTransition><Thinking /></PageTransition> },
-    { path: "/blogs", element: <PageTransition><Blogs /></PageTransition> },
+    { path: "/blogs", element: <PageTransition><BlogsHub /></PageTransition> },
+    { path: "/blogs/professional", element: <PageTransition><Blogs /></PageTransition> },
+    { path: "/blogs/personal", element: <PageTransition><PersonalBlogs /></PageTransition> },
     { path: "/life", element: <PageTransition><Life /></PageTransition> },
     { path: "/arts", element: <PageTransition><Arts /></PageTransition> },
     { path: "/journal", element: <PageTransition><Journal /></PageTransition> },

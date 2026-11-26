@@ -40,8 +40,6 @@ const techProficiency = [
 
 const milestones = [
   { label: "Fabric Lakehouse", date: "Q1 2025", state: "done" },
-  { label: "P6 AI Audit", date: "Q2 2025", state: "done" },
-  { label: "IsoMTO Tool", date: "Q3 2025", state: "active" },
   { label: "DS Dashboard", date: "Q4 2025", state: "watch" },
   { label: "LLM Pipeline", date: "Q1 2026", state: "risk" },
 ];
@@ -457,46 +455,7 @@ export default function Dashboard() {
           <div className="flex flex-wrap items-end justify-between gap-4 mb-6">
             <div>
               <div className="text-[10px] uppercase tracking-[0.3em] font-bold text-accent mb-2">Live Power BI Embed</div>
-              <h2 className="text-3xl md:text-5xl font-display leading-tight">EPC EVM Dashboard <span className="text-accent">— live demo</span></h2>
-              <p className="mt-3 max-w-2xl text-muted text-sm leading-relaxed font-light">
-                A live, interactive Power BI dashboard for a simulated AED 6 billion EPC expansion. Full Earned Value
-                Management suite (PV, EV, AC, SPI, CPI, EAC, ETC, VAC, TCPI), an executive S-curve, discipline-wise progress,
-                resource histogram, and forecast scenarios. Built on a tabular star schema with 28 DAX measures, Deneb (Vega-Lite)
-                visuals and a custom glassmorphism theme.
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {["Power BI", "DAX", "Deneb", "EVM", "Star Schema"].map((tag) => (
-                <span key={tag} className="rounded-full bg-white/80 px-3 py-1.5 text-[10px] uppercase tracking-widest font-bold text-accent ring-1 ring-line/10">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
-          <div className="relative w-full overflow-hidden rounded-lg ring-1 ring-line/10 bg-[#1C1A15]" style={{ paddingTop: "62.5%" }}>
-            <iframe
-              title="EPC_EVM_Dashboard"
-              src="https://app.powerbi.com/view?r=eyJrIjoiZjFjZTBmN2MtN2Y1OC00MGU3LTg1NDYtZDYxZDhhM2NhMTk0IiwidCI6ImYwNmE0NTJkLTMzZDAtNDYxYi1hZWFkLWE2NDI5NjI0OTY4NyIsImMiOjEwfQ%3D%3D"
-              frameBorder={0}
-              allowFullScreen
-              className="absolute inset-0 w-full h-full"
-            />
-          </div>
-          <div className="mt-5 grid grid-cols-2 sm:grid-cols-4 gap-3 text-[10px] uppercase tracking-widest font-bold text-muted">
-            <span>BAC: AED 6.00 B</span>
-            <span>SPI: 0.975</span>
-            <span>CPI: 0.995</span>
-            <span>EAC: AED 6.03 B</span>
-          </div>
-        </Panel>
-      </section>
-
-      <section className="px-4 sm:px-8 md:px-12 lg:px-24 py-8">
-        <Panel className="p-5 md:p-7">
-          <div className="flex flex-wrap items-end justify-between gap-4 mb-6">
-            <div>
-              <div className="text-[10px] uppercase tracking-[0.3em] font-bold text-accent mb-2">Live Power BI Embed</div>
-              <h2 className="text-3xl md:text-5xl font-display leading-tight">EPC Cash Flow & Cost Dashboard <span className="text-accent">— live demo</span></h2>
+              <h2 className="text-3xl md:text-5xl font-display leading-tight">Cost & Cash Flow Analytics Dashboard <span className="text-accent">— live demo</span></h2>
               <p className="mt-3 max-w-2xl text-muted text-sm leading-relaxed font-light">
                 A live contractor cash-flow and cost-control dashboard for the same AED 6 billion EPC programme. Tracks budget
                 utilisation, committed vs actual cost, monthly cash flow, an S-curve of cumulative spend, retention, net cash

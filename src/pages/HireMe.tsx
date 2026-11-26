@@ -250,9 +250,9 @@ export default function HireMe() {
             </div>
           </div>
 
-          <motion.form 
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+          <motion.form
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             onSubmit={handleFormSubmit} 
             className="space-y-6 md:space-y-8 bg-white p-8 sm:p-12 md:p-16 rounded-[2.5rem] md:rounded-[3.5rem] shadow-2xl shadow-ink/5 border border-line/5"
