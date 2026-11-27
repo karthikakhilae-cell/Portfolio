@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, useLocation, useRoutes } from "react-router-dom";
-import { AnimatePresence } from "motion/react";
+import { AnimatePresence } from "framer-motion";
 import { cloneElement, ReactElement } from "react";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";

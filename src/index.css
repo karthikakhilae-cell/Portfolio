@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -7,58 +6,68 @@
 
   --breakpoint-xs: 30rem;
 
-  --color-bg: #F5F2ED;
-  --color-ink: #1A1A1A;
-  --color-accent: #5A5A40;
-  --color-muted: rgba(26, 26, 26, 0.6);
-  --color-line: rgba(26, 26, 26, 0.1);
+  /* Warm cream / near-black / muted sage-olive — matches the reference:
+     a calm, elegant editorial palette, not a multi-hue "vibrant" one.
+     Card variety comes from light/dark/photo contrast, not accent hues. */
+  --color-bg: #F6F4EC;
+  --color-ink: #1D1C1A;
+  --color-accent: #5F6B4E;
+  /* Solid warm gray, not a transparent ink — compounding opacity modifiers
+     (text-muted/40 etc.) on an already-transparent color silently drops
+     below WCAG AA contrast. A solid base keeps every /NN variant readable. */
+  --color-muted: #5C594F;
+  --color-line: rgba(29, 28, 26, 0.1);
 }
 
 /* ── Dark mode CSS variable overrides ──────────────────────────────── */
 html.dark {
   color-scheme: dark;
-  --color-bg: #0F0D0A;
-  --color-ink: #F0EDE8;
-  --color-accent: #8A8A60;
-  --color-muted: rgba(240, 237, 232, 0.55);
-  --color-line: rgba(240, 237, 232, 0.1);
+  --color-bg: #141310;
+  --color-ink: #F2F0E8;
+  --color-accent: #9AAA80;
+  --color-muted: #B5B2A6;
+  --color-line: rgba(242, 240, 232, 0.1);
 }
 
 /* ── Dark mode surface overrides (hardcoded Tailwind classes) ───────── */
 
 /* White cards & sections → warm dark surface */
 html.dark .bg-white {
-  background-color: #1A1810;
+  background-color: #1C1A15;
 }
 
 /* Semi-transparent white elements (skill pills, quote card, etc.) */
 html.dark .bg-white\/90,
 html.dark .bg-white\/80,
 html.dark .bg-white\/70 {
-  background-color: rgba(30, 27, 18, 0.85);
+  background-color: rgba(30, 28, 22, 0.85);
 }
 
-/* Beige section / page backgrounds → main dark bg */
+/* Section / page background tints → main dark bg */
 html.dark .bg-\[\#F4F0E8\],
 html.dark .bg-\[\#ECE7DD\],
-html.dark .bg-\[\#F8F6F1\] {
-  background-color: #151310;
+html.dark .bg-\[\#F8F6F1\],
+html.dark .bg-\[\#F6F4EC\],
+html.dark .bg-\[\#F4F2E8\],
+html.dark .bg-\[\#F0EEE2\],
+html.dark .bg-\[\#F1EFE4\] {
+  background-color: #17150F;
 }
 
 /* Dashboard inner KPI panel bg */
 html.dark .hover\:bg-white:hover {
-  background-color: #222018;
+  background-color: #262319;
 }
 
 /* Buttons that are explicitly white bg with ink text */
 html.dark .bg-white.text-ink {
-  background-color: #1A1810;
-  color: #F0EDE8;
+  background-color: #1C1A15;
+  color: #F2F0E8;
 }
 
 /* Blur glow elements — don't need to change, just reduce intensity */
 html.dark .bg-white.blur-\[100px\] {
-  background-color: rgba(240, 237, 232, 0.04);
+  background-color: rgba(242, 240, 232, 0.04);
 }
 
 @layer base {

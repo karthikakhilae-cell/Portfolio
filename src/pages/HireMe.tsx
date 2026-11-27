@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, CheckCircle2, Zap, Target, BarChart3, Layers, Loader2, Brain, Copy, Check, FileText, ChevronDown } from "lucide-react";
 import { useState, FormEvent, useRef, useEffect } from "react";
 import { SOCIAL_LINKS } from "../constants";
@@ -250,7 +250,7 @@ export default function HireMe() {
             </div>
           </div>
 
-          <motion.form 
+          <motion.form
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -259,7 +259,7 @@ export default function HireMe() {
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="space-y-2">
-                <label className="text-[10px] uppercase tracking-widest font-bold text-muted/60">Name</label>
+                <label className="text-[10px] uppercase tracking-widest font-bold text-muted">Name</label>
                 <input 
                   type="text" 
                   required
@@ -270,7 +270,7 @@ export default function HireMe() {
                 />
               </div>
               <div className="space-y-2">
-                <label className="text-[10px] uppercase tracking-widest font-bold text-muted/60">Email</label>
+                <label className="text-[10px] uppercase tracking-widest font-bold text-muted">Email</label>
                 <input 
                   type="email" 
                   required
@@ -283,19 +283,19 @@ export default function HireMe() {
             </div>
             
             <div className="space-y-2 relative" ref={dropdownRef}>
-              <label className="text-[10px] uppercase tracking-widest font-bold text-muted/60">Project Type</label>
+              <label className="text-[10px] uppercase tracking-widest font-bold text-muted">Project Type</label>
               <div 
                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                 className="w-full border-b border-line/20 py-4 flex items-center justify-between cursor-pointer group hover:border-accent transition-colors"
               >
-                <span className={`text-lg font-sans ${formState.project ? 'text-ink' : 'text-muted/40'}`}>
+                <span className={`text-lg font-sans ${formState.project ? 'text-ink' : 'text-muted/80'}`}>
                   {formState.project || "Select Project Type"}
                 </span>
                 <motion.div
                   animate={{ rotate: isDropdownOpen ? 180 : 0 }}
                   transition={{ duration: 0.3, ease: "easeInOut" }}
                 >
-                  <ChevronDown className={`w-5 h-5 transition-colors ${isDropdownOpen ? 'text-accent' : 'text-muted/40'}`} />
+                  <ChevronDown className={`w-5 h-5 transition-colors ${isDropdownOpen ? 'text-accent' : 'text-muted/80'}`} />
                 </motion.div>
               </div>
 
@@ -334,7 +334,7 @@ export default function HireMe() {
             </div>
 
             <div className="space-y-2">
-              <label className="text-[10px] uppercase tracking-widest font-bold text-muted/60">Message</label>
+              <label className="text-[10px] uppercase tracking-widest font-bold text-muted">Message</label>
               <textarea 
                 required
                 value={formState.message}

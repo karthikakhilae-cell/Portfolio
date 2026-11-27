@@ -1,7 +1,6 @@
-import { motion } from "motion/react";
+import { motion } from "framer-motion";
 import { PROJECTS as STATIC_PROJECTS, SOCIAL_LINKS } from "../constants";
-import { useEffect, useState } from "react";
-import { ArrowRight, BarChart3, Loader2, Sparkles } from "lucide-react";
+import { ArrowRight, BarChart3, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const ONGOING_PROJECT_IDS = new Set([
@@ -10,32 +9,26 @@ const ONGOING_PROJECT_IDS = new Set([
   "db-optimization",
 ]);
 
-export default function Work() {
-  const [projects, setProjects] = useState(STATIC_PROJECTS);
-  const [isLoading, setIsLoading] = useState(true);
+// Same categorical palette used across Dashboard/Analytics/Home — tag color
+// is derived from the tag text itself so each project's tag row gets some
+// natural variety without needing a manual category-to-color mapping.
+// Only colors that pass 4.5:1 text contrast on a light tint are included
+// here (the darker "gold" and terracotta variants read fine as icon/badge
+// fills elsewhere but fall short for this small 8px text).
+const TAG_COLORS = [
+  { text: "text-accent", bg: "bg-accent/5" },
+  { text: "text-[#267365]", bg: "bg-[#267365]/8" },
+  { text: "text-[#314E52]", bg: "bg-[#314E52]/8" },
+];
 
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const response = await fetch("/api/projects");
-        if (response.ok) {
-          const githubProjects = await response.json();
-          const merged = [...STATIC_PROJECTS];
-          githubProjects.forEach((gp: any) => {
-            if (!merged.find(p => p.link === gp.link || p.id === gp.id)) {
-              merged.push(gp);
-            }
-          });
-          setProjects(merged);
-        }
-      } catch (error) {
-        console.error("Failed to fetch projects:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchProjects();
-  }, []);
+function tagColor(tag: string) {
+  let hash = 0;
+  for (let i = 0; i < tag.length; i++) hash = (hash * 31 + tag.charCodeAt(i)) % TAG_COLORS.length;
+  return TAG_COLORS[hash];
+}
+
+export default function Work() {
+  const projects = STATIC_PROJECTS;
 
   return (
     <main className="pt-24 md:pt-32 pb-20 px-4 sm:px-8 md:px-12 lg:px-24 min-h-screen bg-bg">
@@ -63,13 +56,7 @@ export default function Work() {
         </Link>
       </motion.div>
 
-      {isLoading ? (
-        <div className="flex flex-col items-center justify-center py-20 gap-4">
-          <Loader2 className="w-8 h-8 animate-spin text-accent" />
-          <p className="text-xs uppercase tracking-widest font-bold text-muted">Syncing with GitHub...</p>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 md:gap-y-16">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 md:gap-y-16">
           {projects.map((project) => (
             <motion.div
               key={project.id}
@@ -105,20 +92,27 @@ export default function Work() {
 
               <div className="space-y-3">
                 <div className="flex flex-wrap gap-2">
-                  {project.tags.map(tag => (
-                    <span key={tag} className="text-[8px] uppercase tracking-[0.2em] font-bold text-accent bg-accent/5 px-2 py-1 rounded">
-                      {tag}
-                    </span>
-                  ))}
+                  {project.tags.map(tag => {
+                    const c = tagColor(tag);
+                    return (
+                      <span key={tag} className={`text-[8px] uppercase tracking-[0.2em] font-bold ${c.text} ${c.bg} px-2 py-1 rounded`}>
+                        {tag}
+                      </span>
+                    );
+                  })}
                 </div>
                 <h3 className="text-xl font-medium group-hover:text-accent transition-colors">{project.title}</h3>
+                {project.summary && (
+                  <p className="border-l-2 border-accent/40 pl-3 text-[11px] font-medium italic leading-relaxed text-ink/75 group-hover:border-accent transition-colors">
+                    {project.summary}
+                  </p>
+                )}
                 <p className="text-xs text-muted leading-relaxed line-clamp-2">{project.description}</p>
               </div>
             </Link>
             </motion.div>
           ))}
-        </div>
-      )}
+      </div>
 
       <div className="mt-32 text-center">
         <a href={SOCIAL_LINKS.github} target="_blank" rel="noopener noreferrer" className="text-xs font-bold uppercase tracking-widest border-b border-ink pb-2 hover:text-accent hover:border-accent transition-all">

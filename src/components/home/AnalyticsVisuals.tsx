@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+﻿import { motion } from "framer-motion";
 import { Activity, BarChart3, Database, LineChart, Cpu, Zap } from "lucide-react";
 
 interface AnalyticsVisualsProps {
@@ -14,7 +14,7 @@ const kpis = [
 
 const categories = [
   { label: "Python", value: 92, color: "bg-[#267365]" },
-  { label: "ML", value: 84, color: "bg-[#5A5A40]" },
+  { label: "ML", value: 84, color: "bg-accent" },
   { label: "SQL", value: 80, color: "bg-[#C06C54]" },
   { label: "BI", value: 76, color: "bg-[#314E52]" },
   { label: "Cloud", value: 68, color: "bg-[#D9A441]" },
@@ -28,7 +28,7 @@ const pipeline = [
 
 export default function AnalyticsVisuals({ projectCount }: AnalyticsVisualsProps) {
   return (
-    <section className="px-4 sm:px-8 md:px-12 lg:px-24 py-24 md:py-36 bg-[#ECE7DD]">
+    <section className="px-4 sm:px-8 md:px-12 lg:px-24 py-24 md:py-36 bg-[#F0EEE2]">
       <div className="grid xl:grid-cols-[0.9fr_1.1fr] gap-12 md:gap-16 items-start">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
@@ -63,13 +63,13 @@ export default function AnalyticsVisuals({ projectCount }: AnalyticsVisualsProps
                   className="bg-white border border-line/10 p-5 shadow-xl shadow-ink/5"
                 >
                   <div className="flex items-center justify-between mb-8">
-                    <span className="text-[9px] uppercase tracking-[0.2em] font-bold text-muted/60">
+                    <span className="text-[9px] uppercase tracking-[0.2em] font-bold text-muted">
                       {kpi.label}
                     </span>
                     <Icon className="w-4 h-4 text-accent" />
                   </div>
                   <div className="text-4xl font-display leading-none">{value}</div>
-                  <div className="mt-2 text-[10px] uppercase tracking-widest font-bold text-muted/50">
+                  <div className="mt-2 text-[10px] uppercase tracking-widest font-bold text-muted">
                     {kpi.detail}
                   </div>
                 </motion.div>
@@ -117,11 +117,11 @@ export default function AnalyticsVisuals({ projectCount }: AnalyticsVisualsProps
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-[#172120] text-white border border-white/10 p-6 md:p-8 shadow-xl shadow-ink/10"
+              className="bg-[#1C1A15] text-white border border-white/10 p-6 md:p-8 shadow-xl shadow-ink/10"
             >
               <div className="flex items-center justify-between mb-8">
                 <div>
-                  <div className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/40 mb-2">
+                  <div className="text-[10px] uppercase tracking-[0.3em] font-bold text-white/60 mb-2">
                     Model Performance
                   </div>
                   <h3 className="text-2xl font-display">Accuracy trend</h3>
@@ -146,16 +146,16 @@ export default function AnalyticsVisuals({ projectCount }: AnalyticsVisualsProps
                 />
                 <path d="M24 148 C60 130, 80 110, 120 102 C162 92, 178 68, 220 58 C262 48, 290 40, 336 34 L336 160 L24 160Z" fill="rgba(217,164,65,0.12)" />
                 {[24, 120, 220, 336].map((x, i) => (
-                  <circle key={x} cx={x} cy={[148, 102, 58, 34][i]} r="5" fill="#F5F2ED" />
+                  <circle key={x} cx={x} cy={[148, 102, 58, 34][i]} r="5" fill="#F2F0E8" />
                 ))}
               </svg>
 
               <div className="grid grid-cols-3 gap-3 mt-6">
                 {pipeline.map((item) => (
                   <div key={item.name} className="border border-white/10 p-4">
-                    <div className="text-[9px] uppercase tracking-widest text-white/40 font-bold">{item.name}</div>
+                    <div className="text-[9px] uppercase tracking-widest text-white/60 font-bold">{item.name}</div>
                     <div className="text-2xl font-display mt-2">{item.value}</div>
-                    <div className="text-[10px] text-white/45 mt-1 leading-snug">{item.detail}</div>
+                    <div className="text-[10px] text-white/70 mt-1 leading-snug">{item.detail}</div>
                   </div>
                 ))}
               </div>
@@ -175,14 +175,14 @@ export default function AnalyticsVisuals({ projectCount }: AnalyticsVisualsProps
               <h3 className="text-2xl font-display mb-8">Focus distribution</h3>
               <div className="relative mx-auto w-56 h-56">
                 <svg viewBox="0 0 120 120" className="w-full h-full -rotate-90" role="img" aria-label="Skill focus donut chart">
-                  <circle cx="60" cy="60" r="44" fill="none" stroke="#F5F2ED" strokeWidth="18" />
+                  <circle cx="60" cy="60" r="44" fill="none" stroke="#F6F4EC" strokeWidth="18" />
                   <circle cx="60" cy="60" r="44" fill="none" stroke="#267365" strokeWidth="18" strokeDasharray="118 276" />
                   <circle cx="60" cy="60" r="44" fill="none" stroke="#C06C54" strokeWidth="18" strokeDasharray="78 276" strokeDashoffset="-118" />
                   <circle cx="60" cy="60" r="44" fill="none" stroke="#D9A441" strokeWidth="18" strokeDasharray="56 276" strokeDashoffset="-196" />
                 </svg>
                 <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
                   <div className="text-4xl font-display">4x</div>
-                  <div className="text-[10px] uppercase tracking-widest font-bold text-muted/60">skill layers</div>
+                  <div className="text-[10px] uppercase tracking-widest font-bold text-muted">skill layers</div>
                 </div>
               </div>
             </motion.div>
@@ -206,12 +206,12 @@ export default function AnalyticsVisuals({ projectCount }: AnalyticsVisualsProps
                   <div key={metric.label} className="bg-bg p-5 border border-line/10">
                     <div className="text-[10px] uppercase tracking-widest font-bold text-accent">{metric.label}</div>
                     <div className="text-4xl font-display mt-4">{metric.value}</div>
-                    <div className="text-[10px] uppercase tracking-widest font-bold text-muted/50 mt-2">{metric.note}</div>
+                    <div className="text-[10px] uppercase tracking-widest font-bold text-muted mt-2">{metric.note}</div>
                   </div>
                 ))}
               </div>
               <div className="mt-6 bg-bg p-5 border border-line/10">
-                <div className="flex items-center justify-between text-[10px] uppercase tracking-widest font-bold text-muted/60 mb-4">
+                <div className="flex items-center justify-between text-[10px] uppercase tracking-widest font-bold text-muted mb-4">
                   <span>Pipeline automation coverage</span>
                   <span>87%</span>
                 </div>

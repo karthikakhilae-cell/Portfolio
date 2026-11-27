@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+﻿import { motion } from "framer-motion";
 import { Mail, Linkedin, Github, Instagram, ArrowRight, Loader2 } from "lucide-react";
 import { useState, FormEvent } from "react";
 import { SOCIAL_LINKS } from "../constants";
@@ -112,10 +112,10 @@ export default function Contact() {
           </div>
         </motion.div>
 
-        <motion.form 
+        <motion.form
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          onSubmit={handleFormSubmit} 
+          onSubmit={handleFormSubmit}
           className="bg-white p-8 md:p-12 rounded-[2rem] md:rounded-3xl shadow-xl space-y-6 md:space-y-8"
         >
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">

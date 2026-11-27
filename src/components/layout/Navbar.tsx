@@ -1,23 +1,23 @@
-import { motion, AnimatePresence } from "motion/react";
-import { Menu, X, Github, Linkedin, Instagram, ExternalLink, Sun, Moon } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X, Github, Linkedin, Instagram, ExternalLink, Sun, Moon, ArrowUpRight } from "lucide-react";
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { PROFILE_PIC, SOCIAL_LINKS } from "../../constants";
 import { useTheme } from "../../hooks/useTheme";
 
-const NAV_LINKS = [
+// Primary links stay visible inline; everything else lives in the
+// grouped "More" overlay so the bar itself stays short and scannable.
+const PRIMARY_LINKS = [
   { name: "Home", path: "/home" },
   { name: "Work", path: "/work" },
-  { name: "Hire Me", path: "/hire-me" },
-  { name: "Lab", path: "/lab" },
-  { name: "Thinking", path: "/thinking" },
-  { name: "Blogs", path: "/blogs" },
-  { name: "Life", path: "/life" },
-  { name: "Arts", path: "/arts" },
-  { name: "Journal", path: "/journal" },
-  { name: "Store", path: "/store" },
   { name: "About", path: "/about" },
-  { name: "Contact", path: "/contact" }
+  { name: "Contact", path: "/contact" },
+];
+
+const MORE_GROUPS = [
+  { group: "Work", links: [{ name: "Dashboard", path: "/dashboard" }, { name: "Lab", path: "/lab" }] },
+  { group: "Writing", links: [{ name: "Thinking", path: "/thinking" }, { name: "Blogs", path: "/blogs" }, { name: "Journal", path: "/journal" }] },
+  { group: "Explore", links: [{ name: "Life", path: "/life" }, { name: "Arts", path: "/arts" }, { name: "Store", path: "/store" }] },
 ];
 
 export default function Navbar() {
@@ -41,48 +41,50 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 w-full z-50 px-4 sm:px-8 md:px-12 lg:px-24 py-4 md:py-6 flex justify-between items-center transition-all duration-500 ${scrolled ? "bg-bg/80 backdrop-blur-md py-3 md:py-4 shadow-sm" : "bg-transparent"}`}>
+      <nav
+        className={`fixed top-0 left-0 w-full z-50 px-4 sm:px-8 md:px-12 lg:px-16 flex justify-between items-center transition-all duration-500 ${
+          scrolled
+            ? "py-3 md:py-4 bg-bg/95 backdrop-blur-xl border-b border-line/10 shadow-sm"
+            : "py-5 md:py-7 bg-transparent border-b border-transparent"
+        }`}
+      >
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="flex items-center gap-3 md:gap-4 group cursor-pointer"
+          className="flex items-center gap-2.5 md:gap-3 group cursor-pointer"
           onClick={() => navigate('/about')}
         >
           <div className="relative">
             <img
               src={PROFILE_PIC}
               alt="Akhil"
-              className="w-8 h-8 md:w-10 md:h-10 rounded-full object-cover border border-ink/10 group-hover:border-accent transition-colors"
+              className="w-8 h-8 md:w-9 md:h-9 rounded-full object-cover border border-ink/10 group-hover:border-accent transition-colors"
               referrerPolicy="no-referrer"
             />
             <div className="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 bg-green-500 border-2 border-bg rounded-full" />
           </div>
-          <div className={`text-lg md:text-xl font-display tracking-tight ${lightText ? "text-white" : "text-ink"}`}>
+          <div className={`text-sm md:text-base font-display tracking-tight leading-tight ${lightText ? "text-white" : "text-ink"}`}>
             Akhil Karthik
+            <div className="text-[8px] md:text-[9px] uppercase tracking-[0.2em] font-sans font-bold text-muted">Data &amp; AI</div>
           </div>
         </motion.div>
 
-        <div className={`hidden lg:flex gap-6 xl:gap-8 text-[10px] uppercase tracking-[0.2em] font-bold ${lightText ? "text-white/70" : "text-ink/60"}`}>
-          {NAV_LINKS.slice(0, 7).map((link) => (
+        <div className={`hidden lg:flex items-center gap-7 xl:gap-9 text-[11px] uppercase tracking-[0.15em] font-bold ${lightText ? "text-white/70" : "text-ink/70"}`}>
+          {PRIMARY_LINKS.map((link) => (
             <Link
               key={link.path}
               to={link.path}
-              className={`hover:text-accent transition-colors relative group ${location.pathname === link.path ? "text-accent" : ""}`}
+              className={`relative transition-colors hover:text-accent ${location.pathname === link.path ? "text-accent" : ""}`}
             >
               {link.name}
-              <span className={`absolute -bottom-1 left-0 h-px bg-accent transition-all ${location.pathname === link.path ? "w-full" : "w-0 group-hover:w-full"}`} />
             </Link>
           ))}
-          <button
-            onClick={() => setIsMenuOpen(true)}
-            className="text-accent hover:text-ink transition-colors relative group"
-          >
-            More +
-            <span className="absolute -bottom-1 left-0 w-0 h-px bg-ink transition-all group-hover:w-full" />
+          <button onClick={() => setIsMenuOpen(true)} className="transition-colors hover:text-accent">
+            More
           </button>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 md:gap-3">
           <button
             onClick={toggle}
             aria-label="Toggle dark mode"
@@ -90,12 +92,18 @@ export default function Navbar() {
           >
             {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
           </button>
+          <Link
+            to="/hire-me"
+            className="hidden sm:inline-flex items-center gap-2 bg-accent text-white px-5 md:px-6 py-2.5 md:py-3 rounded-lg text-[11px] font-bold uppercase tracking-widest hover:bg-ink transition-colors"
+          >
+            Let's Talk <ArrowUpRight className="w-3.5 h-3.5" />
+          </Link>
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className={`lg:hidden p-2 ${lightText ? "text-white" : "text-ink"}`}
+            className={`lg:hidden p-2 rounded-full hover:bg-ink/5 transition-colors ${lightText ? "text-white" : "text-ink"}`}
             aria-label="Toggle Menu"
           >
-            <Menu className="w-6 h-6" />
+            <Menu className="w-5 h-5" />
           </button>
         </div>
       </nav>
@@ -119,25 +127,57 @@ export default function Navbar() {
               </button>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 md:gap-x-24 gap-y-6 md:gap-y-8 my-8 md:my-12 overflow-y-auto max-h-[70vh] pr-4 scrollbar-hide">
-              {NAV_LINKS.map((link, i) => (
-                <motion.div
-                  key={link.path}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.03 }}
-                >
-                  <Link
-                    to={link.path}
-                    onClick={() => setIsMenuOpen(false)}
-                    className="group flex items-end gap-3 md:gap-4"
-                  >
-                    <span className="text-[9px] md:text-[10px] font-bold opacity-20 group-hover:opacity-100 transition-opacity mb-1 md:mb-2">0{i + 1}</span>
-                    <span className="text-3xl sm:text-4xl md:text-6xl font-display hover:text-accent transition-all duration-500 group-hover:pl-2 md:group-hover:pl-4">
-                      {link.name}
-                    </span>
-                  </Link>
-                </motion.div>
+            <div className="my-8 md:my-12 overflow-y-auto max-h-[70vh] pr-4 scrollbar-hide space-y-10 md:space-y-14">
+              <div>
+                <div className="text-[10px] uppercase tracking-[0.3em] font-bold text-accent/70 mb-4 md:mb-6">Main</div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 md:gap-x-24 gap-y-5 md:gap-y-6">
+                  {[...PRIMARY_LINKS, { name: "Hire Me", path: "/hire-me" }].map((link, i) => (
+                    <motion.div
+                      key={link.path}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: i * 0.03 }}
+                    >
+                      <Link
+                        to={link.path}
+                        onClick={() => setIsMenuOpen(false)}
+                        className="group flex items-end gap-3 md:gap-4"
+                      >
+                        <span className="text-[9px] md:text-[10px] font-bold opacity-20 group-hover:opacity-100 transition-opacity mb-1 md:mb-2">0{i + 1}</span>
+                        <span className="text-3xl sm:text-4xl md:text-6xl font-display hover:text-accent transition-all duration-500 group-hover:pl-2 md:group-hover:pl-4">
+                          {link.name}
+                        </span>
+                      </Link>
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+
+              {MORE_GROUPS.map((section, gi) => (
+                <div key={section.group}>
+                  <div className="text-[10px] uppercase tracking-[0.3em] font-bold text-accent/70 mb-4 md:mb-6">{section.group}</div>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 md:gap-x-24 gap-y-5 md:gap-y-6">
+                    {section.links.map((link, i) => (
+                      <motion.div
+                        key={link.path}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: (gi * 3 + i) * 0.03 }}
+                      >
+                        <Link
+                          to={link.path}
+                          onClick={() => setIsMenuOpen(false)}
+                          className="group flex items-end gap-3 md:gap-4"
+                        >
+                          <span className="text-[9px] md:text-[10px] font-bold opacity-20 group-hover:opacity-100 transition-opacity mb-1 md:mb-2">0{i + 1}</span>
+                          <span className="text-2xl sm:text-3xl md:text-5xl font-display hover:text-accent transition-all duration-500 group-hover:pl-2 md:group-hover:pl-4">
+                            {link.name}
+                          </span>
+                        </Link>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
               ))}
             </div>
 
